@@ -224,5 +224,36 @@
     #     if(command[0]=="empty" and len(dq)==0):
     #         print(1)
 
-#백준 알고리즘 자료구조1 (연습) 단어 뒤집기2
-#이거 들어가나?
+#백준 알고리즘 자료구조1 (연습) 단어 뒤집기2 -> 내일 다시 풀어보자
+import sys
+
+s = list(map(str, sys.stdin.readline().strip()))
+
+res = ""
+word = ""
+reverse = True
+
+for c in s:
+
+    if c == '<':
+        reverse = False
+        res += word
+        word = c
+
+    elif c == '>':
+        reverse = True
+        res += (word + '>')
+        word = ""
+
+    elif c == ' ':
+        res += word + c
+        word = ""
+
+    elif reverse:
+        word = c + word
+
+    else:
+        word += c
+
+res += word
+print(res)
