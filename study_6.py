@@ -190,36 +190,39 @@
     #         print(f"{answer[i]},",end=" ")
 
 #백준 알고리즘 기초1- 덱
-from collections import deque
-import sys
-import readline
-N=int(sys.stdin.readline())
-dq=deque()
-for i in range(N):
-    command=list(sys.stdin.readline().strip().split())
-    if(command[0]=="push_back"):
-        dq.append(command[1])
-    if(command[0]=="push_front"):
-        dq.appendleft(command[1])
-    if(command[0]=="pop_front" and len(dq)==0):
-        print(-1)        
-    if(command[0]=="pop_front" and len(dq)!=0):
-        print(dq.popleft())
-    if(command[0]=="pop_back" and len(dq)==0):
-        print(-1)
-    if(command[0]=="pop_back" and len(dq)!=0):
-        print(dq.pop())
-    if(command[0]=="front" and len(dq)!=0):
-        print(dq[0])
-    if(command[0]=="front" and len(dq)==0):
-        print(-1)
-    if(command[0]=="back" and len(dq)!=0):
-        print(dq[len(dq)-1])
-    if(command[0]=="back" and len(dq)==0):
-        print(-1)
-    if(command[0]=="size"):
-        print(len(dq))
-    if(command[0]=="empty" and len(dq)!=0):
-        print(0)
-    if(command[0]=="empty" and len(dq)==0):
-        print(-1)
+    # from collections import deque
+    # import sys
+    # import readline
+    # N=int(sys.stdin.readline())
+    # dq=deque()
+    # for i in range(N):
+    #     command=list(sys.stdin.readline().strip().split())
+    #     if(command[0]=="push_back"):
+    #         dq.append(command[1])
+    #     if(command[0]=="push_front"):
+    #         dq.appendleft(command[1])
+    #     if(command[0]=="pop_front" and len(dq)==0):
+    #         print(-1)        
+    #     if(command[0]=="pop_front" and len(dq)!=0):
+    #         print(dq.popleft())
+    #     if(command[0]=="pop_back" and len(dq)==0):
+    #         print(-1)
+    #     if(command[0]=="pop_back" and len(dq)!=0):
+    #         print(dq.pop())
+    #     if(command[0]=="front" and len(dq)!=0):
+    #         print(dq[0])
+    #     if(command[0]=="front" and len(dq)==0):
+    #         print(-1)
+    #     if(command[0]=="back" and len(dq)!=0):
+    #         print(dq[len(dq)-1])
+    #     if(command[0]=="back" and len(dq)==0):
+    #         print(-1)
+    #     if(command[0]=="size"):
+    #         print(len(dq))
+    #     if(command[0]=="empty" and len(dq)!=0):
+    #         print(0)
+    #     if(command[0]=="empty" and len(dq)==0):
+    #         print(1)
+
+#백준 알고리즘 자료구조1 (연습) 단어 뒤집기2
+#이거 들어가나?
