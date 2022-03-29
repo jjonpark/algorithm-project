@@ -225,35 +225,93 @@
     #         print(1)
 
 #백준 알고리즘 자료구조1 (연습) 단어 뒤집기2 -> 내일 다시 풀어보자
+    # import sys
+
+    # s = list(map(str, sys.stdin.readline().strip()))
+
+    # res = ""
+    # word = ""
+    # reverse = True
+
+    # for c in s:
+
+    #     if c == '<':
+    #         reverse = False
+    #         res += word
+    #         word = c
+
+    #     elif c == '>':
+    #         reverse = True
+    #         res += (word + '>')
+    #         word = ""
+
+    #     elif c == ' ':
+    #         res += word + c
+    #         word = ""
+
+    #     elif reverse:
+    #         word = c + word
+
+    #     else:
+    #         word += c
+
+    # res += word
+    # print(res)
+
+#백준 알고리즘 자료구조1 (연습) - 쇠막대기
+    # import sys
+    # import readline
+    # x=list(sys.stdin.readline().strip())
+    # cnt=1
+    # if(x[1]==")"):
+    #         cnt-=1
+    # result=0
+    # for i in range(1,len(x)-1):
+    #     if(x[i]=="(" and x[i+1]!=")"):
+    #         cnt+=1
+    #     if(x[i]=="(" and x[i+1]==")"):
+    #         result+=cnt
+    #     if(x[i-1]!="(" and x[i]==")"):
+    #         result+=1
+    #         cnt-=1
+    # print(result+1)
+
+#백준 알고리즘 자료구조1 (연습) - 오큰수
+    # import sys
+    # import readline
+    # x=int(sys.stdin.readline())
+    # y=list(map(int,sys.stdin.readline().strip().split()))
+    # Nge=[None]*len(y)
+    # for i in range(x):
+    #     if(i==(x-1)):
+    #         Nge[i]=-1
+    #         break
+    #     for j in range(i+1,x):
+    #         if(y[i]<y[j]):
+    #             Nge[i]=y[j]
+    #             break
+    #         else: 
+    #             Nge[i]=-1
+    # for _ in Nge:
+    #     print(_ , end=" ")
+
+#떡 가져가는 문제(이코테 강의)
 import sys
-
-s = list(map(str, sys.stdin.readline().strip()))
-
-res = ""
-word = ""
-reverse = True
-
-for c in s:
-
-    if c == '<':
-        reverse = False
-        res += word
-        word = c
-
-    elif c == '>':
-        reverse = True
-        res += (word + '>')
-        word = ""
-
-    elif c == ' ':
-        res += word + c
-        word = ""
-
-    elif reverse:
-        word = c + word
-
+import readline
+n,m=map(int,sys.stdin.readline().split())
+y=list(map(int,sys.stdin.readline().strip().split()))
+start=0
+end=max(y)
+result=0
+while (start<=end):
+    total =0
+    mid = (start+end)//2
+    for x in y:
+        if x> mid:
+            total+=x-mid
+    if total <m:
+        end=mid-1
     else:
-        word += c
-
-res += word
-print(res)
+        result=mid
+        start=mid+1
+print(result)
