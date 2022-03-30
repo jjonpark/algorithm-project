@@ -276,7 +276,7 @@
     #         cnt-=1
     # print(result+1)
 
-#백준 알고리즘 자료구조1 (연습) - 오큰수
+#백준 알고리즘 자료구조1 (연습) - 오큰수 -> 시간초과?
     # import sys
     # import readline
     # x=int(sys.stdin.readline())
@@ -296,22 +296,56 @@
     #     print(_ , end=" ")
 
 #떡 가져가는 문제(이코테 강의)
-import sys
-import readline
-n,m=map(int,sys.stdin.readline().split())
-y=list(map(int,sys.stdin.readline().strip().split()))
-start=0
-end=max(y)
-result=0
-while (start<=end):
-    total =0
-    mid = (start+end)//2
-    for x in y:
-        if x> mid:
-            total+=x-mid
-    if total <m:
-        end=mid-1
-    else:
-        result=mid
-        start=mid+1
-print(result)
+    # import sys
+    # import readline
+    # n,m=map(int,sys.stdin.readline().split())
+    # y=list(map(int,sys.stdin.readline().strip().split()))
+    # start=0
+    # end=max(y)
+    # result=0
+    # while (start<=end):
+    #     total =0
+    #     mid = (start+end)//2
+    #     for x in y:
+    #         if x> mid:
+    #             total+=x-mid
+    #     if total <m:
+    #         end=mid-1
+    #     else:
+    #         result=mid
+    #         start=mid+1
+    # print(result)
+
+# 정렬된 배열의 특정 수의 개수 구하기 : 이코테 강의 
+    # import sys
+    # import readline
+    # from bisect import bisect_right,bisect_left
+    # n,m=map(int,sys.stdin.readline().split())
+    # y=list(map(int, sys.stdin.readline().strip().split()))
+
+    # def count_by_range(array, left_value, right_value):
+    #     right_index = bisect_right(array, right_value)
+    #     left_index = bisect_left(array, left_value)
+    #     return right_index-left_index
+
+    # count=count_by_range(y,m,m)
+    # if count==0:
+    #     print(-1)
+    # else:
+    #     print(count)
+
+#백준 알고리즘 자료구조1 (연습) - 오큰수 시간초과가 떠있어서 재풀이..
+    # import sys
+    # import readline
+    # x=int(sys.stdin.readline())
+    # y=list(map(int,sys.stdin.readline().strip().split()))
+    # answer=[-1]*x
+    # stack=[0]
+    # for i in range(1,x):
+    #     while stack and y[stack[-1]]<y[i]:
+    #         answer[stack.pop()]=y[i]
+    #     stack.append(i)
+    # print(*answer)
+
+#백준 알고리즘 자료구조1 (연습) - 오등큰수
+#-> 그리디 알고리즘 공부로 넘어가자!
