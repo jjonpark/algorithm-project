@@ -85,15 +85,134 @@
     # print(result)
 
 #백준 알고리즘 주유소 풀이
-N = int(input())
-roads = list(map(int, input().split()))
-cities = list(map(int, input().split()))
+    # N = int(input())
+    # roads = list(map(int, input().split()))
+    # cities = list(map(int, input().split()))
 
-minVal = cities[0]
-sum = 0
-for i in range(N-1):
-    if minVal > cities[i]:
-        minVal = cities[i]
-    sum += (minVal * roads[i])
-    
-print(sum)
+    # minVal = cities[0]
+    # sum = 0
+    # for i in range(N-1):
+    #     if minVal > cities[i]:
+    #         minVal = cities[i]
+    #     sum += (minVal * roads[i])
+        
+    # print(sum)
+
+#백준 알고리즘 문제 보물
+    # x=int(input())
+    # y_1=list(map(int,input().split()))
+    # y_2=list(map(int,input().split()))
+    # y_1.sort()
+    # y_2.sort(reverse=True)
+    # result=0
+    # for i in range(x):
+    #     result+=(y_1[i]*y_2[i])
+
+    # print(result)
+
+#백준 알고리즘 문제 - 거스름돈
+    # import sys
+    # import readline
+    # def cnt_remain(x:int):
+    #     k=1000-x
+    #     result=0
+    #     if(k>=500):
+    #         result+=(k//500)
+    #         k=int(k%500)
+    #     if(k>=100):
+    #         result+=(k//100)
+    #         k=int(k%100)
+    #     if(k>=50):
+    #         result+=(k//50)
+    #         k=int(k%50)
+    #     if(k>=10):
+    #         result+=(k//10)
+    #         k=int(k%10)
+    #     if(k>=5):
+    #         result+=(k//5)
+    #         k=int(k%5)
+    #     if(k>=1):
+    #         result+=(k//1)
+    #         k=int(k%1)
+    #     return result
+    # x=int(sys.stdin.readline())
+    # answer=cnt_remain(x)
+    # print(answer)
+
+#백준 알고리즘 - 로프
+import sys
+import readline
+x=int(sys.stdin.readline())
+y=[]
+result=0
+ans=0
+for i in range(x):
+    y.append(int(sys.stdin.readline()))
+y.sort()
+for i in range(x):
+    result=y[i]*(x-i)
+    if(ans<=result):
+        ans=result
+print(ans)
+#백준 알고리즘 - 전자레인지
+    # import sys
+    # import readline
+    # x=int(sys.stdin.readline())
+    # result=0
+    # k_1=0
+    # k_2=0
+    # k_3=0
+    # if((x%10)!=0):
+    #     result=-1
+    # else:
+    #     if(x>=300):
+    #         k_1=(x//300)
+    #         x=int(x%300)
+    #     if(x>=60):
+    #         k_2=(x//60)
+    #         x=int(x%60)
+    #     if(x>=10):
+    #         k_3=(x//10)
+    # if(result==-1):
+    #     print(-1)
+    # else:
+    #     print(f"{k_1} {k_2} {k_3}")
+
+#백준 알고리즘 - 수들의 합
+    # import sys
+    # import readline
+    # x=int(sys.stdin.readline())
+    # num=0
+    # result=0
+    # for i in range(1,x):
+    #     num=(i*(i+1))
+    #     if(num>(2*x)):
+    #         result=i
+    #         break
+    # if(x<=2):
+    #     print(1)
+    # elif(x==3):
+    #     print(2)
+    # else:
+    #     print(result-1)
+
+#<삼성 SW expert> -암호생성기
+    # T=10
+    # for test_case in range(1,T+1):
+    #     x=int(input())
+    #     y=list(map(int,input().split()))
+    #     i=1
+    #     while True:
+    #         if(i>5):
+    #             i=1
+    #         y[0]-=i
+    #         y.append(y[0])
+    #         if(y[0]<=0):
+    #             y[-1]=0
+    #             del y[0]
+    #             break
+    #         del y[0]
+    #         i+=1
+    #     print(f"#{test_case}",end=" ")
+    #     for i in range(len(y)):
+    #         print(y[i],end=" ")
