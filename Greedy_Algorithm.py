@@ -140,20 +140,21 @@
     # print(answer)
 
 #백준 알고리즘 - 로프
-import sys
-import readline
-x=int(sys.stdin.readline())
-y=[]
-result=0
-ans=0
-for i in range(x):
-    y.append(int(sys.stdin.readline()))
-y.sort()
-for i in range(x):
-    result=y[i]*(x-i)
-    if(ans<=result):
-        ans=result
-print(ans)
+    # import sys
+    # import readline
+    # x=int(sys.stdin.readline())
+    # y=[]
+    # result=0
+    # ans=0
+    # for i in range(x):
+    #     y.append(int(sys.stdin.readline()))
+    # y.sort()
+    # for i in range(x):
+    #     result=y[i]*(x-i)
+    #     if(ans<=result):
+    #         ans=result
+    # print(ans)
+    
 #백준 알고리즘 - 전자레인지
     # import sys
     # import readline
@@ -216,3 +217,103 @@ print(ans)
     #     print(f"#{test_case}",end=" ")
     #     for i in range(len(y)):
     #         print(y[i],end=" ")
+
+#백준 알고리즘 <신입사원> -> 답은 맞는거 같은데 시간초과... 
+    # import sys
+    # import readline
+    # test_case=int(sys.stdin.readline())
+    # for k in range(test_case):
+    #     n=int(sys.stdin.readline())
+    #     y=[]
+    #     for i in range(n):
+    #         y_1,y_2=map(int,sys.stdin.readline().split())
+    #         y.append([y_1,y_2])
+    #         # b=sorted(y,key=lambda x:x[0])
+    #         # c=sorted(b,key=lambda x:x[1])
+    #         # print(c)
+    #     rank=[0]*n
+    #     for i in range(n):
+    #         for j in range(n):
+    #             if(y[i][0]>y[j][0]and y[i][1]>y[j][1]):
+    #                 rank[i]+=1
+    #     rank_set=list(set(rank))
+    #     rank_count=[None]*len(rank_set)
+    #     for k in range(len(rank_set)):
+    #         rank_count[k]=rank.count(rank_set[k])
+    #     print(max(rank_count))
+    
+#백준 알고리즘 <신입사원> 문제풀이
+    # import sys
+    # t= int(input())
+    # for _ in range(t):
+    #     n=int(input())
+    #     lst=sorted([list(map(int,sys.stdin.readline().strip().split())) for x in range(n)], key = lambda x:x[0])
+    #     cnt=1
+    #     min=lst[0][1]
+
+    #     for i in range(1,n):
+    #         if lst[i][1]<min:
+    #             min=lst[i][1]
+    #             cnt+=1
+    #     print(cnt)
+
+#백준 알고리즘 < 카드 정렬하기 > -> 출력초과?
+    # import sys
+    # import readline
+    # x=int(sys.stdin.readline())
+    # y=[]
+    # if(x==1):
+    #     result=0
+    # else:
+    #     for i in range(x):
+    #         y.append(int(sys.stdin.readline()))
+    #     y.sort()
+    #     result=0
+    #     while len(y)>1:
+    #         tmp1=y.pop(0)
+    #         tmp2=y.pop(0)
+    #         y.insert(0,tmp1+tmp2)
+    #         result+=(tmp1 +tmp2)
+    # print(result)
+
+#백준 알고리즘 <카드 정렬하기> -> heapq 를 활용해보자 
+    # import heapq
+    # import sys
+    # import readline
+    # x=int(sys.stdin.readline())
+    # y=[]
+    # if(x==1):
+    #     result=0
+    # else:
+    #     for i in range(x):
+    #         heapq.heappush(y, int(sys.stdin.readline()))
+    #     result=0
+    #     while len(y)>1:
+    #         tmp1=heapq.heappop(y)
+    #         tmp2=heapq.heappop(y)
+    #         result += tmp1 + tmp2
+    #         heapq.heappush(y,tmp1 + tmp2)
+    # print(result)
+
+#백준 알고리즘 <단어수학> 
+import sys
+import readline
+x=int(sys.stdin.readline())
+num=[9,8,7,6,5,4,3,2,1,0]
+tmp=[]
+for i in range(x):
+    y=list(str(sys.stdin.readline().strip()))
+    y.reverse()
+    for j in range(len(y)):
+        tmp.append([y[j],j])
+tmp_sort=sorted(tmp,key=lambda x:x[1],reverse=True)
+print(tmp_sort)
+tmp2=[]
+for i in range(len(tmp_sort)):
+    if(tmp_sort[i][0] in tmp2):
+        continue
+    else:
+        tmp2.append(tmp_sort[i][0])
+        tmp_sort[i][1]=num.pop(0)
+print(tmp2)
+print(tmp_sort)
