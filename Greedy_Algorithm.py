@@ -295,25 +295,208 @@
     #         heapq.heappush(y,tmp1 + tmp2)
     # print(result)
 
-#백준 알고리즘 <단어수학> 
+#백준 알고리즘 <단어수학> -> 복잡하여 풀이참조함..
+    # import sys
+    # import readline
+    # x=int(sys.stdin.readline())
+    # num=[9,8,7,6,5,4,3,2,1,0]
+    # tmp=[]
+    # for i in range(x):
+    #     y=list(str(sys.stdin.readline().strip()))
+    #     y.reverse()
+    #     for j in range(len(y)):
+    #         tmp.append([y[j],j])
+    # tmp_sort=sorted(tmp,key=lambda x:x[1],reverse=True)
+    # print(tmp_sort)
+    # tmp2=[]
+    # for i in range(len(tmp_sort)):
+    #     if(tmp_sort[i][0] in tmp2):
+    #         continue
+    #     else:
+    #         tmp2.append(tmp_sort[i][0])
+    #         tmp_sort[i][1]=num.pop(0)
+    # print(tmp2)
+    # print(tmp_sort)
+
+#백준 알고리즘 <단어수학> - 문제 풀이 
+    # n=int(input())
+    # alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    # frequency=[0]*26
+    # for i in range(n):
+    #     enter = input()
+    #     weight=1
+    #     for j in enter[::-1]:
+    #         frequency[alphabet.find(j)] +=weight
+    #         weight *=10
+    # frequency.sort(reverse=True)
+    # total=0
+
+    # for i in range(9,0,-1):
+    #     total=total+(frequency[9-i]*i)
+    # print(total)
+
+#백준 알고리즘 <뒤집기>
+    # import sys
+    # import readline
+    # x=list(str(sys.stdin.readline().strip()))
+    # cnt_0=0
+    # cnt_1=0
+    # if(x[0]=="0"):
+    #     cnt_0+=1
+    # else:
+    #     cnt_1+=1
+    # for i in range(1,len(x)):
+    #     if(x[i-1]!=x[i]):
+    #         if(x[i]=="0"):
+    #             cnt_0+=1
+    #         else:
+    #             cnt_1+=1
+    # result=min(cnt_1,cnt_0)
+    # print(result)
+
+#백준 알고리즘 <A->B> -> 시간 초과?
+    # import sys
+    # import readline
+    # import math
+    # import time
+    # start = time.time()
+    # x,ans=map(int, sys.stdin.readline().split())
+    # tmp1=ans
+    # result=0
+    # while x<tmp1:
+    #     if(tmp1%10==1):
+    #         tmp1=tmp1//10
+    #         result+=1
+    #     else:
+    #         if(tmp1%2==0):
+    #             tmp1=tmp1//2
+    #             result+=1
+    # if(x==tmp1):
+    #     print(result+1)
+    # else:
+    #     print(-1)
+    # end=time.time()
+    # print(f"{end-start :.5f} sec")
+#백준 알고리즘 <A->B> 문제풀이
+    # import math
+    # import time
+    # start = time.time() 
+    # a,b= map(int, input().split())
+    # cnt=1
+    # while True:
+    #     if b==a:
+    #         break
+    #     elif(b%2!=0 and b%10 !=1 ) or (b<a):
+    #         cnt=-1
+    #         break
+    #     else:
+    #         if b%10 ==1 :
+    #             b//=10
+    #             cnt+=1
+    #         else:
+    #             b//=2
+    #             cnt+=1
+    # print(cnt)
+    # end=time.time()
+    # print(f"{end-start :.5f} sec")
+
+#백준 알고리즘 <캠핑>
+    # import sys
+    # import readline
+    # test_case=1
+    # while True:
+    #     L,P,V=map(int,sys.stdin.readline().split())
+    #     if(L==0 and P==0 and V==0):
+    #         break
+    #     result=0
+    #     tmp1=(V%P)
+    #     result+=((V//P)*L)
+    #     if(tmp1>=L):
+    #         result+=L
+    #     else:
+    #         result+=tmp1
+    #     print(f"Case {test_case}: {result}")
+    #     test_case+=1
+
+#백준 알고리즘 <보석 도둑> -> 시간초과...후...
+    # import sys
+    # import readline
+    # N,K=map(int,sys.stdin.readline().split())
+    # M_V=[None]*N
+    # C=[None]*K
+    # for i in range(N):
+    #     m_1,v_1=map(int,sys.stdin.readline().split())
+    #     M_V[i]=[m_1,v_1]
+    # M_V_sort=sorted(M_V,key= lambda x: x[1], reverse=True)
+    # result=0
+    # for j in range(K):
+    #     C[j]=int(sys.stdin.readline())
+    # C.sort()
+    # for i in range(K):
+    #     for j in range(len(M_V_sort)):
+    #         if(C[i]>M_V_sort[j][0]):
+    #             result+=M_V_sort[j][1]
+    #             M_V_sort.pop(j)
+    #             break
+    # print(result)
+
+#백준 알고리즘 <보석도둑> 우선순위 큐?
+    # import heapq
+    # import sys
+    # N,K = map(int,sys.stdin.readline().split())
+    # jew=[]
+    # for _ in range(N):
+    #     heapq.heappush(jew, list(map(int, sys.stdin.readline().split())))
+    # bags=[]
+    # for _ in range(K):
+    #     bags.append(int(sys.stdin.readline()))
+    # bags.sort()
+    # answer=0
+    # tmp_jew =[]
+    # for bag in bags:
+    #     while jew and bag >=jew[0][0]:
+    #         heapq.heappush(tmp_jew, -heapq.heappop(jew)[1])
+    #     if tmp_jew:
+    #         answer-=heapq.heappop(tmp_jew)
+    #     elif not jew:
+    #         break 
+    # print(answer)
+
+#동적 프로그래밍
+#피보나치 수열
+    # def fibo(x):
+    #     if x==1 or x==2:
+    #         return 1 
+    #     return fibo(x-1) +fibo(x-2)
+
+    # print(fibo(4))
+#메모이제이션을 통한 피보나치 수열
+    # d=[0]*100
+    # def fibo(x):
+    #     if x==1 or x==2:
+    #         return 1
+    #     if d[x]!=0:
+    #         return d[x]
+    #     d[x]= fibo(x-1) + fibo(x-2)
+    #     return d[x]
+    # print(fibo(99))
+#바텀업 방싱을 이용한 피보나치 
+    # d=[0]*100
+    # d[1]=1
+    # d[2]=1
+    # n=99
+    # for i in range(3,n+1):
+    #     d[i]=d[i-1]+d[i-2]
+    # print(d[n])
+#창고 털기 문제 ->다이나믹 프로그래밍?
 import sys
-import readline
-x=int(sys.stdin.readline())
-num=[9,8,7,6,5,4,3,2,1,0]
-tmp=[]
-for i in range(x):
-    y=list(str(sys.stdin.readline().strip()))
-    y.reverse()
-    for j in range(len(y)):
-        tmp.append([y[j],j])
-tmp_sort=sorted(tmp,key=lambda x:x[1],reverse=True)
-print(tmp_sort)
-tmp2=[]
-for i in range(len(tmp_sort)):
-    if(tmp_sort[i][0] in tmp2):
-        continue
-    else:
-        tmp2.append(tmp_sort[i][0])
-        tmp_sort[i][1]=num.pop(0)
-print(tmp2)
-print(tmp_sort)
+n= int(sys.stdin.readline())
+array=list(map(int,sys.stdin.readline().strip().split()))
+
+d=[0]*100
+d[0]=array[0]
+d[1]=max(array[0],array[1])
+for i in range(2,n):
+    d[i]=max(d[i-1],d[i-2]+array[i])
+
+print(d[n-1])
