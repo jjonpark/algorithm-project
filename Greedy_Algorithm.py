@@ -489,14 +489,234 @@
     #     d[i]=d[i-1]+d[i-2]
     # print(d[n])
 #창고 털기 문제 ->다이나믹 프로그래밍?
-import sys
-n= int(sys.stdin.readline())
-array=list(map(int,sys.stdin.readline().strip().split()))
+    # import sys
+    # n= int(sys.stdin.readline())
+    # array=list(map(int,sys.stdin.readline().strip().split()))
 
-d=[0]*100
-d[0]=array[0]
-d[1]=max(array[0],array[1])
-for i in range(2,n):
-    d[i]=max(d[i-1],d[i-2]+array[i])
+    # d=[0]*100
+    # d[0]=array[0]
+    # d[1]=max(array[0],array[1])
+    # for i in range(2,n):
+    #     d[i]=max(d[i-1],d[i-2]+array[i])
 
-print(d[n-1])
+    # print(d[n-1])
+
+#<삼성 아카데미> 거듭제곱
+    # def jegab(x,y):
+    #     if(y==1):
+    #         return x
+    #     return x*jegab(x,y-1)
+    # T=10
+    # for test_case in range(1,T+1):
+    #     _=input()
+    #     x,y=map(int,input().split())
+    #     result=jegab(x,y)
+    #     print(f"#{test_case} {result}")
+
+#<삼성 아카데미> String
+    # T=10
+    # for test_case in range(1,T+1):
+    #     _=input()
+    #     find_st=input()
+    #     st=input()
+    #     result=st.count(find_st)
+    #     print(f"#{test_case} {result}")
+
+#<삼성 아카데미> 단순 2진 암호코드
+    # T=int(input())
+    # for test_case in range(1,T+1):
+    #     N,M=map(int,input().split())
+    #     y=[]
+    #     y_set=[]
+    #     ans_list=[0]
+    #     for i in range(N):
+    #         y.append(input())
+    #         y_set=list((set(y)))
+    #     for i in y_set:
+    #         if(y.count(i)==7):
+    #             ans_list[0]=list((str(i)))
+    #     for j in range(M-1,0,-1):
+    #         if(ans_list[0][j]=="1"):
+    #             ans_list[0]=ans_list[0][j-56:j]
+    #             break
+    #     tmp1=[]
+    #     tmp2=[0]*8
+    #     for k in range(0,8):
+    #         tmp1.append(ans_list[0][7*k:7*k+7])
+    #     for i in range(8):
+    #         if(tmp1[i]==['0','0','0','1','1','0','1']):
+    #             tmp2[i]=0
+    #         elif(tmp1[i]==['0','0','1','1','0','0','1']):
+    #             tmp2[i]=1
+    #         elif(tmp1[i]==['0','0','1','0','0','1','1']):
+    #             tmp2[i]=2
+    #         elif(tmp1[i]==['0','1','1','1','1','0','1']):
+    #             tmp2[i]=3
+    #         elif(tmp1[i]==['0','1','0','0','0','1','1']):
+    #             tmp2[i]=4
+    #         elif(tmp1[i]==['0','1','1','0','0','0','1']):
+    #             tmp2[i]=5
+    #         elif(tmp1[i]==['0','1','0','1','1','1','1']):
+    #             tmp2[i]=6
+    #         elif(tmp1[i]==['0','1','1','1','0','1','1']):
+    #             tmp2[i]=7
+    #         elif(tmp1[i]==['0','1','1','0','1','1','1']):
+    #             tmp2[i]=8
+    #         elif(tmp1[i]==['0','0','0','1','0','1','1']):
+    #             tmp2[i]=9
+    #     if(ans_list[0]==0):
+    #         print(0)
+    #     else:
+    #         print(tmp1)
+    #         print(tmp2)
+
+#<삼성 SW expert> 단순 2진 알고리즘
+    # T = int(input())
+
+    # for t in range(1, T+1) :
+    #     N, M = map(int, input().split())
+    #     input_code = []
+    #     for _ in range(N) :
+    #         input_code.append(list(input()))
+
+    #     num = ['0001101', '0011001', '0010011', '0111101', '0100011', '0110001', '0101111', '0111011', '0110111', '0001011']
+
+    #     code = ''
+    #     for i in range(N) :
+    #         if '1' in input_code[i] :
+    #             for j in range(M) :
+    #                 code += input_code[i][j]
+    #             break
+
+    #     rev_code = code[::-1]
+    #     for i in range(M) :
+    #         if rev_code[i] == '1' :
+    #             rev_code = rev_code[i:i+56]
+    #             break
+    #     code = rev_code[::-1]
+
+    #     code_num = [code[0:7], code[7:14], code[14:21], code[21:28], code[28:35], code[35: 42], code[42:49], code[49:56]]
+
+    #     for i in range(8) :
+    #         code_num[i] = num.index(code_num[i])
+
+    #     sum_odd = code_num[0] + code_num[2] + code_num[4] + code_num[6]
+    #     sum_even = code_num[1] + code_num[3] + code_num[5]
+    #     ver = (sum_odd * 3) + sum_even + code_num[7]
+
+    #     if ver % 10 == 0 :
+    #         print("#{} {}".format(t, sum(code_num)))
+    #     else :
+    #         print("#{} {}".format(t, 0))
+
+#백준 알고리즘 <기타줄>
+    # import sys
+    # N,M=map(int,sys.stdin.readline().split())
+    # line_P=[]
+    # line_O=[]
+    # for i in range(M):
+    #     k_1,k_2=map(int,sys.stdin.readline().split())
+    #     line_P.append(k_1)
+    #     line_O.append(k_2)
+    # answer=0
+    # line_O.sort()
+    # line_P.sort()
+    # if((line_P[0]/6) <= line_O[0]):
+    #     answer=min((N//6*line_P[0]) + ((N%6)*line_O[0]),(((N//6)+1)*line_P[0]))
+    # else:
+    #     answer=N*line_O[0]
+
+    # print(answer)
+
+#나동빈 다이나믹 프로그래밍 -> 아이디어는 맞았다! 강의에서는 어떻게 코딩했나?
+    # import sys
+    # x=int(sys.stdin.readline())
+    # d=[0]*30
+    # for i in range(x+1):
+    #     if(i==0 or i==1):
+    #         d[i]=0
+    #         continue
+    #     elif(i==2 or i==3 or i==5):
+    #         d[i]=1
+    #         continue
+    #     else:
+    #         if(i%2==0 and i%3==0 and i%5==0):
+    #             d[i]=min(d[i//2],d[i//3],d[i//5],d[i-1])+1
+    #             continue
+    #         elif(i%2==0 and i%3==0):
+    #             d[i]=min(d[i//2],d[i//3],d[i-1])+1
+    #             continue
+    #         elif(i%2==0 and i%5==0):
+    #             d[i]=min(d[i//2],d[i//5],d[i-1])+1
+    #             continue
+    #         elif(i%3==0 and i%5==0):
+    #             d[i]=min(d[i//3],d[i//5],d[i-1])+1
+    #             continue
+    #         elif(i%2==0):
+    #             d[i]=min(d[i//2],d[i-1])+1
+    #             continue
+    #         elif(i%3==0):
+    #             d[i]=min(d[i//3],d[i-1])+1
+    #             continue
+    #         elif(i%5==0):
+    #             d[i]=min(d[i//5],d[i-1])+1
+    #             continue
+    #         else:
+    #             d[i]=d[i-1]+1
+    # print(d[x])
+
+#나동빈 다이나믹 프로그래밍 1만들기 ->정답 풀이
+    # x=int(input())
+    # d=[0]*30001
+    # for i in range(2,x+1):
+    #     d[i]=d[i-1]+1
+    #     if i%2==0:
+    #         d[i]=min(d[i],d[i//2]+1)
+    #     elif i%3==0:
+    #         d[i]=min(d[i],d[i//3]+1)
+    #     if i%5==0:
+    #         d[i]=min(d[i],d[i//5]+1)
+    # print(d[x])
+
+#나동빈 다이나믹 프로그래밍 화폐만들기 
+    # N,M=map(int,input().split())
+    # N_list=[]
+    # for i in range(N):
+    #     N_list.append(int(input()))
+    # d=[0]*(M+1)
+    # tmp1=min(N_list)
+    # tmp2=10000
+    # for i in range(tmp1,M+1):
+    #     for j in range(N):
+    #         if(i==N_list[j]):
+    #             d[i]=1
+    #             break
+    #         elif(d[i-N_list[j]]!=0):
+    #             d[i]=min(tmp2,d[i-N_list[j]]+1)
+    #             tmp2=d[i-N_list[j]]+1
+    # print(d)        
+
+#나동빈 다이나믹 프로그래밍 금광 문제 
+T=int(input())
+for test_case in range(1,T+1):
+    N,M=map(int,input().split())
+    y=list(map(int,input().split()))
+    array=[]
+    answer_array=[]
+    for i in range(M):
+        array.append(y[i::M])
+        answer_array.append([0]*N)
+    answer_array[0]=array[0]
+    for i in range(1,M):
+        for j in range(N):
+            if(j==0):
+                answer_array[i][j]=max(answer_array[i-1][j],answer_array[i-1][j+1])+array[i][j]
+                continue
+            if(j==N-1):
+                answer_array[i][j]=max(answer_array[i-1][j-1],answer_array[i-1][j])+array[i][j]
+                continue
+            else:
+                answer_array[i][j]=max(answer_array[i-1][j],answer_array[i-1][j+1],answer_array[i-1][j-1])+array[i][j]
+                continue
+    k=max(answer_array[M-1])
+    print(k)
