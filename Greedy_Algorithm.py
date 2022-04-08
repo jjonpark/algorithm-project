@@ -696,27 +696,41 @@
     #             tmp2=d[i-N_list[j]]+1
     # print(d)        
 
-#나동빈 다이나믹 프로그래밍 금광 문제 
-T=int(input())
-for test_case in range(1,T+1):
-    N,M=map(int,input().split())
-    y=list(map(int,input().split()))
-    array=[]
-    answer_array=[]
-    for i in range(M):
-        array.append(y[i::M])
-        answer_array.append([0]*N)
-    answer_array[0]=array[0]
-    for i in range(1,M):
-        for j in range(N):
-            if(j==0):
-                answer_array[i][j]=max(answer_array[i-1][j],answer_array[i-1][j+1])+array[i][j]
-                continue
-            if(j==N-1):
-                answer_array[i][j]=max(answer_array[i-1][j-1],answer_array[i-1][j])+array[i][j]
-                continue
-            else:
-                answer_array[i][j]=max(answer_array[i-1][j],answer_array[i-1][j+1],answer_array[i-1][j-1])+array[i][j]
-                continue
-    k=max(answer_array[M-1])
-    print(k)
+#나동빈 다이나믹 프로그래밍 금광 문제 -> 정답!!!!
+    # T=int(input())
+    # for test_case in range(1,T+1):
+    #     N,M=map(int,input().split())
+    #     y=list(map(int,input().split()))
+    #     array=[]
+    #     answer_array=[]
+    #     for i in range(M):
+    #         array.append(y[i::M])
+    #         answer_array.append([0]*N)
+    #     answer_array[0]=array[0]
+    #     for i in range(1,M):
+    #         for j in range(N):
+    #             if(j==0):
+    #                 answer_array[i][j]=max(answer_array[i-1][j],answer_array[i-1][j+1])+array[i][j]
+    #                 continue
+    #             if(j==N-1):
+    #                 answer_array[i][j]=max(answer_array[i-1][j-1],answer_array[i-1][j])+array[i][j]
+    #                 continue
+    #             else:
+    #                 answer_array[i][j]=max(answer_array[i-1][j],answer_array[i-1][j+1],answer_array[i-1][j-1])+array[i][j]
+    #                 continue
+    #     k=max(answer_array[M-1])
+    #     print(k)
+
+#나동빈 다이나믹 프로그래밍 병사 배치하기 -> 감이 안잡히네 
+#가장 긴 증가하는 부분 수열?(LIS)
+x= int(input())
+y_list=list(map(int,input().split()))
+y_list.reverse()
+answer_list=[1]*len(y_list)
+for i in range(1,len(y_list)):
+    for j in range(i):
+        if(y_list[i]>y_list[j]):
+            answer_list[i]=max(answer_list[i],answer_list[j]+1)
+tmp1=max(answer_list)
+result=x-tmp1
+print(result)
