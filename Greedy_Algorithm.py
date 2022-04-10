@@ -723,14 +723,236 @@
 
 #나동빈 다이나믹 프로그래밍 병사 배치하기 -> 감이 안잡히네 
 #가장 긴 증가하는 부분 수열?(LIS)
-x= int(input())
-y_list=list(map(int,input().split()))
-y_list.reverse()
-answer_list=[1]*len(y_list)
-for i in range(1,len(y_list)):
-    for j in range(i):
-        if(y_list[i]>y_list[j]):
-            answer_list[i]=max(answer_list[i],answer_list[j]+1)
-tmp1=max(answer_list)
-result=x-tmp1
-print(result)
+    # x= int(input())
+    # y_list=list(map(int,input().split()))
+    # y_list.reverse()
+    # answer_list=[1]*len(y_list)
+    # for i in range(1,len(y_list)):
+    #     for j in range(i):
+    #         if(y_list[i]>y_list[j]):
+    #             answer_list[i]=max(answer_list[i],answer_list[j]+1)
+    # tmp1=max(answer_list)
+    # result=x-tmp1 
+    # print(result)
+ 
+# 힙 라이브러리 사용 해보기 
+# import heapq
+ #오름차순 힙 정렬(heap Sort)
+    # def heapsort(iterable):
+    #     h=[]
+    #     result=[]
+    #     for value in iterable:
+    #         heapq.heappush(h,value)
+    #     for i in range(len(h)):
+    #         result.append(heapq.heappop(h))
+    #     return result
+    # result = heapsort([1,3,5,7,9,2,4,6,8,0])
+    # print(result)
+ #내림차순 힙 정렬(heap sort)
+    # import heapq
+    # def heapsort(iterable):
+    #     h=[]
+    #     result=[]
+    #     for value in iterable:
+    #         heapq.heappush(h,-value)
+    #     for i in range(len(h)):
+    #         result.append(-heapq.heappop(h))
+    #     return result
+    # result=heapsort([1,3,5,7,9,2,4,6,8,0])
+    # print(result)
+
+#다익스트라 알고리즘 우선순위 큐 활용
+    # import heapq
+    # import sys
+    # input= sys.stdin.readline
+    # INF=int(1e9)
+    # n,m=map(int,input().split())
+    # start = int(input())
+    # graph=[[] for i in range(n+1)]
+    # distance=[INF]*(n+1)
+    # for _ in range(m):
+    #     a,b,c=map(int,input().split())
+    #     graph[a].append((b,c))
+    # def dijkstra(start):
+    #     q=[]
+    #     heapq.heappush(q,(0,start))
+    #     distance[start]=0
+    #     while q:
+    #         dist, now = heapq.heappop(q)
+    #         if distance[now] <dist:
+    #             continue
+    #         for i in graph[now]:
+    #             cost= dist +i[1]
+    #             if cost < distance[i[0]]:
+    #                 distance[i[0]]=cost
+    #                 heapq.heappush(q,(cost,i[0]))
+    # dijkstra(start)
+
+#<나동빈 코딩> 전보 문제 
+    # import heapq
+    # import sys
+    # input = sys.stdin.realdine
+    # INF=int(1e9)
+    # n, m, start =map(int,sys.stdin.readline().split())
+    # graph = [ [] for i in range(n+1)] #각 노드에 연결되어 있는 노드에 대한 정보를 담는 리스트 만들기 
+    # distance=[INF]*(n+1)
+
+    # for _ in range(m):
+    #     x,y,z=map(int, input().split())
+    #     graph[x].append((y,z))
+
+    # def dijkstra(start):
+    #     q=[]
+    #     heapq.heappush(q,(0,start))
+    #     distance[start]=0
+    #     while q:
+    #         dist,now=heapq.heappop(q)
+    #         if distance[now]<dist:
+    #             continue
+    #         for i in graph[now]:
+    #             cost = dist +i[1]
+    #             if cost < distance[i[0]]:
+    #                 distance[i[0]]=cost
+    #                 heapq.heappush(q,(cost,i[0]))
+    # dijkstra(start)
+    # count=0
+    # max_distance=0
+    # for d in distance:
+    #     if d!=1e9:
+    #         count+=1
+    #         max_distance=max(max_distance,d)
+    # print(count-1,max_distance)
+
+#<백준 알고리즘> 수묶기 -> 내가 봐도 너무 길고 비효율적
+    # x=int(input())
+    # y=[]
+    # for i in range(x):
+    #     y.append(int(input()))
+    # y.sort()
+    # array=[]
+    # result=0
+    # while len(y)!=0 and y[0]<=0:
+    #     if(len(y)>=2):
+    #         if(y[0]<=0 and y[1]<=0):
+    #             result+=(y[0]*y[1])
+    #             y.pop(0)
+    #             y.pop(0)
+    #             continue
+    #         elif(y[0]<=0):
+    #             result+=y[0]
+    #         y.pop(0)
+    #     else:
+    #         result+=y[0]
+    #         y.pop(0)
+    # y.sort(reverse=True)
+    # while y:
+    #     if(len(y)>=2):
+    #         if(y[0]==1):
+    #             result+=y[0]+y[1]
+    #             y.pop(0)
+    #             y.pop(0)
+    #         else:     
+    #             result+=(y[0]*y[1])
+    #             y.pop(0)
+    #             y.pop(0)
+    #             continue
+    #     else:
+    #         result+=y[0]
+    #         y.pop(0)
+    # print(result)
+
+#<백준 알고리즘> 아이디어 참고 
+    # N = int(input())
+    # positiveList=[]
+    # negativeList=[]
+    # oneList=[]
+
+    # for _ in range(N):
+    #     num = int(input())
+    #     if num > 1:
+    #         positiveList.append(num)
+    #     elif num <= 0:
+    #         negativeList.append(num)
+    #     else:
+    #         oneList.append(num)
+
+    # positiveList.sort(reverse=True)
+    # negativeList.sort()
+
+    # result = 0
+
+    # if len(positiveList) % 2 == 0:
+    #     for i in range(0,len(positiveList),2):
+    #         result += positiveList[i] * positiveList[i+1]
+    # else:
+    #     for i in range(0,len(positiveList)-1,2):
+    #         result += positiveList[i] * positiveList[i+1]
+    #     result += positiveList[len(positiveList)-1] # 마지막 숫자는 더해주기
+
+
+    # if len(negativeList) % 2 == 0:
+    #     for i in range(0,len(negativeList),2):
+    #         result += negativeList[i] * negativeList[i+1]
+    # else:
+    #     for i in range(0,len(negativeList)-1,2):
+    #         result += negativeList[i] * negativeList[i+1]
+    #     result += negativeList[len(negativeList)-1] # 마지막 숫자는 더해주기
+
+    # result += sum(oneList)
+
+    # print(result)
+#백준 알고리즘 <5와 6의 차이>
+    # import sys
+    # num_1, num_2=map(int,sys.stdin.readline().split())
+    # num_1_l=list(str(num_1))
+    # num_2_l=list(str(num_2))
+    # for i in range(len(num_1_l)):
+    #     num_1_l[i]=int(num_1_l[i])
+    # for i in range(len(num_2_l)):
+    #     num_2_l[i]=int(num_2_l[i])
+    # max_result=0
+    # min_result=0
+    # for i in range(len(num_1_l)):
+    #     if(num_1_l[i]==5):
+    #         num_1_l[i]=6
+    #     max_result+=num_1_l[i]*(10**(len(num_1_l)-1-i))
+    # for i in range(len(num_2_l)):
+    #     if(num_2_l[i]==5):
+    #         num_2_l[i]=6
+    #     max_result+=num_2_l[i]*(10**(len(num_2_l)-1-i))
+    # for i in range(len(num_1_l)):
+    #     if(num_1_l[i]==6):
+    #         num_1_l[i]=5
+    #     min_result+=num_1_l[i]*(10**(len(num_1_l)-1-i))
+    # for i in range(len(num_2_l)):
+    #     if(num_2_l[i]==6):
+    #         num_2_l[i]=5
+    #     min_result+=num_2_l[i]*(10**(len(num_2_l)-1-i))
+    # print(f"{min_result} {max_result}")
+
+#백준 알고리즘 <행렬> -> 답을 참고 하여 작성
+    # def reverse(x,y):
+    #     for i in range(x,x+3):
+    #         for j in range(y,y+3):
+    #             A[i][j]= 1-A[i][j]
+    # def check():
+    #     for i in range(N):
+    #         for j in range(M):
+    #             if A[i][j] != B[i][j]:
+    #                 return False
+    #     return True
+    # N,M=map(int,input().split())
+    # A=[list(map(int,list(input()))) for _ in range(N)]
+    # B=[list(map(int,list(input()))) for _ in range(N)]
+    # count=0
+    # for i in range(N-2):
+    #     for j in range(M-2):
+    #         if A[i][j] != B[i][j]:
+    #             reverse(i,j)
+    #             count+=1
+    # if check():
+    #     print(count)
+    # else:
+    #     print("-1")
+
+
