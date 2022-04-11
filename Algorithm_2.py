@@ -268,3 +268,99 @@
     #                 q.append((virus, s + 1, nx, ny))
 
     # print(graph[target_x-1][target_y-1])
+
+#백준 알고리즘 <촌수 계산>
+    # import sys
+    # from collections import deque
+    # x=int(sys.stdin.readline())
+    # start,end=map(int,sys.stdin.readline().split())
+    # num=int(sys.stdin.readline())
+    # distance=[-1]*(x+1)
+    # graph=[[]for _ in range(x+1)]
+    # for i in range(num):
+    #     a,b=map(int,sys.stdin.readline().split())
+    #     graph[a].append(b)
+    #     graph[b].append(a)
+    # distance[start]=0
+
+    # def DFS(graph,start,end):
+    #     queue=deque([start])
+    #     while queue:
+    #         now=queue.popleft()
+    #         for next_node in graph[now]:
+    #             if distance[next_node]==-1:
+    #                 distance[next_node]=distance[now]+1
+    #                 queue.append(next_node)
+    #     result=distance[end]
+    #     return result
+    # print(DFS(graph,start,end))
+
+
+#백준 알고리즘 <연구소> -> 잠깐 보류 
+    # import collections
+    # import sys
+    # ClEAN=0
+    # WALL=1
+    # VIRUS=2
+    # lab=[[0] for _ in range(8) for _ in range(8)]
+    # mirror = [[0 for _ in range(8)] for _ in range(8)]
+    # q_virus_original = collections.deque()
+
+    # def solve():
+    #     pass
+
+    # N,M= map(int,sys.stdin.readline().split())
+    # for r in range(N):
+    #     l = list(map(int,sys.stdin.readline()))
+    #     for c in range(M):
+    #         lab[r][c]= l[c]
+    #         if lab[r][c] is VIRUS:
+    #             q_virus_original.append((r,c))
+    # solve()
+
+#백준 알고리즘 <백설공주와 일곱 난쟁이> 아직 입력안함
+    # import sys
+    # y=[]
+    # no=[]
+    # sum=0
+    # for _ in range(9):
+    #     k=int(sys.stdin.readline())
+    #     sum+=k
+    #     y.append(k)
+
+    # for i in range(9):
+    #     for j in range(i+1,9):
+    #         result=(y[i]+y[j])
+    #         if(result==(sum-100)):
+    #             no.append(y[i])
+    #             no.append(y[j])
+    #             break
+    # y.remove(no[0])
+    # y.remove(no[1])
+    # for i in y:
+    #     print(i)
+
+#백준 알고리즘 <모든 순열> -> 기존 제공 함수 활용
+    # from itertools import permutations #순열 함수 
+    # import sys
+    # N=int(sys.stdin.readline())
+    # N_list=[i for i in range(1,N+1)]
+    # for numbers in list(permutations(N_list)):
+    #     for num in numbers:
+    #         print(num, end=' ')
+    #     print()
+
+#백준 알고리즘 <DFS 활용> 
+n=int(input())
+ch=[0]*n
+ans=[0]*n
+def DFS(L):
+    if L==n:
+        print(' '.join(map(str,ans)))
+    for i in range(n):
+        if ch[i]==0:
+            ch[i]=1
+            ans[L]=i+1
+            DFS(L+1)
+            ch[i]=0
+DFS(0)
