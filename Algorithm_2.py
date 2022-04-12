@@ -350,17 +350,116 @@
     #         print(num, end=' ')
     #     print()
 
-#백준 알고리즘 <DFS 활용> 
-n=int(input())
-ch=[0]*n
-ans=[0]*n
-def DFS(L):
-    if L==n:
-        print(' '.join(map(str,ans)))
-    for i in range(n):
-        if ch[i]==0:
-            ch[i]=1
-            ans[L]=i+1
-            DFS(L+1)
-            ch[i]=0
-DFS(0)
+#백준 알고리즘 <모든 순열> <DFS 활용> 
+    # n=int(input())
+    # ch=[0]*n
+    # ans=[0]*n
+    # def DFS(L):
+    #     if L==n:
+    #         print(' '.join(map(str,ans)))
+    #     for i in range(n):
+    #         if ch[i]==0:
+    #             ch[i]=1
+    #             ans[L]=i+1
+    #             DFS(L+1)
+    #             ch[i]=0
+    # DFS(0)
+
+#백준 알고리즘 <모든 순열> for 문 함수 활용
+    # visited = [0]*4
+    # for i in range(1,4):
+    #     visited[i]=1
+    #     for j in range(1,4):
+    #         if visited[j]:
+    #             continue
+    #         visited[j]=1
+    #         for k in range(1,4):
+    #             if visited[k]:
+    #                 continue
+    #             visited[k]=1
+    #             print(i,j,k)
+    #             visited[k]=0
+    #         visited[j]=0
+    #     visited[i]=0
+
+#백준 알고리즘 <모든 순열> 재귀 함수 활용
+    # import sys
+    # x=int(sys.stdin.readline())
+    # array=[]
+    # for i in range(1,x+1):
+    #     array.append(i)
+    # visited=[0]*x
+    # answer=[0]*x
+
+    # def permutaion(level):
+    #     if level==x:
+    #         for _ in answer:
+    #             print(_,end=" ")
+    #         print()
+    #         return
+    #     for i in range(x):
+    #         if visited[i]:
+    #             continue
+    #         visited[i]=1
+    #         answer[level]=array[i]
+    #         permutaion(level+1)
+    #         visited[i]=0
+
+    # permutaion(0)
+
+#나동빈 알고리즘 미로 찾기 
+    # from collections import deque
+    # n,m=map(int,input().split())
+    # graph=[]
+    # for i in range(n):
+    #     graph.append(list(map(int,input())))
+    # dx=[-1,1,0,0]
+    # dy=[0,0,-1,1]
+
+    # def BFS(x,y):
+    #     queue=deque()
+    #     queue.append(x,y)
+    #     while queue:
+    #         x,y=queue.popleft()
+    #         for i in range(4):
+    #             nx=x+dx[i]
+    #             ny=y+dy[i]
+    #             if nx<0 or nx>=n or ny<0 or ny>=m:
+    #                 continue
+    #             if graph[nx][ny]==0:
+    #                 continue
+    #             if graph[nx][ny]==1:
+    #                 graph[nx][ny]==graph[x][y]+1
+    #                 queue.append((nx,ny))
+    #     return graph[n-1][m-1]
+    # print(BFS(0,0))
+
+#백준 알고리즘 <미로탐색>
+import sys
+from collections import deque
+N,M=map(int,sys.stdin.readline().split())
+graph=[]
+for i in range(N):
+    graph.append(list(map(int,sys.stdin.readline().strip())))
+dx=[-1,1,0,0]
+dy=[0,0,-1,1]
+array=[[] for _ in range(N)]
+
+def BFS(x,y):
+    queue=deque()
+    queue.append((x,y))
+    while queue:
+        x,y=queue.popleft()
+        for i in range(4):
+            nx=x+dx[i]
+            ny=y+dy[i]
+            if nx<0 or nx>(N-1) or ny<0 or ny>(M-1):
+                continue
+            if graph[nx][ny]==0:
+                continue
+            if graph[nx][ny]==1:
+                graph[nx][ny]=graph[x][y]+1
+                queue.append((nx,ny))
+    return graph[N-1][M-1]
+
+print(BFS(0,0))
