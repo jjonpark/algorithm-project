@@ -1,6 +1,6 @@
 # <백준 알고리즘> 라면사기 -> 시간 초과........
     # import sys
-    # import readline
+    # import reuddline
     # x=int(sys.stdin.readline())
     # y=list(map(int,sys.stdin.readline().split()))
     # result=0
@@ -269,33 +269,6 @@
 
     # print(graph[target_x-1][target_y-1])
 
-#백준 알고리즘 <촌수 계산>
-    # import sys
-    # from collections import deque
-    # x=int(sys.stdin.readline())
-    # start,end=map(int,sys.stdin.readline().split())
-    # num=int(sys.stdin.readline())
-    # distance=[-1]*(x+1)
-    # graph=[[]for _ in range(x+1)]
-    # for i in range(num):
-    #     a,b=map(int,sys.stdin.readline().split())
-    #     graph[a].append(b)
-    #     graph[b].append(a)
-    # distance[start]=0
-
-    # def DFS(graph,start,end):
-    #     queue=deque([start])
-    #     while queue:
-    #         now=queue.popleft()
-    #         for next_node in graph[now]:
-    #             if distance[next_node]==-1:
-    #                 distance[next_node]=distance[now]+1
-    #                 queue.append(next_node)
-    #     result=distance[end]
-    #     return result
-    # print(DFS(graph,start,end))
-
-
 #백준 알고리즘 <연구소> -> 잠깐 보류 
     # import collections
     # import sys
@@ -435,31 +408,169 @@
     # print(BFS(0,0))
 
 #백준 알고리즘 <미로탐색>
-import sys
-from collections import deque
-N,M=map(int,sys.stdin.readline().split())
-graph=[]
-for i in range(N):
-    graph.append(list(map(int,sys.stdin.readline().strip())))
-dx=[-1,1,0,0]
-dy=[0,0,-1,1]
-array=[[] for _ in range(N)]
+    # import sys
+    # from collections import deque
+    # N,M=map(int,sys.stdin.readline().split())
+    # graph=[]
+    # for i in range(N):
+    #     graph.append(list(map(int,sys.stdin.readline().strip())))
+    # dx=[-1,1,0,0]
+    # dy=[0,0,-1,1]
+    # array=[[] for _ in range(N)]
 
-def BFS(x,y):
-    queue=deque()
-    queue.append((x,y))
-    while queue:
-        x,y=queue.popleft()
-        for i in range(4):
-            nx=x+dx[i]
-            ny=y+dy[i]
-            if nx<0 or nx>(N-1) or ny<0 or ny>(M-1):
-                continue
-            if graph[nx][ny]==0:
-                continue
-            if graph[nx][ny]==1:
-                graph[nx][ny]=graph[x][y]+1
-                queue.append((nx,ny))
-    return graph[N-1][M-1]
+    # def BFS(x,y):
+    #     queue=deque()
+    #     queue.append((x,y))
+    #     while queue:
+    #         x,y=queue.popleft()
+    #         for i in range(4):
+    #             nx=x+dx[i]
+    #             ny=y+dy[i]
+    #             if nx<0 or nx>(N-1) or ny<0 or ny>(M-1):
+    #                 continue
+    #             if graph[nx][ny]==0:
+    #                 continue
+    #             if graph[nx][ny]==1:
+    #                 graph[nx][ny]=graph[x][y]+1
+    #                 queue.append((nx,ny))
+    #     return graph[N-1][M-1]
 
-print(BFS(0,0))
+    # print(BFS(0,0))
+#백준 알고리즘 <촌수 계산>
+    # import sys
+    # from collections import deque
+    # x=int(sys.stdin.readline())
+    # start,end=map(int,sys.stdin.readline().split())
+    # num=int(sys.stdin.readline())
+    # distance=[-1]*(x+1)
+    # graph=[[]for _ in range(x+1)]
+    # for i in range(num):
+    #     a,b=map(int,sys.stdin.readline().split())
+    #     graph[a].append(b)
+    #     graph[b].append(a)
+    # distance[start]=0
+
+    # def DFS(graph,start,end):
+    #     queue=deque([start])
+    #     while queue:
+    #         now=queue.popleft()
+    #         for next_node in graph[now]:
+    #             if distance[next_node]==-1:
+    #                 distance[next_node]=distance[now]+1
+    #                 queue.append(next_node)
+    #     result=distance[end]
+    #     return result
+    # print(DFS(graph,start,end))
+
+#백준 알고리즘 <바이러스>
+    # import sys
+    # from collections import deque
+    # num=int(sys.stdin.readline())
+    # line=int(sys.stdin.readline())
+    # graph=[[]for _ in range(num+1)]
+    # for i in range(line):
+    #     a,b=map(int,sys.stdin.readline().strip().split())
+    #     graph[a].append(b)
+    #     graph[b].append(a)
+    # visited=[0]*(num+1)
+
+    # def BFS(start):
+    #     queue=deque([start])
+    #     visited[start]=1
+    #     while queue:
+    #         now=queue.popleft()
+    #         for next_node in graph[now]:
+    #             if(visited[next_node]==1):
+    #                 continue
+    #             else:
+    #                 queue.append(next_node)
+    #                 visited[next_node]=1
+    #     return
+    # BFS(1)
+    # count=0
+    # for _ in visited:
+    #     if(_==1):
+    #         count+=1
+    # print(count-1)
+
+#백준 알고리즘 <삼성 A형 기출> <괄호 추가하기>
+    # import sys
+    # input=sys.stdin.readline
+    # x=int(input())
+
+    # def cal(n1,n2,op):
+    #     if op == '+':
+    #         return n1 + n2
+    #     elif op == '-':
+    #         return n1 - n2
+    #     elif op == '+':
+    #         return n1 * n2
+    # max_sum = float('-inf')
+
+    # def dfs(idx, ans):
+    #     global max_sum
+    #     if idx >= len(opr):
+    #         max_sum = max(max_sum, ans)
+    #         return 
+    #     dfs(idx+1,cal(ans,num[idx+1],opr[idx]))
+
+    #     if idx+1 < len(opr):
+    #         dfs(idx+2,cal(ans, cal(num[idx+1],num[idx+2],opr[idx+1]), opr[idx]))
+    # num,opr=[], []
+    # def sol(m):
+    #     for i in m[:-1]:
+    #         if i.isdigit():
+    #             num.append(int(i))
+    #         else:
+    #             opr.append(i)
+    #     dfs(0,num[0])
+    # sol(m)
+    # print(max_sum)
+
+#백준 알고리즘 < 평범한 배낭 > -> 이게 DP 문제라고라!?
+    # import sys
+    # N,K=map(int,sys.stdin.readline().split())
+    # list=[]
+    # for i in range(N):
+    #     k_1,k_2=map(int,sys.stdin.readline().split())
+    #     k_3=(k_2/k_1)
+    #     list.append([k_1,k_2,k_3])
+    # list=sorted(list, key=lambda x:x[2], reverse=True)
+    # weight=0
+    # value=0
+    # for i in range(N):
+    #     weight+=list[i][0]
+    #     if(weight>K):
+    #         weight-=list[i][0]
+    #     else:
+    #         value+=list[i][1]
+    # print(value)
+
+# 백준 알고리즘 <평범한 배낭> 풀이 
+    # N,K = map(int,input().split())
+    # weight=[0]
+    # value=[0]
+    # dp=[[0] *(K+1) for _ in range(N+1)]
+    # for i in range(N):
+    #     W,V=map(int,input().split())
+    #     weight.append(W)
+    #     value.append(V)
+    # for i in range(1,N+1):
+    #     for j in range(1,K+1):
+    #         if weight[i]<=j:
+    #             dp[i][j]= max(dp[i-1][j], dp[i-1][j-weight[i]]+value[i])
+    #         else:
+    #             dp[i][j]=dp[i-1][j]
+                
+# 백준 알고리즘 <평범한 배낭> 강의 풀이
+def solve():
+    n,k=[int(x) for x in input().split()]
+    table = [0]*(k+1)
+    for _ in range(n):
+        w,v=[int(x) for x in input().split()]
+        for j in range(k,0,-1):
+            if j + w <=k and table[j]!=0:
+                table[j+w]= max(table[j+w], table[j]+v)
+        table[w] = max(table[w], v)
+    print(max(table))
+solve()
