@@ -563,14 +563,221 @@
     #             dp[i][j]=dp[i-1][j]
                 
 # 백준 알고리즘 <평범한 배낭> 강의 풀이
-def solve():
-    n,k=[int(x) for x in input().split()]
-    table = [0]*(k+1)
-    for _ in range(n):
-        w,v=[int(x) for x in input().split()]
-        for j in range(k,0,-1):
-            if j + w <=k and table[j]!=0:
-                table[j+w]= max(table[j+w], table[j]+v)
-        table[w] = max(table[w], v)
-    print(max(table))
-solve()
+    # def solve():
+    #     n,k=[int(x) for x in input().split()]
+    #     table = [0]*(k+1)
+    #     for _ in range(n):
+    #         w,v=[int(x) for x in input().split()]
+    #         if w>k:
+    #             continue
+    #         for j in range(k,0,-1):
+    #             if j + w <=k and table[j]!=0:
+    #                 table[j+w]= max(table[j+w], table[j]+v)
+    #         table[w] = max(table[w], v)
+    #     print(max(table))
+    # solve()
+
+#나동빈 코딩테스트 <음료수 얼려먹기>
+    # N,M=map(int,input().split())
+    # graph=[]
+    # visited=[]
+    # for i in range(N):
+    #     graph.append(list(map(int,input())))
+    #     visited.append([0]*M)
+    # def DFS(x,y):
+    #     if x<=-1 or x>=N or y<=-1 or y>=M:
+    #         return False
+    #     if graph[x][y]==0:
+    #         graph[x][y]=1
+    #         DFS(x-1,y)
+    #         DFS(x,y-1)
+    #         DFS(x+1,y)
+    #         DFS(x,y+1)
+    #         return True
+    #     return False
+    # result=0
+    # for i in range(N):
+    #     for j in range(M):
+    #         if DFS(i,j)==True:
+    #             result+=1
+    # print(result)
+
+#백준 알고리즘 <배추밭 문제>
+    # import sys
+    # T= int(sys.stdin.readline())
+    # def DFS(x,y):
+    #     if x<0 or x>N-1 or y<0 or y>M-1:
+    #         return False
+    #     if graph[x][y]==1:
+    #         graph[x][y]=0
+    #         DFS(x-1,y)
+    #         DFS(x+1,y)
+    #         DFS(x,y-1)
+    #         DFS(x,y+1)
+    #         return True
+    #     return False
+
+    # for test_case in range(1,T+1):
+    #     M,N,K=map(int,sys.stdin.readline().split())
+    #     graph=[[0]*M for _ in range(N)]
+    #     for i in range(K):
+    #         tmp1,tmp2=map(int,sys.stdin.readline().split())
+    #         graph[tmp2][tmp1]=1
+    #     result=0
+    #     for i in range(N):
+    #         for j in range(M):
+    #             if DFS(i,j)==True:
+    #                 result+=1
+    #     print(result)
+
+#백준 알고리즘 <배추밭 문제> DFS 풀이 -->중요
+    # t = int(input())
+    # dx = [1, -1, 0, 0]
+    # dy = [0, 0, -1, 1]
+    # def dfs(x, y):
+    #     queue = [[x, y]]
+    #     while queue:
+    #         a, b = queue[0][0], queue[0][1]
+    #         del queue[0]
+    #         for i in range(4):
+    #             q = a + dx[i]
+    #             w = b + dy[i]
+    #             if 0 <= q < n and 0 <= w < m and s[q][w] == 1:
+    #                 s[q][w] = 0
+    #                 queue.append([q, w])
+    # for i in range(t):
+    #     m, n, k = map(int, input().split())
+    #     s = [[0] * m for i in range(n)]
+    #     cnt = 0
+    #     for j in range(k):
+    #         a, b = map(int, input().split())
+    #         s[b][a] = 1
+    #     for q in range(n):
+    #         for w in range(m):
+    #             if s[q][w] == 1:
+    #                 dfs(q, w)
+    #                 s[q][w] = 0
+    #                 cnt += 1
+    #     print(cnt)
+
+    # #위의 풀이 내껄로 만들기 
+    # dx=[-1,1,0,0]
+    # dy=[0,0,1,-1]
+    # def DFS(x,y):
+    #     queue=[[x,y]]
+    #     while queue:
+    #         a,b=queue[0][0],queue[0][1]
+    #         del queue[0]
+    #         for i in range(4):
+    #             q=a+ dx[i]
+    #             w=b+ dy[i]
+    #             if 0<q<n and 0<w<m and s[q][w]==1:
+    #                 s[q][w]=0
+    #                 queue.append([q,w])
+
+#백준 알고리즘 <달팽이는 올라가고 싶다>
+    # import sys
+    # A,B,V=map(int,sys.stdin.readline().split())
+    # result=0
+    # if A>=V:
+    #     result=1
+    # tmp1=V-A
+    # tmp2=A-B
+    # if tmp1%tmp2==0:
+    #     result=(tmp1//tmp2)+1
+    # else:
+    #     result=(tmp1//tmp2)+2
+    # print(result)
+
+#프로그래머스 <오픈 채팅방>
+    # def solution(record):
+    #     answer = []
+    #     trace = []
+    #     map={} #사전 자료형 
+    #     for i in range(len(record)):
+    #         tmp=record[i].split(' ')
+
+    #         if tmp[0]=="Enter":
+    #             map[tmp[1]]=tmp[2]
+    #             trace.append([tmp[0],tmp[1]])
+    #         elif tmp[0]=="Leave":
+    #             trace.append([tmp[0],tmp[1]])
+    #         else:
+    #             map[tmp[1]]=tmp[2]
+
+    #     for j in range(len(trace)):
+    #         if trace[j][0]=="Enter":
+    #             result=map[trace[j][1]] + "님이 들어왔습니다."
+    #             answer.append(result)
+    #         elif trace[j][0]=="Leave":
+    #             result=map[trace[j][1]] + "님이 나갔습니다."
+    #             answer.append(result)
+
+    #     return answer
+
+#백준 알고리즘 <치킨 배달> ->내가 전개한 대로 풀면 안댐
+    # import sys
+    # N,M = map(int,sys.stdin.readline().split())
+    # graph=[[]*N for _ in range(N)]
+    # for i in range(N):
+    #     graph[i]=list(map(int,sys.stdin.readline().strip().split()))
+
+    # def distance(x,y):
+    #     result=0
+    #     for i in range(N):
+    #         for j in range(N):
+    #             if(graph[i][j]==1):
+    #                 result+=(abs(i-x)+abs(j-y))
+    #     return result
+
+    # visited=[[0]*N for _ in range(N)]
+    # for i in range(N):
+    #     for j in range(N):
+    #         if graph[i][j]==2:
+    #             visited[i][j]=distance(i,j)
+    # print(visited)
+
+#백준 알고리즘 <치킨 배달> 콤비네이션을 활용한 풀이 (완전 탐색)
+    # n,m = map(int, input().split())
+    # City=[list(map(int,input().split())) for _ in range(n)]
+    # answer = 987654321
+    # house = []
+    # for i in range(n):
+    #     for j in range(n):
+    #         if(City[i][j] == 1):
+    #             house.append((i,j))
+    # def Min_distance(chicken, house):
+    #     sum_Distance=[]
+    #     for i in house:
+    #         min_D = 987654321
+    #         for j in chicken:
+    #             Distance= abs(i[0]-j[0]) + abs(i[1]-j[1])
+    #             min_D=min(min_D,Distance)
+    #         sum_Distance.append(min_D)
+    #     return sum_Distance
+    # def Brute_Force(idx, x, y):
+    #     global answer
+    #     if(idx == m):
+    #         choice_chicken=[]
+    #         for i in range(n):
+    #             for j in range(n):
+    #                 if(City[i][j]==3):
+    #                     choice_chicken.append((i,j))
+    #         res=Min_distance(choice_chicken,house)
+    #         if(answer>sum(res)):
+    #             answer=sum(res)
+    #         return
+    #     else:
+    #         for i in range(x,n):
+    #             if(i==x):
+    #                 k=y
+    #             else:
+    #                 k=0
+    #             for j in range(k,n):
+    #                 if(City[i][j]==2):
+    #                     City[i][j]=3
+    #                     Brute_Force(idx+1,i,j+1)
+    #                     City[i][j]=2
+    # Brute_Force(0,0,0)
+    # print(answer)
+
