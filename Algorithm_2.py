@@ -781,3 +781,272 @@
     # Brute_Force(0,0,0)
     # print(answer)
 
+#백준 알고리즘 <치킨 배달> ->좋네~ 한번더 보자
+    # from itertools import combinations
+    # import sys
+    # N,M=map(int, sys.stdin.readline().split())
+    # board = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
+
+    # house = []
+    # chicken = []
+
+    # for i in range(N):
+    #     for j in range(N):
+    #         if board[i][j]==1:
+    #             house.append((i,j))
+    #         elif board[i][j]==2:
+    #             chicken.append((i,j))
+    # min_value=float('inf')
+    # for ch in combinations(chicken, M):
+    #     sum_value=0
+    #     for home in house:
+    #         sum_value += min([abs(home[0]-i[0]) + abs(home[1]-i[1]) for i in ch])
+    #         if min_value <= sum_value:
+    #             break
+    #     if sum_value<min_value:
+    #         min_value=sum_value
+
+#백준 복습 <사칙 연산>
+    # import sys
+    # x,y= map(int,sys.stdin.readline().split())
+    # print(x+y)
+    # print(x-y)
+    # print(x*y)
+    # print(int(x/y))
+    # print(x%y)
+
+#백준 복습 <if문>
+    # import sys
+    # a,b=map(int,sys.stdin.readline().split())
+    # if(a<b):
+    #     print("<")
+    # elif(a>b):
+    #     print(">")
+    # else:
+    #     print("==")
+
+#백준 복습 <for문>
+    # import sys
+    # x=int(sys.stdin.readline())
+    # for i in range(x):
+    #     print("*"*(i+1))
+
+#백준 복습 <for문2>
+    # import sys
+    # x= int(sys.stdin.readline())
+    # for i in range(x):
+    #     print(" "*(x-i-1)+"*"*(i+1))
+
+#백준 복습 <별 찍기5>
+    # import sys
+    # x=int(sys.stdin.readline())
+    # for i in range(x):
+    #     for j in range(x-i-1):
+    #         print(' ', end="")
+    #     for j in range(2*i+1):
+    #         print('*', end="")
+    #     print()
+
+#백준 복습 <최소, 최대>
+    # import sys
+    # x=int(sys.stdin.readline())
+    # y=list(map(int,sys.stdin.readline().strip().split()))
+    # Max_value=y[0]
+    # Min_value=y[0]
+    # for i in range(x):
+    #     if y[i]>Max_value:
+    #         Max_value=y[i]
+    #     if y[i]<Min_value:
+    #         Min_value=y[i]
+    # print(f"{Min_value} {Max_value}")
+
+#백준 복습 <나는 요리사다>
+    # y_value=[0,0,0,0,0]
+    # answer_index=1
+    # answer_value=y_value[0]
+    # for i in range(5):
+    #     k=list(map(int,input().split()))
+    #     y_value[i]=sum(k)
+    #     if answer_value<y_value[i]:
+    #         answer_value=y_value[i]
+    #         answer_index=(i+1)
+    # print(f"{answer_index} {answer_value}")
+
+#백준 복습 <크게 만들기> -> 은근 어렵네....
+    # N,K=map(int,input().split())
+    # value=N-K
+    # y=list(input())
+    # for i in range(len(y)):
+    #     y[i]=int(y[i])
+    # answer=[y[0]]
+    # result=[0]*value
+    # for j in range(1,len(y)):
+    #     if(y[j]>answer[-1]):
+    #         answer.pop()
+    #         answer.append(y[j])
+    #     else:
+    #         answer.append(y[j])
+    # if(len(answer)>value):
+    #     for i in range(value):
+
+#백준 복습 <크게 만들기> 풀이 참조 
+    # import sys
+    # N,K = map(int,sys.stdin.readline().split())
+    # nums = list(map(int,sys.stdin.readline().strip()))
+
+    # result = []
+    # delNum = K
+
+    # for i in range(N):
+    #     while delNum>0 and result:
+    #         if result[len(result)-1] <nums[i]:
+    #             result.pop()
+    #             delNum-=1
+    #         else:
+    #             break
+    #     result.append(nums[i])
+
+    # for i in range(N-K):
+    #     print(result[i], end="")
+
+#백준 복습 < 요세푸스 문제 >
+    # import sys
+    # N,K=map(int,sys.stdin.readline().split())
+    # list=[0]*N
+    # for i in range(1,N+1):
+    #     list[i-1]=i
+    # tmp=0
+    # print("<", end="")
+    # while len(list) >= 1:
+    #     tmp+=K
+    #     tmp= (tmp%len(list))-1
+    #     if(len(list)==1):
+    #         print(list[tmp], end="")
+    #     else:
+    #         print(list[tmp], end=", ")
+    #     del list[tmp]
+    #     if(tmp<0):
+    #         tmp+=1
+    # print(">")
+
+#백준 복습 <스택>
+    # galho=input()
+    # stack=[]
+    # answer=0
+    # for i in range(len(galho)):
+    #     if galho[i]=="(":
+    #         stack.append(galho[i])
+    #     else:
+    #         if galho[i-1]=="(":
+    #             stack.pop()
+    #             answer+= len(stack)
+    #         else:
+    #             stack.pop()
+    #             answer+=1
+    # print(answer)
+
+#백준 복습 < 크게 만들기 >
+    # import sys
+    # N,K=map(int, sys.stdin.readline().split())
+    # number=list(map(int,sys.stdin.readline().strip()))
+
+    # array=[]
+    # cnt=K
+    # for num in number:
+    #     while array and cnt>0 and array[-1]<num:
+    #         array.pop()
+    #         cnt-=1
+    #     array.append(num)
+    # for i in range(N-K):
+    #     print(array[i],end='')
+
+#백준 복습 <큐 2>
+    # import sys
+    # from collections import deque
+    # x=int(sys.stdin.readline())
+    # queue=deque()
+    # for i in range(x):
+    #     y=list(sys.stdin.readline().strip().split())
+    #     if y[0]=='push':
+    #         queue.append(y[1])
+    #     elif y[0]=="front":
+    #         if(len(queue)==0):
+    #             print(-1)
+    #         else:
+    #             print(queue[0])
+    #     elif y[0]=='size':
+    #         print(len(queue))
+    #     elif y[0]=='empty':
+    #         if(len(queue)==0):
+    #             print(1)
+    #         else:
+    #             print(0)
+    #     elif y[0]=='pop':
+    #         if(len(queue)==0):
+    #             print(-1)
+    #         else:
+    #             k=queue.popleft()
+    #             print(k)
+    #     elif y[0]=='back':
+    #         if(len(queue)==0):
+    #             print(-1)
+    #         else:
+    #             print(queue[-1])
+
+#백준 복습 <카드2>
+    # import sys
+    # from collections import deque
+    # x=int(sys.stdin.readline())
+    # queue=deque()
+    # for i in range(1,x+1):
+    #     queue.append(i)
+    # while len(queue)>1:
+    #     queue.popleft()
+    #     k=queue.popleft()
+    #     queue.append(k)
+    # print(queue[0])
+
+#백준 복습 <뱀>
+import sys
+from collections import deque
+size=int(sys.stdin.readline())
+
+graph=[[0]*size for _ in range(size)]
+K=int(sys.stdin.readline())
+for _ in range(K):
+    k_1,k_2=map(int,sys.stdin.readline().split())
+    graph[k_2-1][k_1-1]=1
+L=int(sys.stdin.readline())
+list=deque()
+for i in range(L):
+    L_1,L_2=map(str,sys.stdin.readline().split())
+    L_1=int(L_1)
+    list.append([L_1,L_2])
+dx=[0,1,0,-1]
+dy=[1,0,-1,0]
+
+queue=deque()
+queue.append((0,0))
+cnt=0
+long=1
+i=0
+while queue:
+    x,y=queue.popleft()
+    if(len(list)!=0 and cnt==list[0][0]):
+        if(list[0][1]=="D"):
+            i+=1
+        else:
+            i+=3
+        if(i>=4):
+            i=(i%4)
+        list.popleft()
+    x=x+dx[i]
+    y=y+dy[i]
+    queue.append((x,y))
+    cnt+=1
+    if(x<0 or x>=size or y<0 or y>=size):
+        cnt+=long
+        break
+    if(graph[x][y]==1):
+        long+=1
+print(cnt-1)
