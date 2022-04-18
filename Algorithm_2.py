@@ -1006,47 +1006,90 @@
     #     queue.append(k)
     # print(queue[0])
 
-#백준 복습 <뱀>
-import sys
-from collections import deque
-size=int(sys.stdin.readline())
+#백준 복습 <뱀> -> 개어렵네 자기 몸에 걸려서 끝나는걸 어찌 구현할지..
+    # import sys
+    # from collections import deque
+    # size=int(sys.stdin.readline())
 
-graph=[[0]*size for _ in range(size)]
-K=int(sys.stdin.readline())
-for _ in range(K):
-    k_1,k_2=map(int,sys.stdin.readline().split())
-    graph[k_2-1][k_1-1]=1
-L=int(sys.stdin.readline())
-list=deque()
-for i in range(L):
-    L_1,L_2=map(str,sys.stdin.readline().split())
-    L_1=int(L_1)
-    list.append([L_1,L_2])
-dx=[0,1,0,-1]
-dy=[1,0,-1,0]
+    # graph=[[0]*size for _ in range(size)]
+    # K=int(sys.stdin.readline())
+    # for _ in range(K):
+    #     k_1,k_2=map(int,sys.stdin.readline().split())
+    #     graph[k_2-1][k_1-1]=1
+    # L=int(sys.stdin.readline())
+    # list=deque()
+    # for i in range(L):
+    #     L_1,L_2=map(str,sys.stdin.readline().split())
+    #     L_1=int(L_1)
+    #     list.append([L_1,L_2])
+    # dx=[0,1,0,-1]
+    # dy=[1,0,-1,0]
 
-queue=deque()
-queue.append((0,0))
-cnt=0
-long=1
-i=0
-while queue:
-    x,y=queue.popleft()
-    if(len(list)!=0 and cnt==list[0][0]):
-        if(list[0][1]=="D"):
-            i+=1
-        else:
-            i+=3
-        if(i>=4):
-            i=(i%4)
-        list.popleft()
-    x=x+dx[i]
-    y=y+dy[i]
-    queue.append((x,y))
-    cnt+=1
-    if(x<0 or x>=size or y<0 or y>=size):
-        cnt+=long
-        break
-    if(graph[x][y]==1):
-        long+=1
-print(cnt-1)
+    # queue=deque()
+    # queue.append((0,0))
+    # cnt=0
+    # long=1
+    # i=0
+    # while queue:
+    #     x,y=queue.popleft()
+    #     if(len(list)!=0 and cnt==list[0][0]):
+    #         if(list[0][1]=="D"):
+    #             i+=1
+    #         else:
+    #             i+=3
+    #         if(i>=4):
+    #             i=(i%4)
+    #         list.popleft()
+    #     x=x+dx[i]
+    #     y=y+dy[i]
+    #     queue.append((x,y))
+    #     cnt+=1
+    #     if(x<0 or x>=size or y<0 or y>=size):
+    #         cnt+=long
+    #         break
+    #     if(graph[x][y]==1):
+    #         long+=1
+    # print(cnt-1)
+
+#백준 복습 <뱀 문제> -문제 풀이 
+    # from collections import deque
+
+    # N = int(input())
+    # K = int(input())
+    # board = [[0]* N for  _ in range(N)]
+    # for _ in range(K):
+    #     a,b = map(int,input().split())
+    #     board[a-1][b-1] = 1
+    # L = int(input())
+    # times = {}
+    # for i in range(L):
+    #     X , C = input().split()
+    #     times[int(X)] = C
+    # dy = [-1,0,1,0]
+    # dx = [0,1,0,-1]
+    # direction = 1
+    # time = 1
+    # y,x =0,0
+    # snake = deque([[y,x]])
+    # board[y][x] = 2
+
+    # def direction_change(d,c):
+    #     if c =="L":
+    #         d=(d-1)%4
+    #     else:
+    #         d=(d+1)%4
+    #     return d
+    # while True:
+    #     y,x=y+dy[direction],x+dx[direction]
+    #     if 0<=y<N and 0<=x<N and board[y][x] !=2:
+    #         if not board[y][x] ==1:
+    #             delY,delX = snake.popleft()
+    #             board[delY][delX]=0
+    #         board[y][x] = 2
+    #         snake.append([y,x])
+    #         if time in times.keys():
+    #             direction=direction_change(direction,times[time])
+    #         time +=1
+    #     else:
+    #         break
+    # print(time)
