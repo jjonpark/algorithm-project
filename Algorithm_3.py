@@ -62,22 +62,58 @@
     # print(answer_num)
     # print(num_to_roma(answer_num))
 
-#백준 알고리즘 <패션왕 신해빈>
-T=int(input())
-for test_case in range(1,T+1):
-    x=int(input())
-    kinds_list={}
-    num_list=[]
-    for i in range(x):
-        K_1,K_2=map(str,input().split())
-        if K_2 in kinds_list.keys():
-            for i in range(len(num_list)):
-                if(K_2==num_list[i][0]):
-                    num_list[i][1]+=1
-        else:
-            kinds_list[K_2]=K_1
-            num_list.append([K_2,1])
-    result=1
-    for i in range(len(num_list)):
-        result*=(num_list[i][1]+1)
-    print(result-1)
+    # #백준 알고리즘 <패션왕 신해빈>
+    # T=int(input())
+    # for test_case in range(1,T+1):
+    #     x=int(input())
+    #     kinds_list={}
+    #     num_list=[]
+    #     for i in range(x):
+    #         K_1,K_2=map(str,input().split())
+    #         if K_2 in kinds_list.keys():
+    #             for i in range(len(num_list)):
+    #                 if(K_2==num_list[i][0]):
+    #                     num_list[i][1]+=1
+    #         else:
+    #             kinds_list[K_2]=K_1
+    #             num_list.append([K_2,1])
+    #     result=1
+    #     for i in range(len(num_list)):
+    #         result*=(num_list[i][1]+1)
+    #     print(result-1)
+
+    # #백준 알고리즘 <패션왕 신해빈> 풀이
+    # testcase = int(input())
+
+    # for i in range(testcase):
+    #     map = {}
+    #     answer = 1
+    #     n= int(input())
+    #     for j in range(n):
+    #         a,b = input().split()
+    #         if not b in map:
+    #             map[b] = 1
+    #         else:
+    #             map[b] +=1
+    #     for k in map.keys():
+    #         answer = answer * (map[k]+1)
+    #     print(answer-1)
+
+#코드 포스 Non-zero segments
+n=int(input())
+a=list(map(int,input().split()))
+prefix_sum=[0]*200001
+map={}
+answer=0
+
+map[0]=1
+for i in range(n):
+    prefix_sum[i]=a[i]
+    if i !=0:
+        prefix_sum[i]+=prefix_sum[i-1]
+    if prefix_sum[i] in map :
+        answer+=1
+        map.clear()
+        map[prefix_sum[i-1]]=1
+    map[prefix_sum[i]]=1
+print(answer)
