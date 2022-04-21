@@ -206,26 +206,108 @@
     #         answer-=int(j)
     # print(answer)
 
-#백준 문제풀이 <소트>
+#백준 문제풀이 <소트> ->이게 왜 실패인지 아직도 모르겠어 
+    # import sys
+    # x=int(sys.stdin.readline())
+    # y=list(map(int,sys.stdin.readline().strip().split()))
+    # cnt=int(sys.stdin.readline())
+    # if x==1:
+    #     print(y[0])
+    # else:
+    #     while cnt>0:
+    #         for i in range(1,x):
+    #             if(y[i-1]<y[i]):
+    #                 y[i],y[i-1]=y[i-1],y[i]
+    #                 cnt-=1
+    #                 break
+    #         for j in range(1,x):
+    #             if(y[j-1]<y[j]):
+    #                 break
+    #             else:
+    #                 if(j==x-1):
+    #                     cnt=0
+                    
+    #     for i in range(x):
+    #         print(y[i],end=" ")
+
+#백준 문제 <소트>
+    # import sys
+    # N=int(sys.stdin.readline())
+    # arr=list(map(int,sys.stdin.readline().strip().split()))
+    # cnt=int(sys.stdin.readline())
+
+    # while True:
+    #     tof =False
+    #     for i in range(N):
+    #         idx=i
+    #         cmp=0
+    #         for j in range(N-1,i,-1):
+    #             if arr[idx]<arr[j] and j-i<=cnt:
+    #                 idx=j
+    #                 tof=True
+    #                 cmp=j-i
+    #         if idx!=i:
+    #             tmp=arr[idx]
+    #             del arr[idx]
+    #             arr.insert(i,tmp)
+    #             cnt-=cmp
+    #             break
+    #     if tof==False:
+    #         break
+    # print(*arr)
+
+#백준 문제 <회의실 배정>
+    # import sys
+    # num=int(sys.stdin.readline())
+    # time_list=[]
+    # for i in range(num):
+    #     tmp1,tmp2=map(int,sys.stdin.readline().split())
+    #     time_list.append([tmp1,tmp2])
+    # sort_time=sorted(time_list,key=lambda x:(x[1],x[0]))
+    # cnt=0
+    # tmp3=0
+    # for i in range(num):
+    #     if(tmp3<=sort_time[i][0]):
+    #         tmp3=sort_time[i][1]
+    #         cnt+=1
+    # print(cnt)
+
+#백준 문제 <소트>
 import sys
-x=int(sys.stdin.readline())
-y=list(map(int,sys.stdin.readline().strip().split()))
-cnt=int(sys.stdin.readline())
-if x==1:
-    print(y[0])
-else:
-    while cnt>0:
-        for i in range(1,x):
-            if(y[i-1]<y[i]):
-                y[i],y[i-1]=y[i-1],y[i]
-                cnt-=1
-                break
-        for j in range(1,x):
-            if(y[j-1]<y[j]):
-                break
+x= int(sys.stdin.readline())
+y= list(map(int,sys.stdin.readline().split()))
+csort=[0 for _ in range(10002)]
+for i in range(x):
+    csort[y[i]]+=1
+
+answer=''
+while True:
+    tof=False
+    for i in range(1001):
+        if csort[i]:
+            tof=True
+            if csort[i+1]:
+                k-=1
+                for j in range(i+2,1001):
+                    if(csort[j]):
+                        k=j
+                        break
+                if  k!=-1:
+                    while csort[i]:
+                        answer+=str(i)+" "
+                        csort[i]-=1
+                    answer+=str(i+1)+' '
+                    csort[k]-=1
+                    break
+                else:
+                    answer+=str(i+1)+' '
+                    csort[i+1]-=1
+                    break
             else:
-                if(j==x-1):
-                    cnt=0
-                
-    for i in range(x):
-        print(y[i],end=" ")
+                while(csort[i]):
+                    answer+=str(i)+' '
+                    csort[i]-=1
+                break
+    if(tof==False):
+        break
+print(answer)
