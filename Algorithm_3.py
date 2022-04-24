@@ -273,41 +273,374 @@
     # print(cnt)
 
 #백준 문제 <소트>
-import sys
-x= int(sys.stdin.readline())
-y= list(map(int,sys.stdin.readline().split()))
-csort=[0 for _ in range(10002)]
-for i in range(x):
-    csort[y[i]]+=1
+    # import sys
+    # x= int(sys.stdin.readline())
+    # y= list(map(int,sys.stdin.readline().split()))
+    # csort=[0 for _ in range(10002)]
+    # for i in range(x):
+    #     csort[y[i]]+=1
 
-answer=''
-while True:
-    tof=False
-    for i in range(1001):
-        if csort[i]:
-            tof=True
-            if csort[i+1]:
-                k-=1
-                for j in range(i+2,1001):
-                    if(csort[j]):
-                        k=j
-                        break
-                if  k!=-1:
-                    while csort[i]:
-                        answer+=str(i)+" "
-                        csort[i]-=1
-                    answer+=str(i+1)+' '
-                    csort[k]-=1
-                    break
-                else:
-                    answer+=str(i+1)+' '
-                    csort[i+1]-=1
-                    break
-            else:
-                while(csort[i]):
-                    answer+=str(i)+' '
-                    csort[i]-=1
-                break
-    if(tof==False):
-        break
-print(answer)
+    # answer=''
+    # while True:
+    #     tof=False
+    #     for i in range(1001):
+    #         if csort[i]:
+    #             tof=True
+    #             if csort[i+1]:
+    #                 k-=1
+    #                 for j in range(i+2,1001):
+    #                     if(csort[j]):
+    #                         k=j
+    #                         break
+    #                 if  k!=-1:
+    #                     while csort[i]:
+    #                         answer+=str(i)+" "
+    #                         csort[i]-=1
+    #                     answer+=str(i+1)+' '
+    #                     csort[k]-=1
+    #                     break
+    #                 else:
+    #                     answer+=str(i+1)+' '
+    #                     csort[i+1]-=1
+    #                     break
+    #             else:
+    #                 while(csort[i]):
+    #                     answer+=str(i)+' '
+    #                     csort[i]-=1
+    #                 break
+    #     if(tof==False):
+    #         break
+    # print(answer)
+
+#백준 문제 <팩토리얼>
+
+    # def facto(N):
+    #     if(N==1):
+    #         return 1
+    #     else:
+    #         result = N*facto(N-1)
+    #         return result
+    # N=int(input())
+
+    # if(N==0):
+    #     print(1)
+    # else:
+    #     print(facto(N))
+
+#백준 문제 <하노이 탑>
+    # N=int(input())
+
+    # def hanoi(num,start,to,end):
+    #     if num ==1:
+    #         print(start, end)
+    #     else:
+    #         hanoi(num-1,start,end,to)
+    #         print(start, end)
+    #         hanoi(num-1,to,start,end)
+    # print(2**N-1)
+    # hanoi(N,1,2,3)
+
+#백준 문제 <파이프 옮기기>
+    # N=int(input())
+    # arr=[]
+    # for i in range(N):
+    #     k=list(map(int,input().split()))
+    #     k.append(0)
+    #     arr.append(k)
+    # tmp=[0]*(N+1)
+    # arr.append(tmp)
+    # cnt=0
+
+    # def situation(x_1,x_2,x_3,x_4):
+    #     if(x_3>=N or x_4>=N):
+    #         return
+    #     elif(x_3==N-1 and x_4==N-1):
+    #         global cnt
+    #         cnt+=1
+    #         return
+    #     else:
+    #         if(x_3-x_1==0 and x_4-x_2==1):
+    #             x_1,x_2=x_3,x_4
+    #             if(arr[x_3][x_4+1]==1):
+    #                 return
+    #             else:
+    #                 situation(x_1,x_2,x_3,x_4+1)
+    #             if(arr[x_3+1][x_4+1]==1 or arr[x_3][x_4+1]==1 or arr[x_3+1][x_4]==1):
+    #                 return
+    #             else:
+    #                 situation(x_1,x_2,x_3+1,x_4+1)
+    #         elif(x_3-x_1==1 and x_4-x_2==0):
+    #             x_1,x_2=x_3,x_4
+    #             if(arr[x_3+1][x_4]==1):
+    #                 return
+    #             else:
+    #                 situation(x_1,x_2,x_3+1,x_4)
+    #             if(arr[x_3+1][x_4+1]==1 or arr[x_3][x_4+1]==1 or arr[x_3+1][x_4]==1):
+    #                 return
+    #             else:
+    #                 situation(x_1,x_2,x_3+1,x_4+1)
+    #         elif(x_3-x_1==1 and x_4-x_2==1):
+    #             x_1,x_2=x_3,x_4
+    #             if(arr[x_3+1][x_4]==1):
+    #                 return
+    #             else:
+    #                 situation(x_1,x_2,x_3+1,x_4)
+    #             if(arr[x_3][x_4+1]==1):
+    #                 return
+    #             else:
+    #                 situation(x_1,x_2,x_3,x_4+1)
+    #             if(arr[x_3+1][x_4+1]==1 or arr[x_3][x_4+1]==1 or arr[x_3+1][x_4]==1):
+    #                 return
+    #             else:
+    #                 situation(x_1,x_2,x_3+1,x_4+1)
+    # situation(0,0,0,1)
+    # print(cnt)
+
+#백준 문제풀이 <깔끔> -> 시간 초과가 나는구만?ㅋㅋ
+    # def recursive(y,x,shape):
+    #     global ans
+    #     if y>n or x>n:
+    #         return 
+    #     if y==n and x==n:
+    #         ans+=1
+    #     if home[y][x+1]==0 and (shape==0 or shape==2):
+    #         recursive(y,x+1,0)
+    #     if home[y+1][x]==0 and (shape==1 or shape==2):
+    #         recursive(y+1,x,1)
+    #     if home[y+1][x]==0 and home[y][x+1]==0 and home[y+1][x+1]==0:
+    #         recursive(y+1,x+1,2)
+
+    # n=int(input())
+    # home =[[0 for col in range(18)] for row in range(18)]
+    # for i in range(1,n+1):
+    #     row= list(map(int,input().split()))
+    #     for j in range(1,n+1):
+    #         home[i][j]=row[j-1]
+
+    # ans=0
+    # recursive(1,2,0)
+    # print(ans)
+
+#백준 문제 시간 초과 안나는 파이프 옮기기 
+    # from collections import deque
+    # import sys
+    # input = sys.stdin.readline
+    # def dfs(x, y, direction):
+    #     global count
+    #     if x == n - 1 and y == n - 1: count += 1
+    #     if direction == 0:
+    #         if y + 1 < n and s[x][y + 1] == 0: dfs(x, y + 1, 0)
+    #         if x + 1 < n and y + 1 < n:
+    #             if s[x][y + 1] == 0 and s[x + 1][y + 1] == 0 and s[x + 1][y] == 0:
+    #                 dfs(x + 1, y + 1, 2)
+    #     elif direction == 1:
+    #         if x + 1 < n and s[x + 1][y] == 0: dfs(x + 1, y, 1)
+    #         if x + 1 < n and y + 1 < n:
+    #             if s[x][y + 1] == 0 and s[x + 1][y + 1] == 0 and s[x + 1][y] == 0:
+    #                 dfs(x + 1, y + 1, 2)
+    #     elif direction == 2:
+    #         if y + 1 < n and s[x][y + 1] == 0: dfs(x, y + 1, 0)
+    #         if x + 1 < n and s[x + 1][y] == 0: dfs(x + 1, y, 1)
+    #         if x + 1 < n and y + 1 < n:
+    #             if s[x][y + 1] == 0 and s[x + 1][y + 1] == 0 and s[x + 1][y] == 0:
+    #                 dfs(x + 1, y + 1, 2)
+    # n = int(input())
+    # s = [list(map(int, input().split())) for i in range(n)]
+    # count = 0
+    # dfs(0, 1, 0)
+    # print(count)
+
+#백준 문제 <색종이 자르기>
+    # import sys
+    # N= int(sys.stdin.readline())
+    # K=1
+    # tmp=2
+    # while tmp<N:
+    #     tmp*=2
+    #     K+=1
+    # graph=[]
+    # for i in range(N):
+    #     k=list(map(int,input().split()))
+    #     graph.append(k)
+    # a_cnt=0 #0일때 숫자 카운트
+    # b_cnt=0 #1일때 숫자 카운트
+    # def check(K,y,x):
+    #     tmp1=graph[y][x]
+    #     for i in range(y,2**K):
+    #         for j in range(x,2**K):
+                
+#백준 문제 <색종이 자르기>
+    # import sys
+    # n=int(sys.stdin.readline())
+
+    # colortpaper=[]
+    # for i in range(n):
+    #     k=list(map(int,sys.stdin.readline().split()))
+    #     colortpaper.append(k)
+    # white=0
+    # blue=0
+
+    # def divide(x,y,n):
+    #     global blue, white
+    #     samecolor=colortpaper[x][y]
+    #     for i in range(x, x+n):
+    #         for j in range(y, y+n):
+    #             if colortpaper[i][j]!=samecolor:
+    #                 divide(x,y,n//2)
+    #                 divide(x+n//2,y,n//2)
+    #                 divide(x,y+n//2,n//2)
+    #                 divide(x+n//2,y+n//2,n//2)
+    #                 return
+    #     if samecolor==1:
+    #         blue+=1
+    #         return
+    #     else:
+    #         white+=1
+    #         return
+    # divide(0,0,n)
+    # print(white)
+    # print(blue)
+
+#백준 문제 <영화 감독 숌>
+    # import sys
+    # x=int(sys.stdin.readline())
+    # arr=[]
+    # for i in range(6669999):
+    #     arr.append(i)
+    # answer=[]
+    # for i in range(len(arr)):
+    #     tmp=list(str(arr[i]))
+    #     for j in range(1,len(tmp)):
+    #         if tmp[j]==tmp[j-1]=='6':
+    #             answer.append(arr[i])
+    # print(answer[x+1])
+
+#백준 문제 <영화 감독 숌> 풀이 
+    # n= int(input())
+    # title=666
+    # find_cnt=0
+    # while(True):
+    #     if "666" in str(title):
+    #         find_cnt+=1
+    #     if find_cnt == n:
+    #             print(title)
+    #             break
+    #     title+=1
+
+#백준 문제 <체스판 다시 칠하기> -> 맞았음 좀더 깔끔한 풀이?
+    # import sys
+    # N,M=map(int,sys.stdin.readline().split())
+    # graph=[]
+    # for _ in range(N):
+    #     k=list(str(sys.stdin.readline().strip()))
+    #     graph.append(k)
+    # tmp1=N-8
+    # tmp2=M-8
+
+    # def count(x,y):
+    #     sample_1=[['B','W','B','W','B','W','B','W'],['W','B','W','B','W','B','W','B'],['B','W','B','W','B','W','B','W'],['W','B','W','B','W','B','W','B'],['B','W','B','W','B','W','B','W'],['W','B','W','B','W','B','W','B'],['B','W','B','W','B','W','B','W'],['W','B','W','B','W','B','W','B']]
+    #     sample_2=[['W','B','W','B','W','B','W','B'],['B','W','B','W','B','W','B','W'],['W','B','W','B','W','B','W','B'],['B','W','B','W','B','W','B','W'],['W','B','W','B','W','B','W','B'],['B','W','B','W','B','W','B','W'],['W','B','W','B','W','B','W','B'],['B','W','B','W','B','W','B','W']]
+    #     cnt_1=0
+    #     cnt_2=0
+    #     for i in range(x,x+8):
+    #         for j in range(y,y+8):
+    #             if(graph[i][j]!=sample_1[i-x][j-y]):
+    #                 cnt_1+=1
+    #     for i in range(x,x+8):
+    #         for j in range(y,y+8):
+    #             if(graph[i][j]!=sample_2[i-x][j-y]):
+    #                 cnt_2+=1
+    #     cnt_3=min(cnt_1,cnt_2)
+    #     return cnt_3 
+    # answer=1e9    
+    # for i in range(tmp1+1):
+    #     for j in range(tmp2+1):
+    #         answer=min(answer,count(i,j))
+    # print(answer)
+
+#백준 문제 <체스판 다시 칠하기>
+    # n,m=map(int,input().split())
+    # board=[]
+    # answer=[]
+
+    # for _ in range(n):
+    #     board.append(input())
+
+    # for col in range(n - 7):
+    #     for row in range(m -7):
+    #         countW=0
+    #         countB=0
+    #         for i in range(col, col+8):
+    #             for j in range(row, row+8):
+    #                 if (i+j)%2 ==0 :
+    #                     if board[i][j]!='W':
+    #                         countW +=1
+    #                     if board[i][j]!='B':
+    #                         countB+=1
+    #                 else:
+    #                     if board[i][j]!='B':
+    #                         countW+=1
+    #                     if board[i][j]!='W':
+    #                         countB+=1
+    #         answer.append(countW)
+    #         answer.append(countB)
+    # print(min(answer))
+
+#백준 문제 풀이 <테트로미노>
+    # n, m = map(int, input().split())
+    # board = [list(map(int, input().split())) for _ in range(n)]
+    # tetromino = [
+    #     [(0,0), (0,1), (1,0), (1,1)], # ㅁ
+    #     [(0,0), (0,1), (0,2), (0,3)], # ㅡ
+    #     [(0,0), (1,0), (2,0), (3,0)], # ㅣ
+    #     [(0,0), (0,1), (0,2), (1,0)], 
+    #     [(1,0), (1,1), (1,2), (0,2)],
+    #     [(0,0), (1,0), (1,1), (1,2)], # ㄴ
+    #     [(0,0), (0,1), (0,2), (1,2)], # ㄱ
+    #     [(0,0), (1,0), (2,0), (2,1)],
+    #     [(2,0), (2,1), (1,1), (0,1)],
+    #     [(0,0), (0,1), (1,0), (2,0)], 
+    #     [(0,0), (0,1), (1,1), (2,1)],
+    #     [(0,0), (0,1), (0,2), (1,1)], # ㅜ
+    #     [(1,0), (1,1), (1,2), (0,1)], # ㅗ
+    #     [(0,0), (1,0), (2,0), (1,1)], # ㅏ
+    #     [(1,0), (0,1), (1,1), (2,1)], # ㅓ
+    #     [(1,0), (2,0), (0,1), (1,1)],
+    #     [(0,0), (1,0), (1,1), (2,1)],
+    #     [(1,0), (0,1), (1,1), (0,2)],
+    #     [(0,0), (0,1), (1,1), (1,2)]
+    # ]
+
+    # def find(x,y):
+    #     global answer
+    #     for i in range(19):
+    #         result=0
+    #         for j in range(4):
+    #             try:
+    #                 next_x=x+tetromino[i][j][0]
+    #                 next_y=y+tetromino[i][j][1]
+    #                 result+=board[next_x][next_y]
+    #             except IndexError:
+    #                 continue
+    #         answer = max(answer,result)
+    # def solve():
+    #     for i in range(n):
+    #         for j in range(m):
+    #             find(i,j)
+    # answer=0
+    # solve()
+    # print(answer)
+
+#백준 문제 < N과 M 3> 어렵네. 일단 얼른 정리하고 영화 고고 하자 
+n,m=map(int,input().split())
+answer=[]
+
+def backTracking(depth):
+    if depth==m:
+        print(' '.join(map(str,answer)))
+        return
+    for i in range(1, n+1):
+        answer.append(i)
+        backTracking(depth+1)
+        answer.pop()
+backTracking(0)
