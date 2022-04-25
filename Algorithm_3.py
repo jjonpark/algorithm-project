@@ -632,15 +632,95 @@
     # print(answer)
 
 #백준 문제 < N과 M 3> 어렵네. 일단 얼른 정리하고 영화 고고 하자 
-n,m=map(int,input().split())
-answer=[]
+    # n,m=map(int,input().split())
+    # answer=[]
 
-def backTracking(depth):
-    if depth==m:
-        print(' '.join(map(str,answer)))
+    # def backTracking(depth):
+    #     if depth==m:
+    #         print(' '.join(map(str,answer)))
+    #         return
+    #     for i in range(1, n+1):
+    #         answer.append(i)
+    #         backTracking(depth+1)
+    #         answer.pop()
+    # backTracking(0)
+
+#백준 문제 <N과 M 3> 정답 복기
+    # import sys
+    # n,m=map(int,sys.stdin.readline().split())
+    # answer=[]
+    # def solve(depth):
+    #     if depth==m :
+    #         print(' '.join(map(str,answer)))
+    #         return
+    #     for i in range(1,n+1):
+    #         answer.append(i)
+    #         solve(depth+1)
+    #         answer.pop()
+    # solve(0)
+
+#백준 문제 < N과 M 1>
+    # import sys
+    # n,m=map(int,sys.stdin.readline().split())
+    # answer=[]
+    # def backtraking(depth):
+
+    #     if depth == m :
+    #         print(' '.join(map(str,answer)))
+    #         return
+    #     for i in range(1,n+1):
+    #         if i not in answer:
+    #             answer.append(i)
+    #             backtraking(depth+1)
+    #             answer.pop()
+    # backtraking(0)
+
+#백준 문제 <연산자 끼워넣기> -> 이런 형태의 문제는 한번 보고 다시 도전하자 
+    # import sys
+    # N=int(sys.stdin.readline())
+    # num_list=list(map(int,sys.stdin.readline()))
+    # cal_list=list(map(int,sys.stdin.readline()))
+    # for i in range(4):
+    #     if i==0:
+    #         for _ in range()
+
+#백준 문제 <연산자 끼워넣기>
+N=int(input())
+numArr=list(map(int,input().split()))
+operator=list(map(int,input().split()))
+minAns = float('Inf')
+maxAns = float('-Inf')
+
+def back_tracking(index, sum):
+    global minAns
+    global maxAns
+
+    if index == N-1:
+        if minAns > sum :
+            minAns=sum
+        if maxAns < sum :
+            maxAns=sum
         return
-    for i in range(1, n+1):
-        answer.append(i)
-        backTracking(depth+1)
-        answer.pop()
-backTracking(0)
+    
+    for i in range(4):
+        temp=sum
+        if operator[i]==0 :
+            continue
+        if i==0:
+            sum+=numArr[index+1]
+        elif i==1:
+            sum-=numArr[index+1]
+        elif i==2:
+            sum*=numArr[index+1]
+        else:
+            if sum<0 :
+                sum= abs(sum)//numArr[index+1]*-1
+            else:
+                sum=sum//numArr[index+1]
+        operator[i] -=1
+        back_tracking(index+1,sum)
+        operator[i]+=1
+        sum=temp
+back_tracking(0,numArr[0])
+print(maxAns)
+print(minAns)
