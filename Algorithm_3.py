@@ -685,42 +685,114 @@
     #         for _ in range()
 
 #백준 문제 <연산자 끼워넣기>
-N=int(input())
-numArr=list(map(int,input().split()))
-operator=list(map(int,input().split()))
-minAns = float('Inf')
-maxAns = float('-Inf')
+    # N=int(input())
+    # numArr=list(map(int,input().split()))
+    # operator=list(map(int,input().split()))
+    # minAns = float('Inf')
+    # maxAns = float('-Inf')
 
-def back_tracking(index, sum):
-    global minAns
-    global maxAns
+    # def back_tracking(index, sum):
+    #     global minAns
+    #     global maxAns
 
-    if index == N-1:
-        if minAns > sum :
-            minAns=sum
-        if maxAns < sum :
-            maxAns=sum
-        return
-    
-    for i in range(4):
-        temp=sum
-        if operator[i]==0 :
-            continue
-        if i==0:
-            sum+=numArr[index+1]
-        elif i==1:
-            sum-=numArr[index+1]
-        elif i==2:
-            sum*=numArr[index+1]
+    #     if index == N-1:
+    #         if minAns > sum :
+    #             minAns=sum
+    #         if maxAns < sum :
+    #             maxAns=sum
+    #         return
+        
+    #     for i in range(4):
+    #         temp=sum
+    #         if operator[i]==0 :
+    #             continue
+    #         if i==0:
+    #             sum+=numArr[index+1]
+    #         elif i==1:
+    #             sum-=numArr[index+1]
+    #         elif i==2:
+    #             sum*=numArr[index+1]
+    #         else:
+    #             if sum<0 :
+    #                 sum= abs(sum)//numArr[index+1]*-1
+    #             else:
+    #                 sum=sum//numArr[index+1]
+    #         operator[i] -=1
+    #         back_tracking(index+1,sum)
+    #         operator[i]+=1
+    #         sum=temp
+    # back_tracking(0,numArr[0])
+    # print(maxAns)
+    # print(minAns)
+
+#백준 문제 <미로 탐색>
+    # from collections import deque
+    # N,M=map(int,input().split())
+
+    # dx=[0,0,1,-1]
+    # dy=[-1,1,0,0]
+    # graph=[]
+    # for i in range(N):
+    #     k=list(str(input()))
+    #     graph.append(k)
+    # for i in range(N):
+    #     for j in range(M):
+    #         if graph[i][j]=='1':
+    #             graph[i][j]=1
+    #         else:
+    #             graph[i][j]=0
+    # queue=deque()
+    # queue.append((0,0))
+    # def DFS():
+        
+    #     while queue:
+    #         x,y=queue.popleft()
+    #         for i in range(4):
+    #             nx=x+dx[i]
+    #             ny=y+dy[i]
+    #             if(nx<0 or ny<0 or nx>=N or ny>=M):
+    #                 continue
+    #             else:
+    #                 if graph[nx][ny]==1:
+    #                     graph[nx][ny]=graph[x][y]+1
+    #                     queue.append((nx,ny))
+
+    # DFS()
+    # print(graph[N-1][M-1])
+
+#백준 문제 <벽 뿌수고 탈출하기>
+
+from collections import deque
+import queue
+N,M=map(int,input().split())
+dx=[0,0,1,-1]
+dy=[-1,1,0,0]
+graph=[]
+for i in range(N):
+    k=list(str(input()))
+    graph.append(k)
+for i in range(N):
+    for j in range(M):
+        if graph[i][j]=='1':
+            graph[i][j]=1
         else:
-            if sum<0 :
-                sum= abs(sum)//numArr[index+1]*-1
-            else:
-                sum=sum//numArr[index+1]
-        operator[i] -=1
-        back_tracking(index+1,sum)
-        operator[i]+=1
-        sum=temp
-back_tracking(0,numArr[0])
-print(maxAns)
-print(minAns)
+            graph[i][j]=0
+queue=deque()
+queue.append([0,0,0])
+def BFS():
+    visit =[[[0]*2 for _ in range(M)] for _ in range(N)]
+    visit[0][0][0]=1
+    while queue:
+        x,y,wall=queue.popleft()
+        if x==(N-1) and y==(M-1):
+            return visit[x][y][wall]
+        for i in range(4):
+            if 0<=x+dx[i]<N and 0<=y+dy[i]<M and visit[x+dx[i]][y+dy[i]][wall]==0:
+                if graph[x+dx[i]][y+dy[i]]==0:
+                    visit[x+dx[i]][y+dy[i]][wall]=visit[x][y][wall]+1
+                    queue.append([x+dx[i],y+dy[i],wall])
+                if wall==0 and graph[x+dx[i]][y+dy[i]]==1:
+                    visit[x+dx[i]][y+dy[i]][1]=visit[x][y][0]+1
+                    queue.append([x+dx[i],y+dy[i],1])
+    return -1
+print(BFS())
