@@ -762,37 +762,148 @@
 
 #백준 문제 <벽 뿌수고 탈출하기>
 
+    # from collections import deque
+    # import queue
+    # N,M=map(int,input().split())
+    # dx=[0,0,1,-1]
+    # dy=[-1,1,0,0]
+    # graph=[]
+    # for i in range(N):
+    #     k=list(str(input()))
+    #     graph.append(k)
+    # for i in range(N):
+    #     for j in range(M):
+    #         if graph[i][j]=='1':
+    #             graph[i][j]=1
+    #         else:
+    #             graph[i][j]=0
+    # queue=deque()
+    # queue.append([0,0,0])
+    # def BFS():
+    #     visit =[[[0]*2 for _ in range(M)] for _ in range(N)]
+    #     visit[0][0][0]=1
+    #     while queue:
+    #         x,y,wall=queue.popleft()
+    #         if x==(N-1) and y==(M-1):
+    #             return visit[x][y][wall]
+    #         for i in range(4):
+    #             if 0<=x+dx[i]<N and 0<=y+dy[i]<M and visit[x+dx[i]][y+dy[i]][wall]==0:
+    #                 if graph[x+dx[i]][y+dy[i]]==0:
+    #                     visit[x+dx[i]][y+dy[i]][wall]=visit[x][y][wall]+1
+    #                     queue.append([x+dx[i],y+dy[i],wall])
+    #                 if wall==0 and graph[x+dx[i]][y+dy[i]]==1:
+    #                     visit[x+dx[i]][y+dy[i]][1]=visit[x][y][0]+1
+    #                     queue.append([x+dx[i],y+dy[i],1])
+    #     return -1
+    # print(BFS())
+
+#백준 문제 <연구소>
+    # from collections import deque
+    # import copy
+
+    # def BFS():
+    #     global answer
+    #     queue=deque()
+    #     tmp_graph=copy.deepcopy(graph)
+    #     for i in range(N):
+    #         for j in range(M):
+    #             if(tmp_graph[i][j]==2):
+    #                 queue.append((i,j))
+        
+    #     while queue:
+    #         x,y=queue.popleft()
+    #         for i in range(4):
+    #             nx=x+dx[i]
+    #             ny=y+dy[i]
+    #             if 0<=nx<N and 0<=ny<M:
+    #                 if tmp_graph[nx][ny]==0:
+    #                     tmp_graph[nx][ny]=2
+    #                     queue.append((nx,ny))
+    #     count=0
+    #     for i in range(N):
+    #         for j in range(M):
+    #             if(tmp_graph[i][j]==0):
+    #                 count+=1
+
+    #     answer=max(answer,count)
+
+    # def make_wall(depth):
+    #     if(depth==3):
+    #         BFS()
+    #         return
+    #     else:
+    #         for i in range(N):
+    #             for j in range(M):
+    #                 if graph[i][j]==0:
+    #                     graph[i][j]=1
+    #                     make_wall(depth+1)
+    #                     graph[i][j]=0
+    # N,M=map(int,input().split())
+    # graph=[]
+    # for i in range(N):
+    #     k=list(map(int,input().split()))
+    #     graph.append(k)
+    # dx=[-1,1,0,0]
+    # dy=[0,0,-1,1]
+    # answer=0
+    # make_wall(0)
+    # print(answer)
+
+#백준 문제 < 부분수열의 합 >
+    # N,S=map(int,input().split())
+    # array=list(map(int,input().split()))
+    # answer=0
+    # def dfs(idx, sum):
+    #     global answer
+    #     if idx>=N:
+    #         return
+    #     sum +=array[idx]
+    #     if S==sum:
+    #         answer+=1
+    #     dfs(idx+1,sum-array[idx])
+    #     dfs(idx+1,sum)
+    # dfs(0,0)
+    # print(answer)
+
+#백준 문제 <DFS 와 BFS>
 from collections import deque
-import queue
-N,M=map(int,input().split())
-dx=[0,0,1,-1]
-dy=[-1,1,0,0]
-graph=[]
-for i in range(N):
-    k=list(str(input()))
-    graph.append(k)
-for i in range(N):
-    for j in range(M):
-        if graph[i][j]=='1':
-            graph[i][j]=1
-        else:
-            graph[i][j]=0
+import sys
+N,M,V=map(int,sys.stdin.readline().split())
+graph=[[] for _ in range(N+1)]
+visit=[0]*(N+1)
+visit_1=[0]*(N+1)
+for i in range(M):
+    k_1,k_2=map(int,sys.stdin.readline().split())
+    graph[k_1].append(k_2)
+    graph[k_2].append(k_1)
+for i in range(N+1):
+    graph[i].sort()
+print(V,end=' ')
+def DFS(V):
+    if(visit_1[V]==1):
+        return
+    else:
+        visit_1[V]=1
+        stack=graph[V]
+        for i in stack:
+            if(visit_1[i]==0):
+                print(i,end=' ')
+                DFS(i)
+
+
+
 queue=deque()
-queue.append([0,0,0])
+visit[V]=1
+queue.append(graph[V])
 def BFS():
-    visit =[[[0]*2 for _ in range(M)] for _ in range(N)]
-    visit[0][0][0]=1
+    print(V, end=' ')
     while queue:
-        x,y,wall=queue.popleft()
-        if x==(N-1) and y==(M-1):
-            return visit[x][y][wall]
-        for i in range(4):
-            if 0<=x+dx[i]<N and 0<=y+dy[i]<M and visit[x+dx[i]][y+dy[i]][wall]==0:
-                if graph[x+dx[i]][y+dy[i]]==0:
-                    visit[x+dx[i]][y+dy[i]][wall]=visit[x][y][wall]+1
-                    queue.append([x+dx[i],y+dy[i],wall])
-                if wall==0 and graph[x+dx[i]][y+dy[i]]==1:
-                    visit[x+dx[i]][y+dy[i]][1]=visit[x][y][0]+1
-                    queue.append([x+dx[i],y+dy[i],1])
-    return -1
-print(BFS())
+        x=queue.popleft()
+        for i in x:
+            if(visit[i]==0):
+                visit[i]=1
+                print(i,end=' ')
+                queue.append(graph[i])
+DFS(V)
+print()
+BFS()
