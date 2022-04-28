@@ -866,44 +866,104 @@
     # print(answer)
 
 #백준 문제 <DFS 와 BFS>
-from collections import deque
-import sys
-N,M,V=map(int,sys.stdin.readline().split())
-graph=[[] for _ in range(N+1)]
-visit=[0]*(N+1)
-visit_1=[0]*(N+1)
-for i in range(M):
-    k_1,k_2=map(int,sys.stdin.readline().split())
-    graph[k_1].append(k_2)
-    graph[k_2].append(k_1)
-for i in range(N+1):
-    graph[i].sort()
-print(V,end=' ')
-def DFS(V):
-    if(visit_1[V]==1):
-        return
+    # from collections import deque
+    # import sys
+    # N,M,V=map(int,sys.stdin.readline().split())
+    # graph=[[] for _ in range(N+1)]
+    # visit=[0]*(N+1)
+    # visit_1=[0]*(N+1)
+    # for i in range(M):
+    #     k_1,k_2=map(int,sys.stdin.readline().split())
+    #     graph[k_1].append(k_2)
+    #     graph[k_2].append(k_1)
+    # for i in range(N+1):
+    #     graph[i].sort()
+    # print(V,end=' ')
+    # def DFS(V):
+    #     if(visit_1[V]==1):
+    #         return
+    #     else:
+    #         visit_1[V]=1
+    #         stack=graph[V]
+    #         for i in stack:
+    #             if(visit_1[i]==0):
+    #                 print(i,end=' ')
+    #                 DFS(i)
+
+    # queue=deque()
+    # visit[V]=1
+    # queue.append(graph[V])
+    # def BFS():
+    #     print(V, end=' ')
+    #     while queue:
+    #         x=queue.popleft()
+    #         for i in x:
+    #             if(visit[i]==0):
+    #                 visit[i]=1
+    #                 print(i,end=' ')
+    #                 queue.append(graph[i])
+    # DFS(V)
+    # print()
+    # BFS()
+
+#백준 문제 <이항 계수1>
+    # N,K=map(int,input().split())
+
+    # def bino(N,K):
+    #     answer=1
+    #     for i in range(K):
+    #         answer*=(N-i)
+    #     for j in range(K):
+    #         answer/=(j+1)
+        
+    #     return answer
+    # print(int(bino(N,K)))
+
+#백준 문제 < 이항 계수2> -> 숫자가 너무 커지기 떄문에 모듈러 연산을 사용해야 한다는점만 확인 ㅇㅋ
+    # import sys
+    # N,K=map(int,sys.stdin.readline().split())
+
+    # def bino(N,K):
+    #     answer=1
+    #     for i in range(K):
+    #         answer*=(N-i)
+    #     for j in range(K):
+    #         answer/=(j+1)
+        
+    #     return answer*10007
+    # print(int(bino(N,K)))
+
+#백준 문제 <이항 계수 2>
+    # n,k=map(int, input().split())
+    # dp=[[0]*1001 for _ in range(1001)]
+
+    # for i in range(1,n+1):
+    #     for j in range(0,i+1):
+    #         if j==0:
+    #             dp[i][j]=1
+    #         elif j == i :
+    #             dp[i][j]=1
+    #         else:
+    #             dp[i][j]=(dp[i-1][j-1] + dp[i-1][j])%10007
+
+    # print(dp[n][k])
+
+#백준 문제 < 소수 구하기 >
+M,N=map(int,input().split())
+
+
+def solo_check(K):
+    if(K==1):
+        return 0
+    elif(K==2):
+        return 1
     else:
-        visit_1[V]=1
-        stack=graph[V]
-        for i in stack:
-            if(visit_1[i]==0):
-                print(i,end=' ')
-                DFS(i)
+        tmp=int(K**(1/2))
+        for i in range(2,tmp+1):
+            if (K%i)==0:
+                return 0
+        return 1
 
-
-
-queue=deque()
-visit[V]=1
-queue.append(graph[V])
-def BFS():
-    print(V, end=' ')
-    while queue:
-        x=queue.popleft()
-        for i in x:
-            if(visit[i]==0):
-                visit[i]=1
-                print(i,end=' ')
-                queue.append(graph[i])
-DFS(V)
-print()
-BFS()
+for i in range(M,N+1):
+    if solo_check(i):
+        print(i)
