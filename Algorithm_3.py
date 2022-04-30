@@ -949,21 +949,148 @@
     # print(dp[n][k])
 
 #백준 문제 < 소수 구하기 >
-M,N=map(int,input().split())
+    # M,N=map(int,input().split())
 
 
-def solo_check(K):
-    if(K==1):
-        return 0
-    elif(K==2):
-        return 1
-    else:
-        tmp=int(K**(1/2))
-        for i in range(2,tmp+1):
-            if (K%i)==0:
-                return 0
-        return 1
+    # def solo_check(K):
+    #     if(K==1):
+    #         return 0
+    #     elif(K==2):
+    #         return 1
+    #     else:
+    #         tmp=int(K**(1/2))
+    #         for i in range(2,tmp+1):
+    #             if (K%i)==0:
+    #                 return 0
+    #         return 1
 
-for i in range(M,N+1):
-    if solo_check(i):
-        print(i)
+    # for i in range(M,N+1):
+    #     if solo_check(i):
+    #         print(i)
+
+#백준 문제 <LCM>
+    # def LCM(a,b):
+    #     return(a*b)//GCD(a,b)
+
+    # def GCD(a,b):
+    #     if b%a:
+    #         return GCD(b%a,a)
+    #     else:
+    #         return a
+    # n=int(input())
+    # for i in range(n):
+    #     a,b=map(int,input().split())
+    #     print(LCM(a,b))
+
+
+#삼성 SW 경진 대회 <열매 따기>
+    # N,M=map(int,input().split())
+    # def dfs(step, power, fruit):
+    #     global ans
+    #     if power >M:
+    #         power=M
+    #     if step >=N:
+    #         if ans<fruit:
+    #             ans=fruit
+    #         return
+    #     if power>0 :
+    #         dfs(step+1,power-1,fruit+S[step])
+    #     dfs(step+1,power+1,fruit)
+    # S=[0]*N
+    # for i in range(N):
+    #     S[i]=int(input())
+    # ans=0
+    # dfs(0,M,0)
+    # print(ans)
+
+#삼성 SW 경진 대회 < 뒤집기 게임 >
+
+    # def rev(r,c):
+    #     global cup
+    #     for i in range(r,r+R):
+    #         for j in range(c,c+C):
+    #             cup[i][j]=1-cup[i][j]
+    # def proc():
+    #     ans=0
+    #     for i in range(N):
+    #         for j in range(M):
+    #             if cup[i][j]==1:
+    #                 if i+R>N or j + C >M:
+    #                     return -1
+    #                 ans+=1
+    #                 rev(i,j)
+    #     return ans
+
+    # while True:
+    #     N,M,R,C= map(int,input().split())
+    #     if N==0:
+    #         break
+    #     cup=[[0]*M for _ in range(N)]
+    #     for i in range(N):
+    #         tmp=input().strip()
+    #         for j in range(M):
+    #             cup[i][j]=ord(tmp[j])-48
+    #     print(proc())
+
+#삼성 SW 경진대회 <미로탈출>
+    # dr=[0,1,0,-1]
+    # dc=[1,0,-1,0]
+    # M,N=map(int,input().split())
+    # m=[]
+    # for i in range(N):
+    #     m.append(list(input()))
+    #     for j in range(M):
+    #         if m[i][j]=="S":
+    #             sr,sc,m[i][j]=i,j,"."
+    #             if sr==0:
+    #                 sd=1
+    #             elif sr==N-1:
+    #                 sd=3
+    #             elif sc==0:
+    #                 sd=0
+    #             else:
+    #                 sd=2
+    #         elif m[i][j]=="E":
+    #             er,ec,m[i][j]=i,j,"."
+
+    # def go(dir):
+    #     r,c,d,cnt=sr,sc,sd,1
+    #     while r != er or c!=ec:
+    #         d= (d+dir)%4
+    #         while m[r+dr[d]][c+dc[d]] !='.':
+    #             d=(d-dir+4)%4
+    #         r,c,cnt=r+dr[d],c+dc[d],cnt+1
+    #     return cnt
+
+    # que=[]
+    # head,tail=0,0
+    # chk=[[[0]*4 for _ in range(M)] for _ in range(N)]
+
+    # def push(r,c,d,cnt):
+    #     global tail
+    #     if r <0 or r>=N or c <0 or c>=M:
+    #         return 0
+    #     if m[r][c]!="." or chk[r][c][d]:
+    #         return 0
+    #     chk[r][c][d]=1
+    #     que.append([r,c,d,cnt])
+    #     tail+=1
+    #     if r==er and c==er:
+    #         return 1
+    #     return 0
+
+    # def bfs():
+    #     global head
+    #     push(sr,sc,sd,1)
+    #     while head < tail:
+    #         r,c,d,cnt=que[head]
+    #         head+=1
+    #         push(r,c,(d+1)%4,cnt)
+    #         push(r,c,(d+3)%4,cnt)
+    #         if push(r+dr[d],c+dc[d],d,cnt+1):
+    #             break
+    #     return que[tail-1][3]
+
+    # left=go(3)
+    # right=go(1)
+    # center=bfs()
