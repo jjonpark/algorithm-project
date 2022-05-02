@@ -191,25 +191,142 @@
     # print(f"{a_1}:{b_1}")
 
 #백준 문제 < 문자열 폭발 > ->하나씩 보면서 스택의 개념으로 지워주는
-s=str(input())
-bomb=str(input())
-left=[]
-start=0
-end=len(s)-1
-while start<=end:
-    tof=True
-    left.append(s[start])
-    start+=1
-    if(len(left)>=len(bomb)):
-        for i in range(len(bomb)):
-            if bomb[i]!=left[len(left)-len(bomb)+i]:
-                tof=False
-                break
-        if tof==True:
-            for i in range(len(bomb)):
-                left.pop()
-if len(left)==0:
-    print("FRULA")
-else:
-    for i in range(len(left)):
-        print(left[i], end='')
+    # s=str(input())
+    # bomb=str(input())
+    # left=[]
+    # start=0
+    # end=len(s)-1
+    # while start<=end:
+    #     tof=True
+    #     left.append(s[start])
+    #     start+=1
+    #     if(len(left)>=len(bomb)):
+    #         for i in range(len(bomb)):
+    #             if bomb[i]!=left[len(left)-len(bomb)+i]:
+    #                 tof=False
+    #                 break
+    #         if tof==True:
+    #             for i in range(len(bomb)):
+    #                 left.pop()
+    # if len(left)==0:
+    #     print("FRULA")
+    # else:
+    #     for i in range(len(left)):
+    #         print(left[i], end='')
+
+#백준 문제 <포도주 시식> ->이게 왜 런타임 오류지..?
+    # N=int(input())
+    # array=[0]
+    # for i in range(N):
+    #     k=int(input())
+    #     array.append(k)
+
+    # def solve(n):
+    #     if(n==0):
+    #         return array[0]
+    #     elif(n==1):
+    #         return array[1]
+    #     elif(n==2):
+    #         return (array[1]+array[2])
+    #     else:
+    #         return max(solve(n-3)+array[n-1]+array[n], solve(n-2)+array[n],solve(n-1))  
+    # print(solve(N))
+
+#백준 문제 < 포도주 시식 >
+    # dp=[0]*10001
+    # array=[0]*10001
+
+    # N=int(input())
+    # for i in range(1,N+1):
+    #     array[i]=int(input())
+
+    # dp[1]=array[1]
+    # dp[2]=(array[1]+array[2])
+
+
+    # for i in range(3,N+1):
+    #     dp[i]= max(dp[i-3]+array[i-1]+array[i], dp[i-2]+array[i],dp[i-1])
+    # print(dp[N])
+
+#백준 문제 < 가장 긴 증가하는 부분 수열 > 
+# N=int(input())
+# array=list(map(int,input().split()))
+# dp=[0]*1001
+# for i in range(N):
+#     dp[array[i]]=1
+# print(dp.count(1))
+
+#백준 문제 < 가장 긴 증가하는 부분 수열 > ->2번째 부터 선택해서 가장 큰 수열이 될수도 있겠다.
+    # N=int(input())
+    # array=list(map(int,input().split()))
+    # dp=[]
+    # for i in range(N):
+    #     if(i>0):
+    #         if dp[-1]<array[i]:
+    #             dp.append(array[i])
+    #     else:
+    #         dp.append(array[0])
+    # print(len(dp))
+
+#백준 문제 < 가장 긴 증가하는 부분 수열>
+    # N=int(input())
+    # array=list((map(int,input().split())))
+    # array.insert(0,0)
+    # dp=[0]*1001
+    # answer=0
+    # for i in range(1,N+1):
+    #     for j in range(0,i):
+    #         if array[i]>array[j]:
+    #             dp[i]=max(dp[i],dp[j]+1)
+    #     answer=max(answer,dp[i])
+    # print(answer)
+
+#백준 문제 <내리막길> ->완전 탐색으로 잘 풀었는데, 시간초과 남 
+    # from collections import deque
+    # M,N=map(int,input().split())
+    # graph=[]
+    # for i in range(M):
+    #     k=list(map(int,input().split()))
+    #     graph.append(k)
+    # dx=[0,0,-1,1]
+    # dy=[1,-1,0,0]
+
+    # queue=deque()
+    # answer=[]
+    # def BFS(x,y):
+    #     queue.append((x,y))
+    #     while queue:
+    #         x,y=queue.popleft()
+    #         if x==M-1 and y==N-1:
+    #             answer.append(1) 
+    #         for i in range(4):
+    #             nx=x+dx[i]
+    #             ny=y+dy[i]
+    #             if(nx<0 or nx>=M or ny<0 or ny>=N):
+    #                 continue
+    #             else:
+    #                 if(graph[x][y]>graph[nx][ny]):
+    #                     queue.append((nx,ny))
+
+    # BFS(0,0)
+    # print(len(answer))
+
+#백준 문제 < 내리막길 >
+m,n=map(int,input().split())
+map=[list(map(int,input().split())) for _ in range(m)]
+dp=[[-1]*n for _ in range(m)]
+move=[[0,1],[1,0],[0,-1],[-1,0]]
+
+def dp_bruteForce(y,x):
+    if dp[y][x]!=-1:
+        return dp[y][x]
+    if y==m-1 and x==n-1:
+        return 1
+    dp[y][x]=0
+    for i in range(0,4):
+        dy=y+move[i][0]
+        dx=x+move[i][1]
+        if 0 <=dy <m and 0<=dx<n and map[y][x]>map[dy][dx]:
+            dp[y][x]+=dp_bruteForce(dy,dx)
+    return dp[y][x]
+print(dp_bruteForce(0,0))
