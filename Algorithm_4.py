@@ -312,21 +312,148 @@
     # print(len(answer))
 
 #백준 문제 < 내리막길 >
-m,n=map(int,input().split())
-map=[list(map(int,input().split())) for _ in range(m)]
-dp=[[-1]*n for _ in range(m)]
-move=[[0,1],[1,0],[0,-1],[-1,0]]
+    # m,n=map(int,input().split())
+    # map=[list(map(int,input().split())) for _ in range(m)]
+    # dp=[[-1]*n for _ in range(m)]
+    # move=[[0,1],[1,0],[0,-1],[-1,0]]
 
-def dp_bruteForce(y,x):
-    if dp[y][x]!=-1:
-        return dp[y][x]
-    if y==m-1 and x==n-1:
-        return 1
-    dp[y][x]=0
-    for i in range(0,4):
-        dy=y+move[i][0]
-        dx=x+move[i][1]
-        if 0 <=dy <m and 0<=dx<n and map[y][x]>map[dy][dx]:
-            dp[y][x]+=dp_bruteForce(dy,dx)
-    return dp[y][x]
-print(dp_bruteForce(0,0))
+    # def dp_bruteForce(y,x):
+    #     if dp[y][x]!=-1:
+    #         return dp[y][x]
+    #     if y==m-1 and x==n-1:
+    #         return 1
+    #     dp[y][x]=0
+    #     for i in range(0,4):
+    #         dy=y+move[i][0]
+    #         dx=x+move[i][1]
+    #         if 0 <=dy <m and 0<=dx<n and map[y][x]>map[dy][dx]:
+    #             dp[y][x]+=dp_bruteForce(dy,dx)
+    #     return dp[y][x]
+    # print(dp_bruteForce(0,0))
+
+# 백준 문제 <내리 막길>
+    # N,M=map(int,input().split())
+    # graph=[]
+    # for i in range(N):
+    #     k=list(map(int,input().split()))
+    #     graph.append(k)
+    # dp=[[-1]*M for _  in range(N)]
+    # dx=[0,0,-1,1]
+    # dy=[-1,1,0,0]
+
+    # def check(x,y):
+    #     if dp[x][y]!=-1:
+    #         return dp[x][y]
+    #     if(x==N-1 and y==M-1):
+    #         return 1
+    #     dp[x][y]=0
+    #     for i in range(4):
+    #         nx=x+dx[i]
+    #         ny=y+dy[i]
+    #         if(0<=nx<N and 0<=ny<M and graph[x][y]>graph[nx][ny]):
+    #             dp[x][y]+=check(nx,ny)
+
+    #     return dp[x][y]
+
+    # print(check(0,0))
+
+#코드포스 문제 < Flying sort >
+    # dp=[0]*3001
+
+    # for _ in range(int(input())):
+    #     n=int(input())
+    #     for i in range(n):
+    #         dp[i]=1
+    #     tmp=list(map(int,input().split()))
+    #     a=[]
+    #     mx=1
+    #     for i in range(n):
+    #         a.append([tmp[i],i])
+    #     a.sort()
+    #     for i in range(1,n):
+    #         if a[i-1][1]<a[i][1]:
+    #             dp[i]=dp[i-1]+1
+    #         mx=max(mx,dp[i])
+    #     print(n-mx)
+
+# 백준 문제 < 스타트와 링크 >
+# k=[0,1,2,3]
+# k_1=[0,1]
+# k_2=list(set(k)-set(k_1))
+# print(k_2)
+# from itertools import combinations
+# import copy
+# N=int(input())
+# graph=[]
+# for i in range(N):
+#     k=list(map(int,input().split()))
+#     graph.append(k)
+
+# def sumation(array):
+#     answer=0
+#     for i in range(N//2):
+#         for j in range(N//2):
+#             if(i<j):
+#                 answer+=(graph[array[i]][array[j]]+graph[array[j]][array[i]])
+#     return answer
+# origin_list=[0]*(N)
+# for i in range(N):
+#     origin_list[i]=i
+
+# tmp_list=list(combinations(range(N),N//2))
+# ans=1e9
+# ans_1=0
+# ans_2=0
+# for i in range(len(tmp_list)):
+#     tmp2_list=list(set(origin_list)-set(tmp_list[i]))
+#     ans_1=sumation(tmp2_list)
+#     ans_2=sumation(tmp_list[i])
+#     ans=min(ans,abs(ans_1-ans_2))
+# print(ans)
+
+#백준 문제 < 스도쿠 >
+sudoku=[]
+for i in range(9):
+    k=list(map(int,input().split()))
+    sudoku.append(k)
+zeros=[]
+for i in range(9):
+    for j in range(9):
+        if(sudoku[i][j]==0):
+            zeros.append((i,j))
+
+def is_programming(x,y):
+    num=[1,2,3,4,5,6,7,8,9]
+    for i in range(9):
+        if sudoku[i][y] in num:
+            num.remove(sudoku[i][y])
+        if sudoku[x][i] in num:
+            num.remove(sudoku[x][i])
+
+    x//=3
+    y//=3
+    for i in range(x*3,(x+1)*3):
+        for j in range(y*3,(y+1)*3):
+            if sudoku[i][j] in num:
+                num.remove(sudoku[i][j])
+    return num
+flag=False 
+def dfs(x):
+    global flag
+    if flag:
+        return
+    if x==len(zeros):
+        for row in sudoku:
+            print(*row)
+        flag=True
+        return
+
+    else:
+        (i,j)=zeros[x]
+        promising=is_programming(i,j)
+
+        for num in promising:
+            sudoku[i][j]=num
+            dfs(x+1)
+            sudoku[i][j]=0
+dfs(0)    
