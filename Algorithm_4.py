@@ -412,48 +412,107 @@
 # print(ans)
 
 #백준 문제 < 스도쿠 >
-sudoku=[]
-for i in range(9):
-    k=list(map(int,input().split()))
-    sudoku.append(k)
-zeros=[]
-for i in range(9):
-    for j in range(9):
-        if(sudoku[i][j]==0):
-            zeros.append((i,j))
+    # sudoku=[]
+    # for i in range(9):
+    #     k=list(map(int,input().split()))
+    #     sudoku.append(k)
+    # zeros=[]
+    # for i in range(9):
+    #     for j in range(9):
+    #         if(sudoku[i][j]==0):
+    #             zeros.append((i,j))
 
-def is_programming(x,y):
-    num=[1,2,3,4,5,6,7,8,9]
-    for i in range(9):
-        if sudoku[i][y] in num:
-            num.remove(sudoku[i][y])
-        if sudoku[x][i] in num:
-            num.remove(sudoku[x][i])
+    # def is_programming(x,y):
+    #     num=[1,2,3,4,5,6,7,8,9]
+    #     for i in range(9):
+    #         if sudoku[i][y] in num:
+    #             num.remove(sudoku[i][y])
+    #         if sudoku[x][i] in num:
+    #             num.remove(sudoku[x][i])
 
-    x//=3
-    y//=3
-    for i in range(x*3,(x+1)*3):
-        for j in range(y*3,(y+1)*3):
-            if sudoku[i][j] in num:
-                num.remove(sudoku[i][j])
-    return num
-flag=False 
-def dfs(x):
-    global flag
-    if flag:
+    #     x//=3
+    #     y//=3
+    #     for i in range(x*3,(x+1)*3):
+    #         for j in range(y*3,(y+1)*3):
+    #             if sudoku[i][j] in num:
+    #                 num.remove(sudoku[i][j])
+    #     return num
+    # flag=False 
+
+    # def dfs(x):
+    #     global flag
+    #     if flag:
+    #         return
+    #     if x==len(zeros):
+    #         for row in sudoku:
+    #             print(*row)
+    #         flag=True
+    #         return
+
+    #     else:
+    #         (i,j)=zeros[x]
+    #         promising=is_programming(i,j)
+
+    #         for num in promising:
+    #             sudoku[i][j]=num
+    #             dfs(x+1)
+    #             sudoku[i][j]=0
+    # dfs(0)    
+
+#백준 문제 < 피보나치 함수 > 
+
+    # T=int(input())
+    # dp=[0]*41
+    # dp[0]=[1,0]
+    # dp[1]=[0,1]
+    # for i in range(2,41):
+    #     k_0=dp[i-2][0]+dp[i-1][0]
+    #     k_1=dp[i-2][1]+dp[i-1][1]
+    #     dp[i]=[k_0,k_1]
+
+    # for i in range(T):
+    #     N=int(input())
+    #     print(f"{dp[N][0]} {dp[N][1]}")
+
+#백준 문제 < 신나는 재귀 함수 >
+    # import sys
+    # input=sys.stdin.readline
+
+    # dp=[[[0]*(21) for _ in range(21)] for _ in range(21)]
+
+    # def w(a,b,c):
+    #     if a<=0 or b<=0 or c<=0:
+    #         return 1
+    #     if a>20 or b>20 or c>20:
+    #         return w(20,20,20)
+    #     if dp[a][b][c]:
+    #         return dp[a][b][c]
+    #     if a<b<c:
+    #         dp[a][b][c]= w(a,b,c-1)+w(a,b-1,c-1)-w(a,b-1,c)
+    #         return dp[a][b][c]
+    #     dp[a][b][c] =w(a-1,b,c)+w(a-1,b-1,c)+w(a-1,b,c-1)-w(a-1,b-1,c-1)
+    #     return dp[a][b][c]
+
+    # while 1:
+    #     a,b,c=map(int,input().split())
+    #     if a==-1 and b==-1 and c==-1:
+    #         break
+    #     print(f"w({a}, {b}, {c}) = {w(a,b,c)}")
+
+#백준 문제 <퇴사>
+N=int(input())
+array=[]
+for i in range(N):
+    a,b=map(int,input().split())
+    array.append([a,b])
+dp=[0]*N
+def BFS(depth):
+    if depth>=N-1:
         return
-    if x==len(zeros):
-        for row in sudoku:
-            print(*row)
-        flag=True
-        return
-
     else:
-        (i,j)=zeros[x]
-        promising=is_programming(i,j)
-
-        for num in promising:
-            sudoku[i][j]=num
-            dfs(x+1)
-            sudoku[i][j]=0
-dfs(0)    
+        dp[depth]=max(dp[depth], dp[depth]+array[depth][1])
+        BFS(depth+array[depth][0])
+        BFS(depth+1)
+    return
+BFS(0)
+print(dp)
