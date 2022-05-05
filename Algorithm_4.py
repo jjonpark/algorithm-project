@@ -500,19 +500,255 @@
     #     print(f"w({a}, {b}, {c}) = {w(a,b,c)}")
 
 #백준 문제 <퇴사>
-N=int(input())
-array=[]
-for i in range(N):
-    a,b=map(int,input().split())
-    array.append([a,b])
-dp=[0]*N
-def BFS(depth):
-    if depth>=N-1:
-        return
-    else:
-        dp[depth]=max(dp[depth], dp[depth]+array[depth][1])
-        BFS(depth+array[depth][0])
-        BFS(depth+1)
-    return
-BFS(0)
-print(dp)
+    # N=int(input())
+    # array=[]
+    # for i in range(N):
+    #     a,b=map(int,input().split())
+    #     array.append([a,b])
+    # dp=[0]*N
+    # def BFS(depth):
+    #     if depth>=N-1:
+    #         return
+    #     else:
+    #         dp[depth]=max(dp[depth], dp[depth]+array[depth][1])
+    #         BFS(depth+array[depth][0])
+    #         BFS(depth+1)
+    #     return
+    # BFS(0)
+    # print(dp)
+
+#백준 문제 < 퇴사 >
+    # N=int(input())
+    # array=[]
+    # dp=[0]*N
+    # for i in range(N):
+    #     a,b=map(int,input().split())
+    #     array.append([a,b])
+
+    # for i in range(N-1,-1,-1):
+    #     if array[i][0]+i>N and i==N-1 :
+    #         dp[i]=0
+    #     elif array[i][0]==1 and i==N-1:
+    #         dp[i]=array[i][1]
+    #         continue
+    #     else:
+    #         if array[i][0]+i>N:
+    #             dp[i]=dp[i+1]
+    #         else:
+    #             dp[i]=max(dp[i+1],dp[array[i][0]+i]+array[i][1])
+    # k=max(dp)
+    # print(k)
+
+#백준 문제 삼성 sw 기출 < 퇴사 >
+    # n=int(input())
+    # t=[]
+    # p=[]
+    # dp=[]
+    # for i in range(n):
+    #     a,b=map(int,input().split())
+    #     t.append(a)
+    #     p.append(b)
+    #     dp.append(b)
+    # dp.append(0)
+    # for i in range(n-1,-1,-1):
+    #     if t[i]+i>n:
+    #         dp[i]=dp[i+1]
+    #     else:
+    #         dp[i]=max(dp[i+1],p[i]+dp[i+t[i]])
+    # print(dp[0])
+
+#백준 문제 삼성 sw 기출 < 로봇 청소기 > -> 흠.. 뭔가 한끝차이 인거 같은데 
+    # dx=[-1,0,1,0]
+    # dy=[0,1,0,-1]
+
+    # N,M=map(int,input().split())
+    # xs,ys,d=map(int,input().split())
+    # graph=[]
+    # for i in range(N):
+    #     k=list(map(int,input().split()))
+    #     graph.append(k)
+
+    # def go(x,y,d):
+    #     x=x+dx[d]
+    #     y=y+dy[d]
+    #     return x,y,d
+    # def back(x,y,d):
+    #     k=(d+2)%4
+    #     x=x+dx[k]
+    #     y=y+dy[k]
+    #     return x,y,d
+
+    # ans=0
+    # def clean(x,y,d):
+    #     global ans
+    #     graph[x][y]=2
+    #     ans+=1
+    #     for i in range(4):
+    #         if 0<= (x+dx[d]) <N and 0<=(y+dy[d])<N:
+    #             if graph[x+dx[d]][y+dy[d]] ==0:
+    #                 x,y,d=go(x,y,d)
+    #                 return clean(x,y,d)
+    #             else:
+    #                 d=(d+3)%4
+    #     k=(d+2)%4
+    #     if 0<= (x+dx[k]) <N and 0<=(y+dy[k]):
+    #         if graph[x+dx[k]][y+dy[k]]==2:
+    #             x,y,d=back(x,y,d)
+    #             return clean(x,y,d)
+    #     return
+    # clean(xs,ys,d)
+    # print(ans)
+
+#백준 문제 < 로봇 청소기 문제 >
+    # import sys
+    # input=sys.stdin.readline
+    # from collections import deque
+
+    # n,m=map(int, input().split())
+    # graph=[]
+    # visited=[[0]*m for _ in range(n)]
+    # r,c,d= map(int,input().split())
+
+    # dx=[-1,0,1,0]
+    # dy=[0,1,0,-1]
+
+    # for _ in range(n):
+    #     graph.append(list(map(int,input().split())))
+
+    # visited[r][c] = 1
+    # cnt = 1
+
+    # while 1:
+    #     flag=0
+    #     for _ in range(4):
+    #         nx=r+dx[(d+3)%4]
+    #         ny=c+dy[(d+3)%4]
+    #         d=(d+3)%4
+    #         if 0<=nx<n and 0<=ny<m and graph[nx][ny]==0:
+    #             if visited[nx][ny]==0:
+    #                 visited[nx][ny]=1
+    #                 cnt+=1
+    #                 r=nx
+    #                 c=ny
+    #                 flag=1
+    #                 break
+    #     if flag==0:
+    #         if graph[r-dx[d]][c-dy[d]]==1:
+    #             print(cnt)
+    #             break
+    #         else:
+    #             r,c=r-dx[d],c-dy[d]
+        
+#백준 문제 삼성 SW 기출 <톱니 바퀴> 
+# [2]번째와 다음편 [6]이 맞닿음 
+    # from collections import deque
+    # topni=[]
+    # for i in range(4):
+    #     k=list(str(input()))
+    #     topni.append(k)
+    # def rotation(a,b):
+    #     if b==1:
+    #         tmp=topni[a].pop()
+    #         topni[a].insert(0,tmp)
+    #     else: 
+    #         topni[a].append(topni[a][0])
+    #         del topni[a][0]
+    #     return 
+    # def program(a,b):
+    #     connet=[]
+    #     tmp=a
+    #     while 1:
+    #         if tmp==3:
+    #             break
+    #         if(topni[tmp][2] != topni[tmp+1][6]):
+    #             connet.append(tmp+1)
+    #         else:
+    #             break
+    #         tmp+=1
+    #     tmp=a
+    #     while 1:
+    #         if tmp==0:
+    #             break
+    #         if(topni[tmp][6] != topni[tmp-1][2]):
+    #             connet.append(tmp-1)
+    #         else:
+    #             break
+    #         tmp-=1
+    #     rotation(a,b)
+    #     for i in connet:
+    #         if(abs(i-a)==2):
+    #             rotation(i,b)
+    #         else:
+    #             rotation(i,b*-1)
+    # T=int(input())
+    # for i in range(T):
+    #     a,b=map(int,input().split())
+    #     program(a-1,b)
+    # ans=0
+    # for i in range(4):
+    #     if topni[i][0]=='1':
+    #         ans+=(2**i)
+    # print(ans)
+
+#백준 문제 삼성 sw 기출 <인구 이동> -> 아이디어는 떠올랐는데, 구현이 어렵네.
+    # N,L,R=map(int,input().split())
+    # graph=[]
+    # for i in range(N):
+    #     k=list(map(int,input().split()))
+    #     graph.append(k)
+    # dx=[0,0,-1,1]
+    # dy=[-1,1,0,0]
+    # ans_list=[[]*2001]
+    # def open_door(x,y):
+
+    #     for i in range(4):
+    #         nx=x+dx[i]
+    #         ny=y+dy[i]
+    #         if 0<=nx<N and 0<=ny<N:
+    #             L<=abs(graph[nx][ny]-graph[x][y])<=R
+    #             k.append(())
+
+#백준 문제 삼성 SW 기출 <인구이동>
+import sys
+input=sys.stdin.readline
+from collections import deque
+n,l,r = map(int,input().split())
+graph=[list(map(int,input().split())) for _ in range(n)]
+dx=[-1,0,1,0]
+dy=[0,1,0,-1]
+cnt=0
+
+def bfs(i,j):
+    q=deque()
+    q.append([i,j])
+    temp=[]
+    temp.append([i,j])
+    while q:
+        x,y=q.popleft()
+        for i in range(4):
+            nx=x+dx[i]
+            ny=y+dy[i]
+            if 0<=nx<n and 0<=ny<n and visit[nx][ny]==0:
+                if l<=abs(graph[nx][ny]-graph[x][y])<=r :
+                    visit[nx][ny]=1
+                    q.append([nx,ny])
+                    temp.append([nx,ny])
+    return temp
+
+while True:
+    visit=[[0]*n for i in range(n)]
+    isTrue=False
+    for i in range(n):
+        for j in range(n):
+            if visit[i][j]==0:
+                visit[i][j]=1
+                temp=bfs(i,j)
+                if len(temp)>1:
+                    isTrue=True
+                    num=sum([graph[x][y] for x,y in temp])// len(temp)
+                    for x,y in temp:
+                        graph[x][y]=num
+    if not isTrue:
+        break
+    cnt+=1
+print(cnt)
