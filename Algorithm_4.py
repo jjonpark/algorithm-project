@@ -709,46 +709,94 @@
     #             k.append(())
 
 #백준 문제 삼성 SW 기출 <인구이동>
-import sys
-input=sys.stdin.readline
-from collections import deque
-n,l,r = map(int,input().split())
-graph=[list(map(int,input().split())) for _ in range(n)]
-dx=[-1,0,1,0]
-dy=[0,1,0,-1]
-cnt=0
+    # import sys
+    # input=sys.stdin.readline
+    # from collections import deque
+    # n,l,r = map(int,input().split())
+    # graph=[list(map(int,input().split())) for _ in range(n)]
+    # dx=[-1,0,1,0]
+    # dy=[0,1,0,-1]
+    # cnt=0
 
-def bfs(i,j):
-    q=deque()
-    q.append([i,j])
-    temp=[]
-    temp.append([i,j])
-    while q:
-        x,y=q.popleft()
-        for i in range(4):
-            nx=x+dx[i]
-            ny=y+dy[i]
-            if 0<=nx<n and 0<=ny<n and visit[nx][ny]==0:
-                if l<=abs(graph[nx][ny]-graph[x][y])<=r :
-                    visit[nx][ny]=1
-                    q.append([nx,ny])
-                    temp.append([nx,ny])
-    return temp
+    # def bfs(i,j):
+    #     q=deque()
+    #     q.append([i,j])
+    #     temp=[]
+    #     temp.append([i,j])
+    #     while q:
+    #         x,y=q.popleft()
+    #         for i in range(4):
+    #             nx=x+dx[i]
+    #             ny=y+dy[i]
+    #             if 0<=nx<n and 0<=ny<n and visit[nx][ny]==0:
+    #                 if l<=abs(graph[nx][ny]-graph[x][y])<=r :
+    #                     visit[nx][ny]=1
+    #                     q.append([nx,ny])
+    #                     temp.append([nx,ny])
+    #     return temp
 
-while True:
-    visit=[[0]*n for i in range(n)]
-    isTrue=False
-    for i in range(n):
-        for j in range(n):
-            if visit[i][j]==0:
-                visit[i][j]=1
-                temp=bfs(i,j)
-                if len(temp)>1:
-                    isTrue=True
-                    num=sum([graph[x][y] for x,y in temp])// len(temp)
-                    for x,y in temp:
-                        graph[x][y]=num
-    if not isTrue:
-        break
-    cnt+=1
-print(cnt)
+    # while True:
+    #     visit=[[0]*n for i in range(n)]
+    #     isTrue=False
+    #     for i in range(n):
+    #         for j in range(n):
+    #             if visit[i][j]==0:
+    #                 visit[i][j]=1
+    #                 temp=bfs(i,j)
+    #                 if len(temp)>1:
+    #                     isTrue=True
+    #                     num=sum([graph[x][y] for x,y in temp])// len(temp)
+    #                     for x,y in temp:
+    #                         graph[x][y]=num
+    #     if not isTrue:
+    #         break
+    #     cnt+=1
+    # print(cnt)
+
+#백준 문제 삼성 SW 기출 < 괄호 추가하기 >
+
+order=['+','-','*']
+N=int(input())
+origin = input()
+answer = -0xfffffff
+orders = []
+candidates = []
+num = ''
+
+for unit in origin:
+    if unit not in order:
+        num += unit
+    else:
+        orders.append(int(num))
+        orders.append(unit)
+        num=''
+orders.append(int(num))
+def calculate(num1,order,num2):
+    if order=='+':
+        return num1 + num2
+    elif order == '-':
+        return num1-num2
+    else:
+        return num1 * num2
+
+def move(idx, cnt, flag, orders): #괄호 사용여부를 판별 하는 함수
+    global count
+    if cnt == count:
+        candidates.append(orders)
+        return
+    if flag: #이전에 괄호를 사용했으면 다음에는 무조건 사용 X
+        move(idx+2,cnt+1,False,orders)
+    else:
+        # 1. 괄호를 사용하는 경우 (해당 연산을 미리 계산한다.)
+        move(idx, cnt+1, True, orders[:idx-1] + [calculate(orders[idx-1], orders[idx], orders[idx+1])] + orders[idx+2:]) 
+        move(idx+2, cnt+1, False, orders)
+
+count=len(orders)//2
+move(1,0,False,orders)
+
+for candidate in candidates:
+    target = candidate[::-1]
+    for i in range(len(candidate)//2):
+        target.append(calculate(target.pop(), target.pop(), target.pop()))
+    answer = max(answer, target[0])
+print(answer)
