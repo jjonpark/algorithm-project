@@ -755,48 +755,149 @@
 
 #백준 문제 삼성 SW 기출 < 괄호 추가하기 >
 
-order=['+','-','*']
-N=int(input())
-origin = input()
-answer = -0xfffffff
-orders = []
-candidates = []
-num = ''
+    # order=['+','-','*']
+    # N=int(input())
+    # origin = input()
+    # answer = -0xfffffff
+    # orders = []
+    # candidates = []
+    # num = ''
 
-for unit in origin:
-    if unit not in order:
-        num += unit
-    else:
-        orders.append(int(num))
-        orders.append(unit)
-        num=''
-orders.append(int(num))
-def calculate(num1,order,num2):
-    if order=='+':
-        return num1 + num2
-    elif order == '-':
-        return num1-num2
-    else:
-        return num1 * num2
+    # for unit in origin:
+    #     if unit not in order:
+    #         num += unit
+    #     else:
+    #         orders.append(int(num))
+    #         orders.append(unit)
+    #         num=''
+    # orders.append(int(num))
+    # def calculate(num1,order,num2):
+    #     if order=='+':
+    #         return num1 + num2
+    #     elif order == '-':
+    #         return num1-num2
+    #     else:
+    #         return num1 * num2
 
-def move(idx, cnt, flag, orders): #괄호 사용여부를 판별 하는 함수
-    global count
-    if cnt == count:
-        candidates.append(orders)
-        return
-    if flag: #이전에 괄호를 사용했으면 다음에는 무조건 사용 X
-        move(idx+2,cnt+1,False,orders)
-    else:
-        # 1. 괄호를 사용하는 경우 (해당 연산을 미리 계산한다.)
-        move(idx, cnt+1, True, orders[:idx-1] + [calculate(orders[idx-1], orders[idx], orders[idx+1])] + orders[idx+2:]) 
-        move(idx+2, cnt+1, False, orders)
+    # def move(idx, cnt, flag, orders): #괄호 사용여부를 판별 하는 함수
+    #     global count
+    #     if cnt == count:
+    #         candidates.append(orders)
+    #         return
+    #     if flag: #이전에 괄호를 사용했으면 다음에는 무조건 사용 X
+    #         move(idx+2,cnt+1,False,orders)
+    #     else:
+    #         # 1. 괄호를 사용하는 경우 (해당 연산을 미리 계산한다.)
+    #         move(idx, cnt+1, True, orders[:idx-1] + [calculate(orders[idx-1], orders[idx], orders[idx+1])] + orders[idx+2:]) 
+    #         move(idx+2, cnt+1, False, orders)
 
-count=len(orders)//2
-move(1,0,False,orders)
+    # count=len(orders)//2
+    # move(1,0,False,orders)
 
-for candidate in candidates:
-    target = candidate[::-1]
-    for i in range(len(candidate)//2):
-        target.append(calculate(target.pop(), target.pop(), target.pop()))
-    answer = max(answer, target[0])
-print(answer)
+    # for candidate in candidates:
+    #     target = candidate[::-1]
+    #     for i in range(len(candidate)//2):
+    #         target.append(calculate(target.pop(), target.pop(), target.pop()))
+    #     answer = max(answer, target[0])
+    # print(answer)
+
+#백준 문제 삼성 SW 기출 <캐슬 디펜스> -> 구현 의 근처도 못가겠네 이거.. 
+    # from itertools import combinations
+    # N,M,D=map(int,input().split())
+
+    # graph=[]
+    # for i in range(N):
+    #     k=list(map(int,input().split()))
+    #     graph.append(k)
+
+    # def move():
+    #     global graph
+    #     for i in range(N-1,0,-1):
+    #         graph[i]=graph[i-1]
+    #     for j in range(M):
+    #         graph[0][j]=0
+    #     return
+
+    # def check():
+    #     flag=False
+    #     for i in range(N):
+    #         for j in range(M):
+    #             if graph[i][j]==0:
+    #                 flag=True
+    #     return flag
+
+    # lst=list(combinations(range(5),3))
+
+    # def program():
+    #     while check():
+    #         visited=[]
+
+    # while lst:
+    #     a,b,c=lst.pop()
+
+#백준 문제 삼성 SW 기출 <캐슬 티펜스>
+from itertools import combinations
+from copy import deepcopy
+import sys
+
+N,M,D=map(int,sys.stdin.readline().split())
+#적군의 위치를 저장하는 set
+enemy_position=set()
+for y in range(N):
+    arr=list(map(int,sys.stdin.readline().split()))
+    for x in range(M):
+        if arr[x]==1:
+            enemy_position.add((y,x))
+
+maps=[[0 for _ in range(M)]for _ in range(N)]
+
+archer_position=[(N,i)for i in range(M)]
+
+candidates=combinations(archer_position,3)
+
+#궁사 위치별로 사격 가능한 적군 거리를 계산하는 함수, 3명의 위치 당 사격 가능한좌표,까지의 거리를 계산
+def get_distance(maps,candidates,D):
+    possible_attack_area=[]
+    for position in candidates:
+        copied=[]
+        for y in range(len(maps)):
+            for x in range(len(maps[0])):
+                if abs(position[0]-y) +abs(position[1]-x)<=D:
+                    copied.append([(abs(position[0]-y) + abs(position[1]-x)),y,x])
+        possible_attack_area.append(copied)
+    return possible_attack_area
+
+#적군이 전진하는 함수 
+def go_forward(enemy_position, N):
+    return set([(y+1,x) for y, x in enemy_position if y+1<N])
+
+#공격 가능한 '가장 가까운 적' 을 찾는 함수 
+def find_nearest_enemy(arc, enemy_position):
+    arc.sort(key=lambda x:(x[0],x[2]))
+    for dist, y, x in arc:
+        if (y,x) in enemy_position:
+            return (y,x)
+    return None
+
+maxs=0
+for archors in candidates:
+    arc=get_distance(maps,archors,D)
+    kills=0
+    #각 경우의 수 마다 적 위치는 초기화 해야 하므로 
+    copy_enemy_map=deepcopy(enemy_position)
+    while enemy_position:
+        temp=set()
+        for arc_map in arc:
+            kill=find_nearest_enemy(arc_map,enemy_position)
+            if kill is not None:
+                temp.add(kill)
+        kills+=len(temp)
+
+        enemy_position-=temp
+
+        enemy_position=go_forward(enemy_position,N)
+    
+    enemy_position=copy_enemy_map
+    if maxs < kills:
+        maxs=kills
+print(maxs)
