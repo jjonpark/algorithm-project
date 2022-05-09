@@ -836,68 +836,208 @@
     #     a,b,c=lst.pop()
 
 #백준 문제 삼성 SW 기출 <캐슬 티펜스>
-from itertools import combinations
-from copy import deepcopy
-import sys
+    # from itertools import combinations
+    # from copy import deepcopy
+    # import sys
 
-N,M,D=map(int,sys.stdin.readline().split())
-#적군의 위치를 저장하는 set
-enemy_position=set()
-for y in range(N):
-    arr=list(map(int,sys.stdin.readline().split()))
-    for x in range(M):
-        if arr[x]==1:
-            enemy_position.add((y,x))
+    # N,M,D=map(int,sys.stdin.readline().split())
+    # #적군의 위치를 저장하는 set
+    # enemy_position=set()
+    # for y in range(N):
+    #     arr=list(map(int,sys.stdin.readline().split()))
+    #     for x in range(M):
+    #         if arr[x]==1:
+    #             enemy_position.add((y,x))
 
-maps=[[0 for _ in range(M)]for _ in range(N)]
+    # maps=[[0 for _ in range(M)]for _ in range(N)]
 
-archer_position=[(N,i)for i in range(M)]
+    # archer_position=[(N,i)for i in range(M)]
 
-candidates=combinations(archer_position,3)
+    # candidates=combinations(archer_position,3)
 
-#궁사 위치별로 사격 가능한 적군 거리를 계산하는 함수, 3명의 위치 당 사격 가능한좌표,까지의 거리를 계산
-def get_distance(maps,candidates,D):
-    possible_attack_area=[]
-    for position in candidates:
-        copied=[]
-        for y in range(len(maps)):
-            for x in range(len(maps[0])):
-                if abs(position[0]-y) +abs(position[1]-x)<=D:
-                    copied.append([(abs(position[0]-y) + abs(position[1]-x)),y,x])
-        possible_attack_area.append(copied)
-    return possible_attack_area
+    # #궁사 위치별로 사격 가능한 적군 거리를 계산하는 함수, 3명의 위치 당 사격 가능한좌표,까지의 거리를 계산
+    # def get_distance(maps,candidates,D):
+    #     possible_attack_area=[]
+    #     for position in candidates:
+    #         copied=[]
+    #         for y in range(len(maps)):
+    #             for x in range(len(maps[0])):
+    #                 if abs(position[0]-y) +abs(position[1]-x)<=D:
+    #                     copied.append([(abs(position[0]-y) + abs(position[1]-x)),y,x])
+    #         possible_attack_area.append(copied)
+    #     return possible_attack_area
 
-#적군이 전진하는 함수 
-def go_forward(enemy_position, N):
-    return set([(y+1,x) for y, x in enemy_position if y+1<N])
+    # #적군이 전진하는 함수 
+    # def go_forward(enemy_position, N):
+    #     return set([(y+1,x) for y, x in enemy_position if y+1<N])
 
-#공격 가능한 '가장 가까운 적' 을 찾는 함수 
-def find_nearest_enemy(arc, enemy_position):
-    arc.sort(key=lambda x:(x[0],x[2]))
-    for dist, y, x in arc:
-        if (y,x) in enemy_position:
-            return (y,x)
-    return None
+    # #공격 가능한 '가장 가까운 적' 을 찾는 함수 
+    # def find_nearest_enemy(arc, enemy_position):
+    #     arc.sort(key=lambda x:(x[0],x[2]))
+    #     for dist, y, x in arc:
+    #         if (y,x) in enemy_position:
+    #             return (y,x)
+    #     return None
 
-maxs=0
-for archors in candidates:
-    arc=get_distance(maps,archors,D)
-    kills=0
-    #각 경우의 수 마다 적 위치는 초기화 해야 하므로 
-    copy_enemy_map=deepcopy(enemy_position)
-    while enemy_position:
-        temp=set()
-        for arc_map in arc:
-            kill=find_nearest_enemy(arc_map,enemy_position)
-            if kill is not None:
-                temp.add(kill)
-        kills+=len(temp)
+    # maxs=0
+    # for archors in candidates:
+    #     arc=get_distance(maps,archors,D)
+    #     kills=0
+    #     #각 경우의 수 마다 적 위치는 초기화 해야 하므로 
+    #     copy_enemy_map=deepcopy(enemy_position)
+    #     while enemy_position:
+    #         temp=set()
+    #         for arc_map in arc:
+    #             kill=find_nearest_enemy(arc_map,enemy_position)
+    #             if kill is not None:
+    #                 temp.add(kill)
+    #         kills+=len(temp)
 
-        enemy_position-=temp
+    #         enemy_position-=temp
 
-        enemy_position=go_forward(enemy_position,N)
-    
-    enemy_position=copy_enemy_map
-    if maxs < kills:
-        maxs=kills
-print(maxs)
+    #         enemy_position=go_forward(enemy_position,N)
+        
+    #     enemy_position=copy_enemy_map
+    #     if maxs < kills:
+    #         maxs=kills
+    # print(maxs)
+
+#백준 문제 <단지 번호 붙이기> -> 다 왔는데 카운트 하는걸 모르겠다
+    # from collections import deque
+    # N= int(input())
+    # answer_list=[]*626
+    # graph=[]
+    # for i in range(N):
+    #     k=list(str(input()))
+    #     for j in range(N):
+    #         k[j]=int(k[j])
+    #     graph.append(k)
+    # visited=[[0]*N for _ in range(N)]
+
+    # dx=[-1,1,0,0]
+    # dy=[0,0,1,-1]
+    # queue=deque()
+    # cnt=1
+    # def BFS(x,y):
+    #     global cnt, graph, visited
+    #     if(graph[x][y]==1 and visited[x][y]==0):
+    #         graph[x][y]=2
+    #         visited[x][y]=cnt
+        
+    #     queue.append((x,y))
+    #     while queue:
+    #         x,y=queue.popleft()
+    #         for i in range(4):
+    #             nx=x+dx[i]
+    #             ny=y+dy[i]
+    #             if 0<=nx<N and 0<=ny<N and graph[nx][ny]==1 and visited[nx][ny]==0:
+    #                 graph[nx][ny]=2
+    #                 visited[nx][ny]=cnt
+    #                 queue.append((nx,ny))
+    #             else: 
+    #                 continue
+    #     cnt+=1
+    #     return
+
+    # for i in range(N):
+    #     for j in range(N):
+    #         if visited[i][j]==0:
+    #             BFS(i,j)
+
+    # print(visited)
+
+#백준 문제 <단지 번호 붙이기> 풀이 
+    # from collections import deque
+
+    # dx=[0,0,-1,1]
+    # dy=[-1,1,0,0]
+    # def bfs(graph,a,b):
+    #     n=len(graph)
+    #     queue=deque()
+    #     queue.append((a,b))
+    #     graph[a][b]=0
+    #     count=1
+
+    #     while queue:
+    #         x,y=queue.popleft()
+    #         for i in range(4):
+    #             nx=x+dx[i]
+    #             ny=y+dy[i]
+    #             if nx<0 or nx>=n or ny<0 or ny>=n:
+    #                 continue
+    #             if graph[nx][ny]==1:
+    #                 graph[nx][ny]=0
+    #                 queue.append((nx,ny))
+    #                 count+=1
+    #     return count
+    # n=int(input())
+    # graph=[]
+    # for i in range(n):
+    #     graph.append(list(map(int,input())))
+
+    # cnt=[]
+    # for i in range(n):
+    #     for j in range(n):
+    #         if graph[i][j]==1:
+    #             cnt.append(bfs(graph,i,j))
+    # cnt.sort()
+    # print(len(cnt))
+    # for i in range(len(cnt)):
+    #     print(cnt[i])
+
+#백준 문제 <안전영역>
+import copy
+from collections import deque
+N=int(input())
+graph=[]
+max=0
+for i in range(N):
+    k=list(map(int,input().split()))
+    graph.append(k)
+    for j in range(N):
+        if max<k[j]:
+            max=k[j]
+dx=[0,0,-1,1]
+dy=[-1,1,0,0]
+def make_graph(i):
+    list_graph=copy.deepcopy(graph)
+    for x in range(N):
+        for y in range(N):
+            if(list_graph[x][y]<=i):
+                list_graph[x][y]=0
+            else: 
+                list_graph[x][y]=1
+    return list_graph
+
+def BFS(graph,x,y):
+    n=len(graph)
+    queue=deque()
+    queue.append((x,y))
+    count=1
+    while queue:
+        x,y=queue.popleft()
+        for i in range(4):
+            nx=x+dx[i]
+            ny=y+dy[i]
+            if nx<0 or ny<0 or nx>=n or ny>=n:
+                continue
+            if graph[nx][ny]==1:
+                graph[nx][ny]=0
+                queue.append((nx,ny))
+                count+=1
+    return count
+
+cnt=[]
+max_answer=0
+for k in range(1,max):
+    tmp_graph=make_graph(k)
+    cnt=[]
+    for i in range(N):
+        for j in range(N):
+            if tmp_graph[i][j]==1:
+                cnt.append(BFS(tmp_graph,i,j))
+    if max_answer<len(cnt):
+        max_answer=len(cnt)
+
+print(max_answer)
+
