@@ -986,58 +986,150 @@
     #     print(cnt[i])
 
 #백준 문제 <안전영역>
-import copy
+    # import copy
+    # from collections import deque
+    # N=int(input())
+    # graph=[]
+    # max=0
+    # for i in range(N):
+    #     k=list(map(int,input().split()))
+    #     graph.append(k)
+    #     for j in range(N):
+    #         if max<k[j]:
+    #             max=k[j]
+    # dx=[0,0,-1,1]
+    # dy=[-1,1,0,0]
+    # def make_graph(i):
+    #     list_graph=copy.deepcopy(graph)
+    #     for x in range(N):
+    #         for y in range(N):
+    #             if(list_graph[x][y]<=i):
+    #                 list_graph[x][y]=0
+    #             else: 
+    #                 list_graph[x][y]=1
+    #     return list_graph
+
+    # def BFS(graph,x,y):
+    #     n=len(graph)
+    #     queue=deque()
+    #     queue.append((x,y))
+    #     count=1
+    #     while queue:
+    #         x,y=queue.popleft()
+    #         for i in range(4):
+    #             nx=x+dx[i]
+    #             ny=y+dy[i]
+    #             if nx<0 or ny<0 or nx>=n or ny>=n:
+    #                 continue
+    #             if graph[nx][ny]==1:
+    #                 graph[nx][ny]=0
+    #                 queue.append((nx,ny))
+    #                 count+=1
+    #     return count
+
+    # cnt=[]
+    # max_answer=0
+    # for k in range(0,max+1):
+    #     tmp_graph=make_graph(k)
+    #     cnt=[]
+    #     for i in range(N):
+    #         for j in range(N):
+    #             if tmp_graph[i][j]==1:
+    #                 cnt.append(BFS(tmp_graph,i,j))
+    #     if max_answer<len(cnt):
+    #         max_answer=len(cnt)
+
+    # print(max_answer)
+
+#백준 문제 <숨바꼭질>
+    # from collections import deque
+    # n,k=map(int,input().split())
+    # MAX=10**5
+    # dist=[0]*(MAX+1)
+    # def bfs():
+    #     q=deque()
+    #     q.append(n)
+    #     while q:
+    #         x=q.popleft()
+    #         if x==k:
+    #             print(dist[x])
+    #             break
+    #         for nx in (x-1,x+1,x*2):
+    #             if 0<=nx<=MAX and not dist[nx]:
+    #                 dist[nx]=dist[x]+1
+    #                 q.append(nx)
+
+    # bfs()
+
+#백준 문제 <맥주 마시면서 걸어가기>
+    # from collections import deque
+
+    # def check():
+    #     flag=0
+    #     global ans
+    #     while queue:
+    #         x,y=queue.popleft()
+    #         if x==ex and y==ey:
+    #                 flag=1
+    #         for i in range(N+1):
+    #             if((abs(market_list[i][0]-x)+abs(market_list[i][1]-y))/50)<=20 and visited[i]==0:
+    #                 visited[i]=1
+    #                 queue.append((market_list[i][0],market_list[i][1]))    
+    #     if flag:
+    #         ans="happy"
+    #     else:
+    #         ans="sad"
+    #     return ans
+    # T=int(input())
+    # for test_case in range(T):
+    #     N=int(input())
+    #     market_list=[]
+    #     sx,sy=map(int,input().split())
+    #     for i in range(N):
+    #         kx,ky=map(int,input().split())
+    #         market_list.append([kx,ky])
+    #     ex,ey=map(int,input().split())
+    #     market_list.append((ex,ey))
+    #     ans="happy"
+    #     tmp=(abs(ex-sx)+abs(ey-ex))/50
+    #     if tmp<=20:
+    #         print(ans)
+    #     else:
+    #         queue=deque()
+    #         queue.append((sx,sy))
+    #         visited=[0]*(N+1) 
+    #         print(check())
+
+#백준 문제 <맥주마시면서 걸어가기> 풀이 
+import sys
+input=sys.stdin.readline
 from collections import deque
-N=int(input())
-graph=[]
-max=0
-for i in range(N):
-    k=list(map(int,input().split()))
-    graph.append(k)
-    for j in range(N):
-        if max<k[j]:
-            max=k[j]
-dx=[0,0,-1,1]
-dy=[-1,1,0,0]
-def make_graph(i):
-    list_graph=copy.deepcopy(graph)
-    for x in range(N):
-        for y in range(N):
-            if(list_graph[x][y]<=i):
-                list_graph[x][y]=0
-            else: 
-                list_graph[x][y]=1
-    return list_graph
 
-def BFS(graph,x,y):
-    n=len(graph)
-    queue=deque()
-    queue.append((x,y))
-    count=1
-    while queue:
-        x,y=queue.popleft()
-        for i in range(4):
-            nx=x+dx[i]
-            ny=y+dy[i]
-            if nx<0 or ny<0 or nx>=n or ny>=n:
-                continue
-            if graph[nx][ny]==1:
-                graph[nx][ny]=0
-                queue.append((nx,ny))
-                count+=1
-    return count
+def bfs():
+    q=deque()
+    q.append([home[0],home[1]])
+    while q:
+        x,y=q.popleft()
+        if abs(x-fest[0])+abs(y-fest[1])<=1000:
+            print("happy")
+            return
+        for i in range(n):
+            if not visited[i]:
+                new_x,new_y=conv[i]
+                if abs(x-new_x)+abs(y-new_y)<=1000:
+                    q.append([new_x,new_y])
+                    visited[i]=1
+    print("sad")
+    return
 
-cnt=[]
-max_answer=0
-for k in range(1,max):
-    tmp_graph=make_graph(k)
-    cnt=[]
-    for i in range(N):
-        for j in range(N):
-            if tmp_graph[i][j]==1:
-                cnt.append(BFS(tmp_graph,i,j))
-    if max_answer<len(cnt):
-        max_answer=len(cnt)
-
-print(max_answer)
-
+t= int(input())
+for i in range(t):
+    n=int(input())
+    home=[int(x) for x in input().split()]
+    conv=[]
+    for j in range(n):
+        x,y=map(int,input().split())
+        conv.append([x,y])
+    fest=[int(x) for x in input().split()]
+    visited=[0 for i in range(n+1)]
+    bfs()
