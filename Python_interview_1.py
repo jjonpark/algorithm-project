@@ -353,12 +353,98 @@
 
 # leedCode < 121. Best Time to Buy and Sell Stock > ->풀이
 
-def maxProfit(prices):
-    import sys
-    profit = 0
-    min_price = sys.maxsize
-    for price in prices:
-        min_price = min(min_price, price)
-        profit = max(profit, price - min_price)
+# def maxProfit(prices):
+#     import sys
+#     profit = 0
+#     min_price = sys.maxsize
+#     for price in prices:
+#         min_price = min(min_price, price)
+#         profit = max(profit, price - min_price)
 
-    return profit
+#     return profit
+
+# leedCode < 234. Palindrome Linked List > -> 연결 리스트를 리스트로 전환해주는 과정이 필요하네?
+
+# head = [1, 2, 2, 1]
+
+
+# def isPalindrome(head):
+#     if head == head[::-1]:
+#         return True
+#     else:
+#         return False
+
+
+# print(isPalindrome(head))
+
+# leedCode < 234. Palindrome Linked List > 풀이
+# def isPalindrome(head):
+#     q = []
+#     if not head:
+#         return True
+#     node = head
+#     while node:
+#         q.append(node.val)
+#         node = node.next
+#     if q == q[::-1]:
+#         return True
+#     else:
+#         return False
+
+# leedCode < 21 Merge Two sorted lists >
+
+
+# def mergeTwolists(list1, list2):
+#     p = []
+#     if not list1:
+#         return list2
+#     if not list2:
+#         return list1
+#     node = list1
+#     while node:
+#         p.append(node.val)
+#         node = node.next
+#     node_2 = list2
+#     while node_2:
+#         p.append(node_2.val)
+#         node_2 = node_2.next
+
+#     p.sort()
+#     return p
+
+#연결된 리스트는 좀 다른 방식으로 접근해야 하는거 같음
+
+# from typing import Optional
+
+
+# class Solution:
+#      def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+#         if not l1 or l2 and l1.val > l2.val:
+#             l1,l2 = l2, l1
+#         if l1:
+#             l1.next = self.mergeTwolist(l1.next,l2)
+#         return l1
+# list1 = [1,2,4]
+# list2 = [1,3,4]
+# print(Solution.mergeTwolist(Solution,list1,list2))
+
+#class 공부
+class jss:
+    def __init__(self) -> None: #클래스에서 입력 변수가 없을시 self 을 넣어줘야 한다. 
+        print("JSS 선언!")
+        self.name = input("네임:")
+        self.age = input("나이:")
+    def show(self):
+        print(f"나의 이름은{self.name} 이고, 나이는 {self.age} 입니다")
+a=jss() #init 함수는 클래스를 만드는 순간에 실행된다. 
+a.show()#init 함수가 아닌 함수는 .함수명을 붙혀줌 
+
+#jss 클래스를 상속 받아보자 
+class jss2(jss):
+    def __init__(self) -> None:
+        super().__init__()
+        self.gender = input("성별 :")  
+    def show(self):
+        print(f"나의 이름은{self.name} 이고, 나이는 {self.age} 이고, 성별은 {self.gender}입니다.")
+b=jss2()
+b.show()
