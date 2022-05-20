@@ -412,7 +412,7 @@
 #     p.sort()
 #     return p
 
-#연결된 리스트는 좀 다른 방식으로 접근해야 하는거 같음
+# 연결된 리스트는 좀 다른 방식으로 접근해야 하는거 같음
 
 # from typing import Optional
 
@@ -428,23 +428,65 @@
 # list2 = [1,3,4]
 # print(Solution.mergeTwolist(Solution,list1,list2))
 
-#class 공부
-class jss:
-    def __init__(self) -> None: #클래스에서 입력 변수가 없을시 self 을 넣어줘야 한다. 
-        print("JSS 선언!")
-        self.name = input("네임:")
-        self.age = input("나이:")
-    def show(self):
-        print(f"나의 이름은{self.name} 이고, 나이는 {self.age} 입니다")
-a=jss() #init 함수는 클래스를 만드는 순간에 실행된다. 
-a.show()#init 함수가 아닌 함수는 .함수명을 붙혀줌 
+# class 공부
+# class jss:
+#     def __init__(self) -> None: #클래스에서 입력 변수가 없을시 self 을 넣어줘야 한다.
+#         print("JSS 선언!")
+#         self.name = input("네임:")
+#         self.age = input("나이:")
+#     def show(self):
+#         print(f"나의 이름은{self.name} 이고, 나이는 {self.age} 입니다")
+# a=jss() #init 함수는 클래스를 만드는 순간에 실행된다.
+# a.show()#init 함수가 아닌 함수는 .함수명을 붙혀줌
 
-#jss 클래스를 상속 받아보자 
-class jss2(jss):
+# #jss 클래스를 상속 받아보자
+# class jss2(jss):
+#     def __init__(self) -> None:
+#         super().__init__()
+#         self.gender = input("성별 :")
+#     def show(self):
+#         print(f"나의 이름은{self.name} 이고, 나이는 {self.age} 이고, 성별은 {self.gender}입니다.")
+# b=jss2()
+# b.show()
+
+
+# 링크드 리스트 클래스 구현
+# class ListNode:
+#     def __init__(self, val) -> None:
+#         self.val = val
+#         self.nex = None
+
+
+# head_node = ListNode(1)
+# head_node.next = ListNode(2)
+# head_node.next.next = ListNode(3)
+
+#링크드 리스트 (인프런 강의 )
+
+class Node:
+    def __init__(self,data) -> None:
+        self.data = data
+        self.next = None
+
+class LinkedList:
     def __init__(self) -> None:
-        super().__init__()
-        self.gender = input("성별 :")  
-    def show(self):
-        print(f"나의 이름은{self.name} 이고, 나이는 {self.age} 이고, 성별은 {self.gender}입니다.")
-b=jss2()
-b.show()
+        init = Node('init')
+        self.head = init
+        self.tail = init
+
+        self.현재노드 = None
+        self.데이터수 = 0 
+    def __len__(self):
+        return self.데이터수
+    def append(self, data):
+        새로운노드 = Node(data)
+        self.tail.next = 새로운노드
+        self.tail = 새로운노드
+        self.데이터수+=1
+l = LinkedList()
+l.append(10)
+l.append(20)
+l.append(30)
+l.append(40)
+l.append(15)
+print(l.tail.next)
