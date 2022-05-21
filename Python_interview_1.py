@@ -461,32 +461,57 @@
 # head_node.next = ListNode(2)
 # head_node.next.next = ListNode(3)
 
-#링크드 리스트 (인프런 강의 )
+# 링크드 리스트 (인프런 강의 )
 
-class Node:
-    def __init__(self,data) -> None:
-        self.data = data
+# class Node:
+#     def __init__(self, data) -> None:
+#         self.data = data
+#         self.next = None
+
+
+# class LinkedList:
+#     def __init__(self) -> None:
+#         init = Node('init')
+#         self.head = init
+#         self.tail = init
+
+#         self.현재노드 = None
+#         self.데이터수 = 0
+
+#     def __len__(self):
+#         return self.데이터수
+
+#     def append(self, data):
+#         새로운노드 = Node(data)
+#         self.tail.next = 새로운노드
+#         self.tail = 새로운노드
+#         self.데이터수 += 1
+
+
+# l = LinkedList()
+# l.append(10)
+# l.append(20)
+# l.append(30)
+# l.append(40)
+# l.append(15)
+# print(l.tail.next)
+
+class Node : 
+    def __init__(self,key=None) -> None:
+        self.key = key
         self.next = None
+    def __str__(self) -> str: #print로 호출시 print(v.__str__())으로 동작함
+        return str(self.key)
 
-class LinkedList:
+# 3--> 9 --> -1 링크 리스트 만들기 
+a= Node(3)
+b= Node(9)
+c= Node(-1)
+a.next=b
+b.next=c
+
+# head node 만 있으면 모든 데이터에 접근 가능하니, head 와 size 로만 구성 된 클래스를 만들자, 
+class singlyLinkedList :
     def __init__(self) -> None:
-        init = Node('init')
-        self.head = init
-        self.tail = init
-
-        self.현재노드 = None
-        self.데이터수 = 0 
-    def __len__(self):
-        return self.데이터수
-    def append(self, data):
-        새로운노드 = Node(data)
-        self.tail.next = 새로운노드
-        self.tail = 새로운노드
-        self.데이터수+=1
-l = LinkedList()
-l.append(10)
-l.append(20)
-l.append(30)
-l.append(40)
-l.append(15)
-print(l.tail.next)
+        self.head = None #빈리스트는 head 가 None 이다 
+        self.size = 0
