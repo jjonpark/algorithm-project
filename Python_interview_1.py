@@ -496,22 +496,92 @@
 # l.append(15)
 # print(l.tail.next)
 
-class Node : 
-    def __init__(self,key=None) -> None:
-        self.key = key
-        self.next = None
-    def __str__(self) -> str: #print로 호출시 print(v.__str__())으로 동작함
-        return str(self.key)
+# class Node:
+#     def __init__(self, key=None) -> None:
+#         self.key = key
+#         self.next = None
 
-# 3--> 9 --> -1 링크 리스트 만들기 
-a= Node(3)
-b= Node(9)
-c= Node(-1)
-a.next=b
-b.next=c
+#     def __str__(self) -> str:  # print로 호출시 print(v.__str__())으로 동작함
+#         return str(self.key)
 
-# head node 만 있으면 모든 데이터에 접근 가능하니, head 와 size 로만 구성 된 클래스를 만들자, 
-class singlyLinkedList :
-    def __init__(self) -> None:
-        self.head = None #빈리스트는 head 가 None 이다 
-        self.size = 0
+
+# # 3--> 9 --> -1 링크 리스트 만들기
+# a = Node(3)
+# b = Node(9)
+# c = Node(-1)
+# a.next = b
+# b.next = c
+
+# # head node 만 있으면 모든 데이터에 접근 가능하니, head 와 size 로만 구성 된 클래스를 만들자,
+
+
+# class singlyLinkedList:
+#     def __init__(self) -> None:
+#         self.head = None  # 빈리스트는 head 가 None 이다
+#         self.size = 0
+
+#     def __len__(self):
+#         return self.size
+
+#     def pushfront(self, key):
+#         new_node = Node(key)
+#         new_node.next = self.head
+#         self.head = new_node
+#         self.size += 1
+
+#     def pushback(self, key):
+#         V = Node(key)
+#         if len(self) == 0:
+#             self.head = V
+#         else:
+#             tail = self.head
+#             while tail.next != None:
+#                 tail = tail.next
+#             tail.next =V
+#         self.size += 1
+
+#     def popfront(self):
+#         if len(self)==0:
+#             return None
+#         else:
+#             x=self.head
+#             key = x.key
+#             self.head = x.next
+#             self.size -=1
+#             del x
+#             return key
+#     def popBack(self):
+#         if len(self)==0 :
+#             return None
+#         else:
+#             prev, tail = None, self.head
+#             while tail.next !=None:
+#                 prev = tail
+#                 tail = tail.next
+#             if len(self)==1:
+#                 self.head = None
+#             else:
+#                 prev.next= None
+#             key = tail.key
+#             del tail
+#             size -=1
+#             return key
+
+# leetCode < 21. Merge Two Sorted Lists >
+# def mergeTwoLists(self, l1, l2):
+#     if not l1 or l2 and l1.val>l2.val :
+#         l1, l2 = l2, l1
+#     if l1:
+#         l1.next = self.mergeTwoLists(l1.next, l2)
+#     return l1
+
+#leedCode < 206. Reverse Linked List >
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+class Solution:
+    def reverseList(self, head):
+        while self.next != None:
+            self.next.val
+            head = self.next
