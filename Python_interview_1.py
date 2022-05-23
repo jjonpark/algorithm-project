@@ -575,13 +575,57 @@
 #         l1.next = self.mergeTwoLists(l1.next, l2)
 #     return l1
 
-#leedCode < 206. Reverse Linked List >
+# leetCode < 21. Merge Two Sorted Lists >
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
+
+
+class Solution:
+    def mergeTwoLists(self, list1, list2):
+        dummyNode = ListNode(0)
+        runner = dummyNode
+        while list1 or list2:
+            if list1 is None:
+                runner.next = list2
+                list2 = list2.next
+            elif list2 in None:
+                runner.next = list1
+                list1 = list1.next
+            else:
+                if list1.val < list2.val:
+                    runner.next = list1
+                    list1 = list1.next
+                else:
+                    runner.next = list2
+                    list2 = list2.next
+            runner = runner.next
+        return dummyNode.next
+
+#재귀 풀이 
+class Solution:
+    def mergeTwoLists(self, list1, list2):
+        if list1 is None or list2 is None:
+            return list1 or list2
+        if list1.val < list2.val:
+            list1.next = self.mergeTwoLists(list1.next, list2)
+            return list1
+        else:
+            list2.next = self.mergeTwoLists(list1, list2.next)
+            return list2
+# leedCode < 206. Reverse Linked List >
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 class Solution:
     def reverseList(self, head):
         while self.next != None:
             self.next.val
             head = self.next
+
+
+#삼성 SW 커리큘럼 대로 공부 해서 취득해보자!! 
