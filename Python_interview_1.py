@@ -576,56 +576,113 @@
 #     return l1
 
 # leetCode < 21. Merge Two Sorted Lists >
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 
 
-class Solution:
-    def mergeTwoLists(self, list1, list2):
-        dummyNode = ListNode(0)
-        runner = dummyNode
-        while list1 or list2:
-            if list1 is None:
-                runner.next = list2
-                list2 = list2.next
-            elif list2 in None:
-                runner.next = list1
-                list1 = list1.next
-            else:
-                if list1.val < list2.val:
-                    runner.next = list1
-                    list1 = list1.next
-                else:
-                    runner.next = list2
-                    list2 = list2.next
-            runner = runner.next
-        return dummyNode.next
+# class Solution:
+#     def mergeTwoLists(self, list1, list2):
+#         dummyNode = ListNode(0)
+#         runner = dummyNode
+#         while list1 or list2:
+#             if list1 is None:
+#                 runner.next = list2
+#                 list2 = list2.next
+#             elif list2 in None:
+#                 runner.next = list1
+#                 list1 = list1.next
+#             else:
+#                 if list1.val < list2.val:
+#                     runner.next = list1
+#                     list1 = list1.next
+#                 else:
+#                     runner.next = list2
+#                     list2 = list2.next
+#             runner = runner.next
+#         return dummyNode.next
 
-#재귀 풀이 
-class Solution:
-    def mergeTwoLists(self, list1, list2):
-        if list1 is None or list2 is None:
-            return list1 or list2
-        if list1.val < list2.val:
-            list1.next = self.mergeTwoLists(list1.next, list2)
-            return list1
-        else:
-            list2.next = self.mergeTwoLists(list1, list2.next)
-            return list2
-# leedCode < 206. Reverse Linked List >
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
+# #재귀 풀이 
+# class Solution:
+#     def mergeTwoLists(self, list1, list2):
+#         if list1 is None or list2 is None:
+#             return list1 or list2
+#         if list1.val < list2.val:
+#             list1.next = self.mergeTwoLists(list1.next, list2)
+#             return list1
+#         else:
+#             list2.next = self.mergeTwoLists(list1, list2.next)
+#             return list2
+# # leedCode < 206. Reverse Linked List >
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 
 
-class Solution:
-    def reverseList(self, head):
-        while self.next != None:
-            self.next.val
-            head = self.next
+# class Solution:
+#     def reverseList(self, head):
+#         while self.next != None:
+#             self.next.val
+#             head = self.next
 
 
 #삼성 SW 커리큘럼 대로 공부 해서 취득해보자!! 
+
+# SW 커리큘럼 < 단순 2진 암호코드 > -> 복습의 개념 으로 
+
+    # N,M=map(int, input().split())
+    # graph=[]
+    # for i in range(N):
+    #     k=list(map,str(input().split()))
+    #     print(k)
+    #     for j in range(M):
+    #         k[j]=int(k[j])
+    #     graph.append(k)
+
+    # print(graph)
+
+# SW 커리큘럼 < 단순 2진 암호코드 > -> 풀이 
+to_num = {
+    '0001101': '0', '0011001': '1', '0010011': '2', '0111101': '3', '0100011': '4',
+    '0110001': '5', '0101111': '6', '0111011': '7', '0110111': '8', '0001011': '9',
+}
+
+for test_case in range(int(input())):
+    answer=0
+    N,M = map(int,input().split())
+    array = [input() for _ in range(M)]
+    for i in range(N-5):
+        temp_str = ''
+        if answer: break
+        for j in range(M-1,-1,-1):
+            if answer: break
+            if M-55 <0 :break
+            if array[i][j]=='0': continue
+            temp_arrray = array[i][j-55: j+1]
+            for z in range(8):
+                temp_num = to_num.get(temp_arrray[z*7:(z+1)*7],-1)
+                if temp_num==-1: break
+                else:
+                    temp_str += temp_num
+                    if len(temp_str) ==8:
+                        #밑에 4개가 자신과 같은지 확인
+                        for k in range(4):
+                            if temp_arrray != array[i+k+1][j-55:j+1]: break
+                        else:
+                            #결과 저장용 임시 변수
+                            check_num = 0
+                            #홀수자리만 더하기(여기서는 0부터 시작해서 짝수)
+                            for k in range(0, 7, 2): check_num += int(temp_str[k])
+                            #값 3배 해주기
+                            check_num *= 3
+                            #짝수 자리만 더하기
+                            for k in range(1, 8, 2):check_num += int(temp_str[k])
+                            # 10 으로 나눠지는지 확인
+                            if not check_num % 10:
+                                for k in range(8):
+                                    answer += int(temp_str[k])
+                                break
+        
+    print('#{} {}'.format(t+1, answer))
