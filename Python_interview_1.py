@@ -603,7 +603,7 @@
 #             runner = runner.next
 #         return dummyNode.next
 
-# #재귀 풀이 
+# #재귀 풀이
 # class Solution:
 #     def mergeTwoLists(self, list1, list2):
 #         if list1 is None or list2 is None:
@@ -628,61 +628,211 @@
 #             head = self.next
 
 
-#삼성 SW 커리큘럼 대로 공부 해서 취득해보자!! 
+# 삼성 SW 커리큘럼 대로 공부 해서 취득해보자!!
 
-# SW 커리큘럼 < 단순 2진 암호코드 > -> 복습의 개념 으로 
+# SW 커리큘럼 < 단순 2진 암호코드 > -> 복습의 개념 으로
 
-    # N,M=map(int, input().split())
-    # graph=[]
-    # for i in range(N):
-    #     k=list(map,str(input().split()))
-    #     print(k)
-    #     for j in range(M):
-    #         k[j]=int(k[j])
-    #     graph.append(k)
+# N,M=map(int, input().split())
+# graph=[]
+# for i in range(N):
+#     k=list(map,str(input().split()))
+#     print(k)
+#     for j in range(M):
+#         k[j]=int(k[j])
+#     graph.append(k)
 
-    # print(graph)
+# print(graph)
 
-# SW 커리큘럼 < 단순 2진 암호코드 > -> 풀이 
-to_num = {
-    '0001101': '0', '0011001': '1', '0010011': '2', '0111101': '3', '0100011': '4',
-    '0110001': '5', '0101111': '6', '0111011': '7', '0110111': '8', '0001011': '9',
-}
+# SW 커리큘럼 < 단순 2진 암호코드 > -> 풀이
+# to_num = {
+#     '0001101': '0', '0011001': '1', '0010011': '2', '0111101': '3', '0100011': '4',
+#     '0110001': '5', '0101111': '6', '0111011': '7', '0110111': '8', '0001011': '9',
+# }
 
-for test_case in range(int(input())):
-    answer=0
-    N,M = map(int,input().split())
-    array = [input() for _ in range(M)]
-    for i in range(N-5):
-        temp_str = ''
-        if answer: break
-        for j in range(M-1,-1,-1):
-            if answer: break
-            if M-55 <0 :break
-            if array[i][j]=='0': continue
-            temp_arrray = array[i][j-55: j+1]
-            for z in range(8):
-                temp_num = to_num.get(temp_arrray[z*7:(z+1)*7],-1)
-                if temp_num==-1: break
-                else:
-                    temp_str += temp_num
-                    if len(temp_str) ==8:
-                        #밑에 4개가 자신과 같은지 확인
-                        for k in range(4):
-                            if temp_arrray != array[i+k+1][j-55:j+1]: break
-                        else:
-                            #결과 저장용 임시 변수
-                            check_num = 0
-                            #홀수자리만 더하기(여기서는 0부터 시작해서 짝수)
-                            for k in range(0, 7, 2): check_num += int(temp_str[k])
-                            #값 3배 해주기
-                            check_num *= 3
-                            #짝수 자리만 더하기
-                            for k in range(1, 8, 2):check_num += int(temp_str[k])
-                            # 10 으로 나눠지는지 확인
-                            if not check_num % 10:
-                                for k in range(8):
-                                    answer += int(temp_str[k])
-                                break
-        
-    print('#{} {}'.format(t+1, answer))
+# for test_case in range(int(input())):
+#     answer = 0
+#     N, M = map(int, input().split())
+#     array = [input() for _ in range(M)]
+#     for i in range(N-5):
+#         temp_str = ''
+#         if answer:
+#             break
+#         for j in range(M-1, -1, -1):
+#             if answer:
+#                 break
+#             if M-55 < 0:
+#                 break
+#             if array[i][j] == '0':
+#                 continue
+#             temp_arrray = array[i][j-55: j+1]
+#             for z in range(8):
+#                 temp_num = to_num.get(temp_arrray[z*7:(z+1)*7], -1)
+#                 if temp_num == -1:
+#                     break
+#                 else:
+#                     temp_str += temp_num
+#                     if len(temp_str) == 8:
+#                         # 밑에 4개가 자신과 같은지 확인
+#                         for k in range(4):
+#                             if temp_arrray != array[i+k+1][j-55:j+1]:
+#                                 break
+#                         else:
+#                             # 결과 저장용 임시 변수
+#                             check_num = 0
+#                             # 홀수자리만 더하기(여기서는 0부터 시작해서 짝수)
+#                             for k in range(0, 7, 2):
+#                                 check_num += int(temp_str[k])
+#                             # 값 3배 해주기
+#                             check_num *= 3
+#                             # 짝수 자리만 더하기
+#                             for k in range(1, 8, 2):
+#                                 check_num += int(temp_str[k])
+#                             # 10 으로 나눠지는지 확인
+#                             if not check_num % 10:
+#                                 for k in range(8):
+#                                     answer += int(temp_str[k])
+#                                 break
+
+#     print('#{} {}'.format(test_case+1, answer))
+
+# leetCode < 21. Merge Two Sorted Lists >
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+
+# class Solution:
+#     def mergeTwoLists(self, l1: ListNode, l2: ListNode):
+#         # l1 = [] l2 =[]
+#         # l1 = []  l2 = [0]
+#         if l1 == None:
+#             return l2
+#         elif l2 == None:
+#             return l1
+
+#         # return 해야 하는 값이 노드 한개 임으로 이를 ans 으로 선언
+#         ans = None
+#         if l1.var <= l2.var:
+#             fromPtr = l1
+#             toPtr = l2
+#             ans = fromPtr
+#         else:
+#             fromPtr = l2
+#             toPtr = l1
+#             ans = fromPtr
+#         # fromPtr 이 None 을 가리킬때 까지 반복을 해야 한다.
+#         while fromPtr != None:
+#             if fromPtr.val <= toPtr.val:
+#                 while fromPtr.next != None and fromPtr.next.val <= toPtr.val:
+#                     fromPtr = fromPtr.next
+#                 temp = fromPtr.next
+#                 fromPtr.next = toPtr
+#                 fromPtr = temp
+#                 pass
+#             else:
+#                 temp = fromPtr
+#                 fromPtr = toPtr
+#                 toPtr = temp
+#         return ans
+
+# #leetCode < 206 Reverse Linked list >
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+# # class Solution:
+# #     def reverseList(self, head):
+# #         #스택을 생성한후 스택에 값을 넣어주면서 후에 나중에 뒤집어줌
+# #         stack = []
+# #         node = head
+# #         while node != None:
+# #             stack.append(node)
+# #             node = node.next
+# #         #dummy 를 생성하여 dummy -> 5 -> 4- > 3 -> None 형태로 리스트 노드 작성
+# #         dummy = ListNode(-1)
+# #         node = dummy
+# #         while stack:
+# #             node.next = stack.pop()
+# #             node = node.next
+# #         node.next = None
+# #         return dummy.next
+
+# # 반복 알고리즘을 이용한 풀이
+# class Solution:
+#     def reverseList(self, head):
+#         prev, curr = None, head
+#         while curr:
+#             temp_next = curr.next
+#             curr.next = prev
+#             prev, curr = curr, temp_next
+#         return prev
+
+# LeetCode < 2. Add Two Numbers >
+# from tkinter.messagebox import NO
+
+
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+
+# class Solution:
+#     def addTwoNumbers(self, l1, l2):
+#         dummy = ListNode()
+#         cur = dummy
+#         carry = 0
+#         while l1 or l2 or carry:
+#             v1 = l1.val if l1 else 0
+#             v2 = l2.val if l2 else 0
+
+#             # new digit
+#             val = v1 + v2 + carry
+#             carry = val // 10
+#             val = val % 10
+#             cur.next = ListNode(val)
+
+#             # updata ptrs
+#             cur = cur.next
+#             l1 = l1.next if l1 else None
+#             l2 = l2.next if l2 else None
+
+#         return dummy.next
+
+# leetCode < 20. valid Parentheses >
+# class Solution:
+#     def isValid(self, s):
+#         stack = []
+#         table = {
+#             ')': '(',
+#             '}': '{',
+#             ']': '[',
+#         }
+#         for i in s:
+#             if i not in table:
+#                 stack.append(i)
+#             elif not stack or table[i] != stack.pop():
+#                 return False
+#         return len(stack) == 0
+
+#leetCode < 316 Remove Duplicate Letters >
+s="bcabc"
+stack=[]
+for i in s:
+    stack.append(i)
+print(stack)
+ans_list = [0]*26
+for i in range(len(stack)):
+    tmp=ord(stack[i])-97
+    ans_list[tmp]+=1
+ans = []
+for j in range(len(ans_list)):
+    if ans_list[j]!=0:
+        tmp = chr(j+97)
+        ans.append(tmp)
+ans.sort()
+print(ans)
+
+result = ''.join(s for s in ans)
+print(result)
