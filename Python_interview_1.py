@@ -817,22 +817,23 @@
 #         return len(stack) == 0
 
 #leetCode < 316 Remove Duplicate Letters >
-s="bcabc"
-stack=[]
-for i in s:
-    stack.append(i)
-print(stack)
-ans_list = [0]*26
-for i in range(len(stack)):
-    tmp=ord(stack[i])-97
-    ans_list[tmp]+=1
-ans = []
-for j in range(len(ans_list)):
-    if ans_list[j]!=0:
-        tmp = chr(j+97)
-        ans.append(tmp)
-ans.sort()
-print(ans)
+# s="bcabc"
+# stack=[]
+# for i in s:
+#     stack.append(i)
+# ans_list = [0]*26
+# for i in range(len(stack)):
+#     tmp=ord(stack[i])-97
+#     ans_list[tmp]+=1
+# ans = []
+# for j in range(len(ans_list)):
+#     if ans_list[j]!=0:
+#         tmp = chr(j+97)
+#         ans.append(tmp)
+# ans.sort()
 
-result = ''.join(s for s in ans)
-print(result)
+# result = ''.join(s for s in ans)
+# print(result)
+
+#leetCode < 316. Remove Duplicate letters >
+print("hello world")

@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../Web_study"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Web_study"
+	}
+}
