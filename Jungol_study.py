@@ -82,18 +82,109 @@
 # print(ord("A"))
 # print(ord("P"))
 # print(chr(89))
-N=int(input())
-tmp=65+(N**2)-1
-if tmp>90:
-    Start_str=((tmp-91)%26)+65
-else:
-    Start_str=tmp
-for i in range(Start_str,Start_str-N,-1):
-    cnt = 0
-    while cnt < N:
-        k=i-(N*cnt)
-        while k < 65:
-            k+=26
-        print(chr(k), end=" ")
+# N=int(input())
+# tmp=65+(N**2)-1
+# if tmp>90:
+#     Start_str=((tmp-91)%26)+65
+# else:
+#     Start_str=tmp
+# for i in range(Start_str,Start_str-N,-1):
+#     cnt = 0
+#     while cnt < N:
+#         k=i-(N*cnt)
+#         while k < 65:
+#             k+=26
+#         print(chr(k), end=" ")
+#         cnt+=1
+#     print()
+
+# JUNGOL <문자 사각형 2>
+# N = int(input())
+# arr = [[0]*N for i in range(N)]
+# cnt = 65
+# for j in range(N):
+#     if j % 2 == 0:
+#         for i in range(N):
+#             if cnt > 90:
+#                 cnt = ((cnt-91) % 26 + 65)
+#             arr[i][j] = chr(cnt)
+#             cnt += 1
+#     else:
+#         for i in range(N-1, -1, -1):
+#             if cnt > 90:
+#                 cnt = ((cnt-91) % 26 + 65)
+#             arr[i][j] = chr(cnt)
+#             cnt += 1
+
+# for i in range(N):
+#     for j in range(N):
+#         print(arr[i][j], end=" ")
+#     print()
+
+# JUNGOL <문자 삼각형1> -> 문제를 꼼꼼하게 읽자!
+# N = int(input())
+# arr = [[0]*N for i in range(N)]
+# cnt = 65
+# for i in range(N):
+#     for j in range(N-i-1, N):
+#         if cnt > 90:
+#             cnt = (cnt-91) % 26+65
+#         arr[i][j] = chr(cnt)
+#         cnt += 1
+# for i in range(N):
+#     for j in range(N):
+#         if arr[i][j] == 0:
+#             print(" ", end=" ")
+#         else:
+#             print(arr[i][j], end=" ")
+#     print()
+
+# JUNGOL < 문자 삼각형 1 >
+
+# N=int(input())
+# for i in range(N):
+#     v=i
+#     w=N
+#     for j in range(N):
+#         if i+j+1>=N:
+#             print(chr(v%26+25), end = ' ')
+#             w-=1
+#             v+=w
+#         else:
+#             print(' ', end=' ')
+#     print()
+# n=int(input())
+# for i in range(n):
+#     v=i
+#     w=n
+#     for j in range(n):
+#         if i+j+1>=n:
+#             print(chr(v%26+65), end=' ')
+#             w-=1; v+=w
+#         else:
+#             print(' ', end=' ')
+#     print()
+
+while True:
+    N = int(input())
+    if 1 <= N <= 100 and N%2!=0:
+        break
+    else:
+        print("INPUT ERROR")
+        continue
+arr = [[0]*N for i in range(N)]
+tmp= (N-1)//2
+cnt=65
+for j in range(tmp,-1,-1):
+    for i in range(j,N-j):
+        if cnt>90:
+            cnt = (cnt-91)%26 +65
+        arr[i][j]=chr(cnt)
         cnt+=1
+for i in range(N):
+    for j in range(N):
+        if arr[i][j]==0:
+            print(" ", end=" ")
+        else:
+            print(arr[i][j], end=" ")
     print()
