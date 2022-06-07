@@ -165,26 +165,63 @@
 #             print(' ', end=' ')
 #     print()
 
-while True:
-    N = int(input())
-    if 1 <= N <= 100 and N%2!=0:
-        break
+# while True:
+#     N = int(input())
+#     if 1 <= N <= 100 and N%2!=0:
+#         break
+#     else:
+#         print("INPUT ERROR")
+#         continue
+# arr = [[0]*N for i in range(N)]
+# tmp= (N-1)//2
+# cnt=65
+# for j in range(tmp,-1,-1):
+#     for i in range(j,N-j):
+#         if cnt>90:
+#             cnt = (cnt-91)%26 +65
+#         arr[i][j]=chr(cnt)
+#         cnt+=1
+# for i in range(N):
+#     for j in range(N):
+#         if arr[i][j]==0:
+#             print(" ", end=" ")
+#         else:
+#             print(arr[i][j], end=" ")
+#     print()
+
+# < 별 삼각형 1 >
+def tri_1(N):
+    for i in range(1,N+1):
+        for j in range(i):
+            print("*", end ="")
+        print()
+
+def tri_2(N):
+    for i in range(N,0,-1):
+        for j in range(i):
+            print("*", end ="")
+        print()
+
+def tri_3(N):
+    for i in range(1,N+1):
+        for j in range(N-i):
+            print(" ", end = "")
+        for k in range(1,2*i):
+            print("*", end ="")
+        print()
+
+
+N,M=map(int,input().split())
+arr=[1,2,3]
+if 1<=N<=100 and (M in arr):
+    if M==1:
+        tri_1(N)
+    elif M==2:
+        tri_2(N)
     else:
-        print("INPUT ERROR")
-        continue
-arr = [[0]*N for i in range(N)]
-tmp= (N-1)//2
-cnt=65
-for j in range(tmp,-1,-1):
-    for i in range(j,N-j):
-        if cnt>90:
-            cnt = (cnt-91)%26 +65
-        arr[i][j]=chr(cnt)
-        cnt+=1
-for i in range(N):
-    for j in range(N):
-        if arr[i][j]==0:
-            print(" ", end=" ")
-        else:
-            print(arr[i][j], end=" ")
-    print()
+        tri_3(N)
+else:
+    print("INPUT ERROR!")
+        
+
+
