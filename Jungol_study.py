@@ -190,38 +190,132 @@
 #     print()
 
 # < 별 삼각형 1 >
-def tri_1(N):
-    for i in range(1,N+1):
-        for j in range(i):
-            print("*", end ="")
-        print()
+# def tri_1(N):
+#     for i in range(1,N+1):
+#         for j in range(i):
+#             print("*", end ="")
+#         print()
 
-def tri_2(N):
-    for i in range(N,0,-1):
-        for j in range(i):
-            print("*", end ="")
-        print()
+# def tri_2(N):
+#     for i in range(N,0,-1):
+#         for j in range(i):
+#             print("*", end ="")
+#         print()
 
-def tri_3(N):
-    for i in range(1,N+1):
-        for j in range(N-i):
-            print(" ", end = "")
-        for k in range(1,2*i):
-            print("*", end ="")
-        print()
+# def tri_3(N):
+#     for i in range(1,N+1):
+#         for j in range(N-i):
+#             print(" ", end = "")
+#         for k in range(1,2*i):
+#             print("*", end ="")
+#         print()
 
 
-N,M=map(int,input().split())
-arr=[1,2,3]
-if 1<=N<=100 and (M in arr):
-    if M==1:
-        tri_1(N)
-    elif M==2:
-        tri_2(N)
-    else:
-        tri_3(N)
+# N,M=map(int,input().split())
+# arr=[1,2,3]
+# if 1<=N<=100 and (M in arr):
+#     if M==1:
+#         tri_1(N)
+#     elif M==2:
+#         tri_2(N)
+#     else:
+#         tri_3(N)
+# else:
+#     print("INPUT ERROR!")
+
+# < 별 삼각형 2>
+#    def tri_1(N):
+#         tmp = (N+1)//2
+#         for i in range(1, tmp):
+#             for j in range(i):
+#                 print("*", end="")
+#             print()
+#         for i in range(tmp):
+#             print("*", end="")
+#         print()
+#         for i in range(tmp-1, 0, -1):
+#             for j in range(i):
+#                 print("*", end="")
+#             print()
+
+#     def tri_2(N):
+#         tmp = (N+1)//2
+#         arr = [[0]*tmp for i in range(N)]
+#         for i in range(tmp):
+#             for j in range(tmp-i-1, tmp+i):
+#                 arr[j][i] = "*"
+#         for i in range(N):
+#             for j in range(tmp):
+#                 if (arr[i][j] ==0):
+#                     print(" ", end="")
+#                 else:
+#                     print(arr[i][j], end="")
+#             print()
+
+#     def tri_3(N):
+#         arr = [[0]*N for i in range(N)]
+#         tmp = (N-1)//2
+#         for i in range(tmp+1):
+#             for j in range(i, N-i):
+#                 arr[i][j] = "*"
+#         for i in range(tmp+1, N):
+#             for j in range((N-i)-1, i+1):
+#                 arr[i][j] = "*"
+#         for i in range(N):
+#             for j in range(N):
+#                 if (arr[i][j] ==0):
+#                     print(" ", end="")
+#                 else:
+#                     print(arr[i][j], end="")
+#             print()
+
+#     def tri_4(N):
+#         arr = [[0]*N for i in range(N)]
+#         tmp = (N+1)//2
+#         for i in range(tmp):
+#             for j in range(i, tmp):
+#                 arr[i][j] = "*"
+#         for i in range(tmp, N):
+#             for j in range(tmp-1, i+1):
+#                 arr[i][j] = "*"
+#         for i in range(N):
+#             for j in range(N):
+#                 if (arr[i][j] ==0):
+#                     print(" ", end="")
+#                 else:
+#                     print(arr[i][j], end="")
+#             print()
+#     N,M = map(int, input().split())
+#     if (N%2) == 0 or N >100 or M<1 or M>4:
+#         print("INPUT ERROR!")
+#     else:
+#         if M ==1:
+#             tri_1(N)
+#         elif M ==2:
+#             tri_2(N)
+#         elif M ==3:
+#             tri_3(N)
+#         else:
+#             tri_4(N)
+
+# <별 삼각형 3>
+N=int(input())
+if (N%2)==0 or N>100:
+    print("INOUT ERROR!")
 else:
-    print("INPUT ERROR!")
-        
-
-
+    tmp=(N-1)//2
+    arr=[[0]*(tmp+N) for i in range(N)]
+    for i in range(tmp+1):
+        for j in range(i,(i)*2+i+1):
+            arr[i][j]="*"
+    for i in range(tmp+1,N):
+        for j in range(N-i-1,(N-i-1)*2+(N-i-1)+1):
+            arr[i][j]="*"
+    print(arr)
+    for i in range(N):
+        for j in range(tmp+N):
+            if (arr[i][j] ==0):
+                print(" ", end="")
+            else:
+                print(arr[i][j], end="")
+        print()
