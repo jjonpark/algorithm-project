@@ -299,23 +299,62 @@
 #             tri_4(N)
 
 # <별 삼각형 3>
+# N = int(input())
+# if (N % 2) == 0 or N > 100:
+#     print("INPUT ERROR!")
+# else:
+#     tmp = (N-1)//2
+#     arr = [[0]*(tmp+N) for i in range(N)]
+#     for i in range(tmp+1):
+#         for j in range(i, (i)*2+i+1):
+#             arr[i][j] = "*"
+#     for i in range(tmp+1, N):
+#         for j in range(N-i-1, (N-i-1)*2+(N-i-1)+1):
+#             arr[i][j] = "*"
+#     for i in range(N):
+#         for j in range(tmp+N):
+#             if (arr[i][j] == 0):
+#                 print(" ", end="")
+#             else:
+#                 print(arr[i][j], end="")
+#         print()
+
+# < 달팽이 삼각형 >
+from collections import deque
+dx=[1,0,-1]
+dy=[1,-1,0]
 N=int(input())
-if (N%2)==0 or N>100:
-    print("INOUT ERROR!")
-else:
-    tmp=(N-1)//2
-    arr=[[0]*(tmp+N) for i in range(N)]
-    for i in range(tmp+1):
-        for j in range(i,(i)*2+i+1):
-            arr[i][j]="*"
-    for i in range(tmp+1,N):
-        for j in range(N-i-1,(N-i-1)*2+(N-i-1)+1):
-            arr[i][j]="*"
-    print(arr)
-    for i in range(N):
-        for j in range(tmp+N):
-            if (arr[i][j] ==0):
-                print(" ", end="")
-            else:
-                print(arr[i][j], end="")
-        print()
+arr = [[-1]*N for i in range(N)]
+queue= deque()
+queue.append((0,0))
+tmp=0
+cnt=0
+while queue:
+    x,y= queue.pop()
+    arr[x][y]=cnt
+    nx=x+dx[tmp]
+    ny=y+dy[tmp]
+    if 0<=nx<N and 0<=ny<=N and arr[nx][ny]==-1:
+        queue.append((nx,ny))
+        cnt+=1
+        if(cnt>9):
+            cnt-=10
+    else:
+        tmp+=1
+        if tmp>2:
+            tmp-=3
+        nx=x+dx[tmp]
+        ny=y+dy[tmp]
+        if 0<=nx<N and 0<=ny<=N and arr[nx][ny]==-1:
+            queue.append((nx,ny))
+            cnt+=1
+            if(cnt>9):
+                cnt-=10
+for i in range(N):
+    for j in range(N):
+        if arr[i][j]==-1:
+            print("", end=" ")
+        else:
+            print(arr[i][j], end= " ")
+    print()
+    
