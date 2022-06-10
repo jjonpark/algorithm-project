@@ -320,41 +320,86 @@
 #         print()
 
 # < 달팽이 삼각형 >
-from collections import deque
-dx=[1,0,-1]
-dy=[1,-1,0]
-N=int(input())
-arr = [[-1]*N for i in range(N)]
-queue= deque()
-queue.append((0,0))
-tmp=0
-cnt=0
-while queue:
-    x,y= queue.pop()
-    arr[x][y]=cnt
-    nx=x+dx[tmp]
-    ny=y+dy[tmp]
-    if 0<=nx<N and 0<=ny<=N and arr[nx][ny]==-1:
-        queue.append((nx,ny))
-        cnt+=1
-        if(cnt>9):
-            cnt-=10
-    else:
-        tmp+=1
-        if tmp>2:
-            tmp-=3
-        nx=x+dx[tmp]
-        ny=y+dy[tmp]
-        if 0<=nx<N and 0<=ny<=N and arr[nx][ny]==-1:
-            queue.append((nx,ny))
-            cnt+=1
-            if(cnt>9):
-                cnt-=10
-for i in range(N):
-    for j in range(N):
-        if arr[i][j]==-1:
-            print("", end=" ")
-        else:
-            print(arr[i][j], end= " ")
-    print()
-    
+# from collections import deque
+# dx = [1, 0, -1]
+# dy = [1, -1, 0]
+# N = int(input())
+# arr = [[-1]*N for i in range(N)]
+# queue = deque()
+# queue.append((0, 0))
+# tmp = 0
+# cnt = 0
+# while queue:
+#     x, y = queue.pop()
+#     arr[x][y] = cnt
+#     nx = x+dx[tmp]
+#     ny = y+dy[tmp]
+#     if 0 <= nx < N and 0 <= ny <= N and arr[nx][ny] == -1:
+#         queue.append((nx, ny))
+#         cnt += 1
+#         if(cnt > 9):
+#             cnt -= 10
+#     else:
+#         tmp += 1
+#         if tmp > 2:
+#             tmp -= 3
+#         nx = x+dx[tmp]
+#         ny = y+dy[tmp]
+#         if 0 <= nx < N and 0 <= ny <= N and arr[nx][ny] == -1:
+#             queue.append((nx, ny))
+#             cnt += 1
+#             if(cnt > 9):
+#                 cnt -= 10
+# for i in range(N):
+#     for j in range(N):
+#         if arr[i][j] == -1:
+#             print("", end=" ")
+#         else:
+#             print(arr[i][j], end=" ")
+#     print()
+
+# < 약수 >
+# import math
+# N = int(input())
+# N_sqr = math.sqrt(N)
+# N_sqr = int(N_sqr)
+# arr = []
+# for i in range(1, N_sqr+1):
+#     if N % i == 0:
+#         if i not in arr:
+#             arr.append(i)
+#         k = N//i
+#         if k not in arr:
+#             arr.append(k)
+# arr.sort()
+# for i in range(len(arr)):
+#     print(arr[i], end=" ")
+
+# < 약수와 배수 >
+import math
+n = int(input())
+arr = list(map(int, input().split()))
+m = int(input())
+arr.sort()
+k = arr[-1]
+tmp2 = k//m
+m_sqr = math.sqrt(m)
+m_sqr = int(m_sqr)
+arr_1 = []
+for i in range(1, m_sqr+1):
+    if m % i == 0:
+        if i not in arr_1:
+            arr_1.append(i)
+        q = m//i
+        if q not in arr_1:
+            arr_1.append(q)
+ans_1 = 0
+ans_2 = 0
+for i in arr:
+    if i in arr_1:
+        ans_1 += i
+for i in range(n):
+    if (arr[i] % m) == 0 and (arr[i]//m) >= 1:
+        ans_2 += arr[i]
+print(ans_1)
+print(ans_2)
