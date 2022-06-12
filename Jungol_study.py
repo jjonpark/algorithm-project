@@ -376,30 +376,121 @@
 #     print(arr[i], end=" ")
 
 # < 약수와 배수 >
-import math
-n = int(input())
-arr = list(map(int, input().split()))
-m = int(input())
-arr.sort()
-k = arr[-1]
-tmp2 = k//m
-m_sqr = math.sqrt(m)
-m_sqr = int(m_sqr)
-arr_1 = []
-for i in range(1, m_sqr+1):
-    if m % i == 0:
-        if i not in arr_1:
-            arr_1.append(i)
-        q = m//i
-        if q not in arr_1:
-            arr_1.append(q)
-ans_1 = 0
-ans_2 = 0
-for i in arr:
-    if i in arr_1:
-        ans_1 += i
-for i in range(n):
-    if (arr[i] % m) == 0 and (arr[i]//m) >= 1:
-        ans_2 += arr[i]
-print(ans_1)
-print(ans_2)
+# import math
+# n = int(input())
+# arr = list(map(int, input().split()))
+# m = int(input())
+# arr.sort()
+# k = arr[-1]
+# tmp2 = k//m
+# m_sqr = math.sqrt(m)
+# m_sqr = int(m_sqr)
+# arr_1 = []
+# for i in range(1, m_sqr+1):
+#     if m % i == 0:
+#         if i not in arr_1:
+#             arr_1.append(i)
+#         q = m//i
+#         if q not in arr_1:
+#             arr_1.append(q)
+# ans_1 = 0
+# ans_2 = 0
+# for i in arr:
+#     if i in arr_1:
+#         ans_1 += i
+# for i in range(n):
+#     if (arr[i] % m) == 0 and (arr[i]//m) >= 1:
+#         ans_2 += arr[i]
+# print(ans_1)
+# print(ans_2)
+
+
+# < 약수 구하기 >
+# import math
+# N, K = map(int, input().split())
+# N_sqr = int(math.sqrt(N))
+# arr = []
+# for i in range(1, N_sqr+1):
+#     if N % i == 0:
+#         if i not in arr:
+#             arr.append(i)
+#         if (N//i) not in arr:
+#             arr.append(N//i)
+# arr.sort()
+# if len(arr) < K:
+#     print(0)
+# else:
+#     print(arr[K-1])
+
+# < 최대공약수 와 최소공배수 >
+# import math
+# N, M = map(int, input().split())
+# N_sqr = int(math.sqrt(N))
+# arr_1 = []
+# for i in range(1, N_sqr+1):
+#     if N % i == 0:
+#         if i not in arr_1:
+#             arr_1.append(i)
+#         if (N//i) not in arr_1:
+#             arr_1.append(N//i)
+# arr_1.sort()
+
+# M_sqr = int(math.sqrt(M))
+# arr_2 = []
+# for i in range(1, M_sqr+1):
+#     if M % i == 0:
+#         if i not in arr_2:
+#             arr_2.append(i)
+#         if (M//i) not in arr_2:
+#             arr_2.append(M//i)
+# arr_2.sort()
+# ans_1 = 0
+# for i in range(len(arr_1)-1, -1, -1):
+#     if arr_1[i] in arr_2:
+#         ans_1 = arr_1[i]
+#         break
+# ans_2 = (N*M)//ans_1
+# print(ans_1)
+# print(ans_2)
+
+# < 최대공약수, 최소 공배수 >
+# import copy
+# N = int(input())
+# arr = list(map(int, input().split()))
+# arr_2 = copy.deepcopy(arr)
+
+
+# def GCD(a, b):
+#     while b != 0:
+#         r = a % b
+#         a = b
+#         b = r
+#     return a
+
+
+# tmp = arr.pop()
+# while arr:
+#     a_1 = arr.pop()
+#     tmp = GCD(tmp, a_1)
+# ans_2 = 1
+# while len(arr_2) != 1:
+#     b_1 = arr_2.pop()
+#     b_2 = arr_2.pop()
+#     ans_2 = (b_1*b_2)//(GCD(b_1, b_2))
+#     arr_2.append(ans_2)
+# print(f"{tmp} {ans_2}")
+
+# < 23. 각 자리수의 역과 합 >
+
+while True:
+    N = list(input())
+    ans = 0
+    for i in range(len(N)):
+        N[i] = int(N[i])
+        ans += N[i]
+    if len(N) == 1 and N[0] == 0:
+        break
+    N.reverse()
+    for i in range(len(N)):
+        print(N[i], end="")
+    print(f" {ans}")
