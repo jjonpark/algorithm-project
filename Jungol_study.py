@@ -482,15 +482,161 @@
 
 # < 23. 각 자리수의 역과 합 >
 
-while True:
-    N = list(input())
-    ans = 0
-    for i in range(len(N)):
-        N[i] = int(N[i])
-        ans += N[i]
-    if len(N) == 1 and N[0] == 0:
-        break
-    N.reverse()
-    for i in range(len(N)):
-        print(N[i], end="")
-    print(f" {ans}")
+# while True:
+#     N = list(input())
+#     ans = 0
+#     for i in range(len(N)):
+#         N[i] = int(N[i])
+#         ans += N[i]
+#     if len(N) == 1 and N[0] == 0:
+#         break
+#     N.reverse()
+#     for i in range(len(N)):
+#         print(N[i], end="")
+#     print(f" {ans}")
+
+# < 24. 소수와 합성수 >
+# import math
+# arr = list(map(int, input().split()))
+
+
+# def return_ans(A):
+#     A_sqr = int(math.sqrt(A))
+#     arr_1 = []
+#     for i in range(1, A_sqr+1):
+#         if A % i == 0:
+#             if i not in arr_1:
+#                 arr_1.append(i)
+#             if A//i not in arr_1:
+#                 arr_1.append(A//i)
+#     if len(arr_1) == 2:
+#         return 1
+#     else:
+#         return 0
+
+
+# for i in arr:
+#     if i == 1:
+#         print("number one")
+#     elif return_ans(i):
+#         print("prime number")
+#     else:
+#         print("composite number")
+
+# <25. 소수 >
+# import math
+# M = int(input())
+# N = int(input())
+
+
+# def return_ans(A):
+#     A_sqr = int(math.sqrt(A))
+#     arr_1 = []
+#     for i in range(1, A_sqr+1):
+#         if A % i == 0:
+#             if i not in arr_1:
+#                 arr_1.append(i)
+#             if A//i not in arr_1:
+#                 arr_1.append(A//i)
+#     if len(arr_1) == 2:
+#         return 1
+#     else:
+#         return 0
+
+
+# tmp = N
+# if M == 1:
+#     M += 1
+# ans = 0
+# for i in range(M, N+1):
+#     if return_ans(i):
+#         if tmp >= i:
+#             tmp = i
+#         ans += i
+# if ans == 0:
+#     print("-1")
+# else:
+#     print(ans)
+#     print(tmp)
+
+# <26. 소수 구하기>
+# import math
+
+
+# def return_ans(A):
+#     A_sqr = int(math.sqrt(A))
+#     arr_1 = []
+#     for i in range(1, A_sqr+1):
+#         if A % i == 0:
+#             if i not in arr_1:
+#                 arr_1.append(i)
+#             if A//i not in arr_1:
+#                 arr_1.append(A//i)
+#     if len(arr_1) == 2:
+#         return 1
+#     else:
+#         return 0
+
+
+# N = int(input())
+# for i in range(1, N+1):
+#     M = int(input())
+#     ans_1 = M
+#     ans_2 = M
+#     while ans_1 < 1000000:
+#         if return_ans(ans_1):
+#             break
+#         ans_1 += 1
+#     while ans_2 > 0:
+#         if return_ans(ans_2):
+#             break
+#         ans_2 -= 1
+#     if ans_1 == 1000000:
+#         plus_cnt = 1000000
+#     else:
+#         plus_cnt = ans_1-M
+#     if ans_2 == 0:
+#         minus_cnt = 1000000
+#     else:
+#         minus_cnt = M-ans_2
+
+#     if plus_cnt == minus_cnt and plus_cnt!=0:
+#         print(f"{ans_2} {ans_1}")
+#     elif plus_cnt == minus_cnt:
+#         print(ans_1)
+#     elif plus_cnt < minus_cnt:
+#         print(ans_1)
+#     else:
+#         print(ans_2)
+
+# <27. 소수의 개수>
+# import math
+
+
+# def return_ans(A):
+#     if A == 1:
+#         return 0
+#     A_sqr = int(math.sqrt(A))
+#     arr_1 = []
+#     for i in range(2, A_sqr+1):
+#         if A % i == 0:
+#             return 0
+#     return 1
+
+
+# M, N = map(int,input().split())
+# ans = 0
+# for i in range(M, N+1):
+#     if return_ans(i):
+#         ans += 1
+# print(ans)
+
+# <28. 이진수>
+number_list = list(input())
+for i in range(len(number_list)):
+    number_list[i] = int(number_list[i])
+cnt = len(number_list)
+ans = 0
+for i in range(len(number_list)):
+    ans += (number_list[i]*2**(cnt-i-1))
+print(ans)
