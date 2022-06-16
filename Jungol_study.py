@@ -632,11 +632,110 @@
 # print(ans)
 
 # <28. 이진수>
-number_list = list(input())
-for i in range(len(number_list)):
-    number_list[i] = int(number_list[i])
-cnt = len(number_list)
-ans = 0
-for i in range(len(number_list)):
-    ans += (number_list[i]*2**(cnt-i-1))
-print(ans)
+# number_list = list(input())
+# for i in range(len(number_list)):
+#     number_list[i] = int(number_list[i])
+# cnt = len(number_list)
+# ans = 0
+# for i in range(len(number_list)):
+#     ans += (number_list[i]*2**(cnt-i-1))
+# print(ans)
+
+# <29. 10진수를 2,8,16 진수로>
+
+# def return_arr(N, B):
+#     tmp = N
+#     arr = []
+#     while tmp != 0:
+#         k = tmp % B
+#         if k == 10:
+#             k = "A"
+#         elif k == 11:
+#             k = "B"
+#         elif k == 12:
+#             k = "C"
+#         elif k == 13:
+#             k = "D"
+#         elif k == 14:
+#             k = "E"
+#         elif k == 15:
+#             k = "F"
+#         arr.append(k)
+#         tmp = tmp//B
+#     arr.reverse()
+#     return arr
+
+
+# N, B = map(int, input().split())
+# ans = return_arr(N, B)
+# for i in range(len(ans)):
+#     print(ans[i], end="")
+
+# <31. 문자열 찾기>
+
+# arr = list(input())
+
+# ans_1 = 0
+# ans_2 = 0
+# for i in range(0, len(arr)-1):
+#     if arr[i] == "K" and arr[i+1] == "O" and arr[i+2] == "I":
+#         ans_1 += 1
+#     if arr[i] == "I" and arr[i+1] == "O" and arr[i+2] == "I":
+#         ans_2 += 1
+# print(ans_1)
+# print(ans_2)
+
+# <32. 암호풀기 >
+
+# print(ord("a"))
+# print(ord("z"))
+# print(ord("A"))
+# print(ord("Z"))
+# print(ord(" "))
+# arr_list = list(input())
+# arr_2_list = []
+# for i in range(len(arr_list)):
+#     k = chr(ord(arr_list[i])-32)
+#     arr_2_list.append(k)
+# ans_list = list(input())
+# rans_list = []
+# for i in range(len(ans_list)):
+#     tmp1 = ord(ans_list[i])
+#     if 97 <= tmp1 <= 122:
+#         rans_list.append(arr_list[tmp1-97])
+#     elif tmp1 == 32:
+#         rans_list.append(" ")
+#     elif 65 <= tmp1 <= 90:
+#         rans_list.append(arr_2_list[tmp1-65])
+# for i in range(len(rans_list)):
+#     print(rans_list[i], end="")
+
+# <33. 단어집합2>
+# ans_arr = []
+# while True:
+#     arr = list(input().split())
+#     if arr[0] == "END":
+#         break
+#     for i in arr:
+#         if i not in ans_arr:
+#             ans_arr.append(i)
+#     for j in ans_arr:
+#         print(j, end=" ")
+#     print()
+
+# <34. 단어 세기>
+while True:
+    arr = list(input().split())
+    ans = []
+    if arr[0] == "END":
+        break
+    for i in arr:
+        if i not in ans:
+            ans.append(i)
+    ans.sort()
+    for i in range(len(ans)):
+        tmp = 0
+        for j in range(len(arr)):
+            if ans[i] == arr[j]:
+                tmp += 1
+        print(f"{ans[i]} : {tmp}")
