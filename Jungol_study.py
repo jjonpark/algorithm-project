@@ -724,18 +724,76 @@
 #     print()
 
 # <34. 단어 세기>
-while True:
-    arr = list(input().split())
-    ans = []
-    if arr[0] == "END":
-        break
-    for i in arr:
-        if i not in ans:
-            ans.append(i)
-    ans.sort()
-    for i in range(len(ans)):
-        tmp = 0
-        for j in range(len(arr)):
-            if ans[i] == arr[j]:
-                tmp += 1
-        print(f"{ans[i]} : {tmp}")
+# while True:
+#     arr = list(input().split())
+#     ans = []
+#     if arr[0] == "END":
+#         break
+#     for i in arr:
+#         if i not in ans:
+#             ans.append(i)
+#     ans.sort()
+#     for i in range(len(ans)):
+#         tmp = 0
+#         for j in range(len(arr)):
+#             if ans[i] == arr[j]:
+#                 tmp += 1
+#         print(f"{ans[i]} : {tmp}")
+
+
+# < 35. 변장 >
+# T = int(input())
+# for test_case in range(1, T+1):
+#     N = int(input())
+#     arr = {}
+#     list_a = []
+#     for i in range(N):
+#         wear = list(input().split())
+#         if wear[1] in arr:
+#             arr[wear[1]] += 1
+#         else:
+#             arr[wear[1]] = 1
+#         if wear[1] not in list_a:
+#             list_a.append(wear[1])
+#     ans = 1
+#     for i in list_a:
+#         ans *= ((arr[i])+1)
+#     print(ans-1)
+
+# < 36. 색종이 > -> 겹치는거 생각해서 풀면 답이 없다
+# N = int(input())
+# arr = []
+# for i in range(N):
+#     k_1, k_2 = map(int, input().split())
+#     arr.append([k_1, k_2])
+
+# minus_ans = 0
+# for i in range(len(arr)-1):
+#     for j in range(i+1, len(arr)):
+#         tmp_x = 0
+#         tmp_y = 0
+#         tmp_1 = abs(arr[i][0]-arr[j][0])
+#         tmp_2 = abs(arr[i][1]-arr[j][1])
+#         if tmp_1 < 10 and tmp_2 < 10:
+#             tmp_x = (min(arr[i][0], arr[j][0])+10)-(max(arr[i][0], arr[j][0]))
+#             tmp_y = (min(arr[i][1], arr[j][1])+10)-(max(arr[i][1], arr[j][1]))
+#             minus_ans += (tmp_x*tmp_y)
+
+# ans = (100*N)-(minus_ans)
+# print(ans)
+
+
+#< 36. 색종이 > 풀이 참고 
+arr=[[0]*100 for i in range(100)]
+N=int(input())
+for i in range(N):
+    x,y=map(int,input().split())
+    for k in range(y,y+10):
+        for j in range(x,x+10):
+            arr[k][j]=1
+ans=0
+for i in range(100):
+    for j in range(100):
+        if arr[i][j]==1:
+            ans+=1
+print(ans)
