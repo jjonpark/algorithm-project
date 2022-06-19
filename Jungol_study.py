@@ -783,17 +783,248 @@
 # print(ans)
 
 
-#< 36. 색종이 > 풀이 참고 
-arr=[[0]*100 for i in range(100)]
-N=int(input())
-for i in range(N):
-    x,y=map(int,input().split())
-    for k in range(y,y+10):
-        for j in range(x,x+10):
-            arr[k][j]=1
-ans=0
-for i in range(100):
-    for j in range(100):
-        if arr[i][j]==1:
-            ans+=1
-print(ans)
+# < 36. 색종이 > 풀이 참고
+# arr = [[0]*100 for i in range(100)]
+# N = int(input())
+# for i in range(N):
+#     x, y = map(int, input().split())
+#     for k in range(y, y+10):
+#         for j in range(x, x+10):
+#             arr[k][j] = 1
+# ans = 0
+# for i in range(100):
+#     for j in range(100):
+#         if arr[i][j] == 1:
+#             ans += 1
+# print(ans)
+
+# < 37. 색종이(중) >
+
+# arr = [[0]*100 for i in range(100)]
+# N = int(input())
+# for i in range(N):
+#     x, y = map(int, input().split())
+#     for k in range(y, y+10):
+#         for j in range(x, x+10):
+#             arr[k][j] = 1
+
+# for i in range(100):
+#     for j in range(100):
+#         print(arr[i][j],end="")
+#     print()
+# ans = 0
+# for i in range(1, 99):
+#     for j in range(1, 99):
+#         if arr[i][j] == 1 :
+#             if arr[i][j+1]==0 or arr[i][j-1]==0 or arr[i+1][j]==0 or arr[i-1][j]==0:
+#                 ans += 1
+# for i in range(100):
+#     if arr[i][0] == 1:
+#         ans += 1
+#     if arr[i][99] == 1:
+#         ans += 1
+# for j in range(100):
+#     if arr[0][j] == 1:
+#         ans += 1
+#     if arr[99][j] == 1:
+#         ans += 1
+
+# print(ans)
+
+
+# <37. 색종이 중>
+
+# n = int(input())
+
+# MAP = [[False for _ in range(101)] for _ in range(101)]
+
+# for _ in range(n):
+#     st_j, st_i = map(int, input().split())
+
+#     for i in range(st_i, st_i + 10):
+#         for j in range(st_j, st_j + 10):
+#             MAP[i][j] = True
+
+# total = 0
+# for j in range(1, 101):
+#     for i in range(1, 101):
+#         if MAP[i][j] != MAP[i - 1][j]:
+#             total += 1
+
+# for i in range(1, 101):
+#     for j in range(1, 101):
+#         if MAP[i][j] != MAP[i][j - 1]:
+#             total += 1
+
+# print(total)
+
+# <38. 떡 먹는 호랑이 >
+# arr = [1, 1]
+# for i in range(2, 31):
+#     arr.append(arr[i-1]+arr[i-2])
+
+# D, K = map(int, input().split())
+# b = D-2
+# a = D-3
+# x = 1
+# tmp = K
+# a = arr[a]
+# b = arr[b]
+# while tmp != 0:
+#     x += 1
+#     tmp = K-(x*a)
+#     tmp = (tmp % b)
+# print(x)
+# print((K-x*a)//b)
+
+# <41. 오목 >
+# arr = []
+# arr.append([0]*20)
+# for i in range(19):
+#     k = [0]
+#     tmp=list(map(int, input().split()))
+#     tmp.append(0)
+#     k.append(tmp)
+#     arr.append(k)
+# arr.append([0]*20)
+
+
+# def omok(r, c):
+#     cnt = 0
+#     for i in range(c, 20):
+#         if arr[r][i] != arr[r][c]:
+#             break
+#         cnt += 1
+#     if cnt == 5 and (arr[r][c-1] != arr[r][c]):
+#         return 1
+#     cnt = 0
+#     for i in range(r, 20):
+#         if arr[i][c] != arr[r][c]:
+#             break
+#         cnt += 1
+#     if cnt == 5 and (arr[r-1][c] != arr[r][c]):
+#         return 1
+#     cnt = 0
+#     for i in range(r, 20):
+#         for j in range(c, 20):
+#             if arr[i][j] != arr[r][c]:
+#                 break
+#             cnt += 1
+#     if cnt == 5 and (arr[r-1][c-1] != arr[r][c]):
+#         return 1
+#     cnt = 0
+#     for i in range(r, -1, -1):
+#         for j in range(c, 20):
+#             if arr[i][j] != arr[r][c]:
+#                 break
+#             cnt == 1
+#     if cnt == 5 and arr[r+1][c-1] != arr[r][c]:
+#         return 1
+#     return 0
+
+
+# tmp = 0
+# for i in range(1,20):
+#     for j in range(1,20):
+#         if arr[i][j] != 0:
+#             if (omok(i, j)):
+#                 print(arr[i][j])
+#                 print(f"{i} {j}")
+#                 tmp = 1
+# if tmp == 0:
+#     print("0")
+
+# <40. 오목 >
+# import sys
+# input = sys.stdin.readline
+
+# board = []
+# for i in range(19):
+#     board.append(list(map(int, input().split())))
+
+# # → ↓ ↘ ↗
+# dx = [0, 1, 1, -1]
+# dy = [1, 0, 1, 1]
+
+# for x in range(19):
+#     for y in range(19):
+#         if board[x][y] != 0:
+#             focus = board[x][y]
+
+#             for i in range(4):
+#                 cnt = 1
+#                 nx = x + dx[i]
+#                 ny = y + dy[i]
+
+#                 while 0 <= nx < 19 and 0 <= ny < 19 and board[nx][ny] == focus:
+#                     cnt += 1
+
+#                     if cnt == 5:
+#                         # 육목 체크
+#                         if 0 <= x - dx[i] < 19 and 0 <= y - dy[i] < 19 and board[x - dx[i]][y - dy[i]] == focus:
+#                             break
+#                         if 0 <= nx + dx[i] < 19 and 0 <= ny + dy[i] < 19 and board[nx + dx[i]][ny + dy[i]] == focus:
+#                             break
+#                         # 육목이 아니면 성공한거니까 종료
+#                         print(focus)
+#                         print(x + 1, y + 1)
+#                         sys.exit(0)
+
+#                     nx += dx[i]
+#                     ny += dy[i]
+
+# print(0)
+
+# < 41. 빙고 >
+arr = []
+for i in range(5):
+    k = list(map(int, input().split()))
+    arr.append(k)
+
+
+def check_list(a):
+    cnt = 0
+    for i in range(5):
+        if a[i][0] == 1 and a[i][1] == 1 and a[i][2] == 1 and a[i][3] == 1 and a[i][4] == 1:
+            cnt += 1
+    for j in range(5):
+        if a[0][j] == 1 and a[1][j] == 1 and a[2][j] == 1 and a[3][j] == 1 and a[4][j] == 1:
+            cnt += 1
+    if a[0][0] == 1 and a[1][1] == 1 and a[2][2] == 1 and a[3][3] == 1 and a[4][4] == 1:
+        cnt += 1
+    if a[0][4] == 1 and a[1][3] == 1 and a[2][2] == 1 and a[3][1] == 1 and a[4][0] == 1:
+        cnt += 1
+    if cnt >= 3:
+        return 1
+    return 0
+
+
+ans_list = [[0]*5 for i in range(5)]
+arr_list = []
+for i in range(5):
+    k = list(map(int, input().split()))
+    arr_list.append(k)
+tmp = 0
+c = 0
+b = 0
+d = 0
+for i in range(5):
+    for j in range(5):
+        for x in range(5):
+            for y in range(5):
+                if arr[x][y] == arr_list[i][j]:
+                    ans_list[x][y] = 1
+                    tmp += 1
+                    if check_list(ans_list) == 1:
+                        c = 1
+                        break
+            if c == 1:
+                b = 1
+                break
+        if b == 1:
+            d = 1
+            break
+    if d == 1:
+        break
+
+print(tmp)
