@@ -976,55 +976,122 @@
 # print(0)
 
 # < 41. 빙고 >
-arr = []
-for i in range(5):
-    k = list(map(int, input().split()))
-    arr.append(k)
+# arr = []
+# for i in range(5):
+#     k = list(map(int, input().split()))
+#     arr.append(k)
 
 
-def check_list(a):
-    cnt = 0
-    for i in range(5):
-        if a[i][0] == 1 and a[i][1] == 1 and a[i][2] == 1 and a[i][3] == 1 and a[i][4] == 1:
-            cnt += 1
-    for j in range(5):
-        if a[0][j] == 1 and a[1][j] == 1 and a[2][j] == 1 and a[3][j] == 1 and a[4][j] == 1:
-            cnt += 1
-    if a[0][0] == 1 and a[1][1] == 1 and a[2][2] == 1 and a[3][3] == 1 and a[4][4] == 1:
-        cnt += 1
-    if a[0][4] == 1 and a[1][3] == 1 and a[2][2] == 1 and a[3][1] == 1 and a[4][0] == 1:
-        cnt += 1
-    if cnt >= 3:
-        return 1
-    return 0
+# def check_list(a):
+#     cnt = 0
+#     for i in range(5):
+#         if a[i][0] == 1 and a[i][1] == 1 and a[i][2] == 1 and a[i][3] == 1 and a[i][4] == 1:
+#             cnt += 1
+#     for j in range(5):
+#         if a[0][j] == 1 and a[1][j] == 1 and a[2][j] == 1 and a[3][j] == 1 and a[4][j] == 1:
+#             cnt += 1
+#     if a[0][0] == 1 and a[1][1] == 1 and a[2][2] == 1 and a[3][3] == 1 and a[4][4] == 1:
+#         cnt += 1
+#     if a[0][4] == 1 and a[1][3] == 1 and a[2][2] == 1 and a[3][1] == 1 and a[4][0] == 1:
+#         cnt += 1
+#     if cnt >= 3:
+#         return 1
+#     return 0
 
 
-ans_list = [[0]*5 for i in range(5)]
-arr_list = []
-for i in range(5):
-    k = list(map(int, input().split()))
-    arr_list.append(k)
-tmp = 0
-c = 0
-b = 0
-d = 0
-for i in range(5):
-    for j in range(5):
-        for x in range(5):
-            for y in range(5):
-                if arr[x][y] == arr_list[i][j]:
-                    ans_list[x][y] = 1
-                    tmp += 1
-                    if check_list(ans_list) == 1:
-                        c = 1
-                        break
-            if c == 1:
-                b = 1
-                break
-        if b == 1:
-            d = 1
-            break
-    if d == 1:
-        break
+# ans_list = [[0]*5 for i in range(5)]
+# arr_list = []
+# for i in range(5):
+#     k = list(map(int, input().split()))
+#     arr_list.append(k)
+# tmp = 0
+# c = 0
+# b = 0
+# d = 0
+# for i in range(5):
+#     for j in range(5):
+#         for x in range(5):
+#             for y in range(5):
+#                 if arr[x][y] == arr_list[i][j]:
+#                     ans_list[x][y] = 1
+#                     tmp += 1
+#                     if check_list(ans_list) == 1:
+#                         c = 1
+#                         break
+#             if c == 1:
+#                 b = 1
+#                 break
+#         if b == 1:
+#             d = 1
+#             break
+#     if d == 1:
+#         break
 
-print(tmp)
+# print(tmp)
+
+# <42. 숫자 야구 >
+# from collections import deque
+
+# arr = []
+# for i in range(1, 10):
+#     for j in range(1, 10):
+#         for k in range(1, 10):
+#             if i != j and j != k and i != k:
+#                 arr.append([i, j, k])
+
+
+# def check_1(N, S, B):
+#     global arr
+#     N_list = list(str(N))
+#     for i in range(3):
+#         N_list[i] = int(N_list[i])
+#     for i in range(len(arr)):
+#         in_S = 0
+#         in_B = 0
+#         if arr[i] != 0:
+#             for k in range(3):
+#                 if N_list[k] == arr[i][k]:
+#                     in_S += 1
+#                 for j in range(3):
+#                     if k != j:
+#                         if N_list[k] == arr[i][j]:
+#                             in_B += 1
+#         if in_B == B and in_S == S:
+#             continue
+#         else:
+#             arr[i] = 0
+
+
+# M = int(input())
+
+# for i in range(M):
+#     N, S, B = map(int, input().split())
+#     check_1(N, S, B)
+# ans = 0
+# for i in range(len(arr)):
+#     if arr[i] != 0:
+#         ans += 1
+# print(ans)
+
+# <43. 연속 부분 합 찾기 >
+# N = int(input())
+# arr = list(map(int, input().split()))
+
+# ans_arr = []
+# for i in range(N):
+#     if i == 0:
+#         ans_arr.append(arr[0])
+#     else:
+#         tmp = ans_arr[i-1]+arr[i]
+#         if tmp <= arr[i]:
+#             ans_arr.append(arr[i])
+#         else:
+#             ans_arr.append(tmp)
+# ans = -100000000
+# for i in range(len(ans_arr)):
+#     if ans <= ans_arr[i]:
+#         ans = ans_arr[i]
+
+# print(ans)
+
+#<44. stack >
