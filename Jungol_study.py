@@ -1095,3 +1095,18 @@
 # print(ans)
 
 #<44. stack >
+
+N=int(input())
+arr=[]
+for i in range(N):
+    k=list(input().split())
+    if k[0]=="i":
+        arr.append(int(k[1]))
+    elif k[0]=="c":
+        print(len(arr))
+    elif k[0]=="o":
+        if len(arr)==0:
+            print("empty")
+        else:
+            print(arr.pop())
+    
