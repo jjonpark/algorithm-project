@@ -1094,19 +1094,36 @@
 
 # print(ans)
 
-#<44. stack >
+# <44. stack >
 
-N=int(input())
-arr=[]
+# N = int(input())
+# arr = []
+# for i in range(N):
+#     k = list(input().split())
+#     if k[0] == "i":
+#         arr.append(int(k[1]))
+#     elif k[0] == "c":
+#         print(len(arr))
+#     elif k[0] == "o":
+#         if len(arr) == 0:
+#             print("empty")
+#         else:
+#             print(arr.pop())
+
+# <45. queue>
+from collections import deque
+
+N = int(input())
+arr = deque()
+
 for i in range(N):
-    k=list(input().split())
-    if k[0]=="i":
+    k = list(input().split())
+    if k[0] == "i":
         arr.append(int(k[1]))
-    elif k[0]=="c":
+    if k[0] == "c":
         print(len(arr))
-    elif k[0]=="o":
-        if len(arr)==0:
+    if k[0] == "o":
+        if (len(arr) == 0):
             print("empty")
         else:
-            print(arr.pop())
-    
+            print(arr.popleft())
