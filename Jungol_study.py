@@ -1111,19 +1111,65 @@
 #             print(arr.pop())
 
 # <45. queue>
-from collections import deque
+# from collections import deque
 
-N = int(input())
-arr = deque()
+# N = int(input())
+# arr = deque()
 
-for i in range(N):
-    k = list(input().split())
-    if k[0] == "i":
-        arr.append(int(k[1]))
-    if k[0] == "c":
-        print(len(arr))
-    if k[0] == "o":
-        if (len(arr) == 0):
-            print("empty")
-        else:
-            print(arr.popleft())
+# for i in range(N):
+#     k = list(input().split())
+#     if k[0] == "i":
+#         arr.append(int(k[1]))
+#     if k[0] == "c":
+#         print(len(arr))
+#     if k[0] == "o":
+#         if (len(arr) == 0):
+#             print("empty")
+#         else:
+#             print(arr.popleft())
+
+# < 46. Bad hair day> --> 시간 초과
+
+# N = int(input())
+# arr = []
+# for i in range(N):
+#     k = int(input())
+#     arr.append(k)
+# ans = 0
+# for i in range(N-1):
+#     for j in range(i+1, N):
+#         if arr[i] <= arr[j]:
+#             break
+#         else:
+#             ans += 1
+# print(ans)
+
+# <46. bad hair day> //강의 참고
+# N = int(input())
+# arr = []
+# ans = 0
+# for i in range(N):
+#     k = int(input())
+#     while True:
+#         if len(arr) != 0 and arr[-1] <= k:
+#             arr.pop()
+#         else:
+#             arr.append(k)
+#             ans += (len(arr)-1)
+#             break
+# print(ans)
+
+# <47. 쇠 막대기 > #풀었던건데 기억이 안남
+arr = list(input())
+tmp = 0
+ans = 0
+for i in range(len(arr)-1):
+    if arr[i] == "(" and arr[i+1] == ")":
+        ans += tmp
+    elif arr[i]==")" and arr[i-1]!="(":
+        ans+=1
+    if arr[i] == "(":
+        tmp += 1
+    elif arr[i] == ")":
+        tmp -= 1
+print(ans)
