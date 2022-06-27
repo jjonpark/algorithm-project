@@ -1160,16 +1160,113 @@
 # print(ans)
 
 # <47. 쇠 막대기 > #풀었던건데 기억이 안남
-arr = list(input())
-tmp = 0
-ans = 0
-for i in range(len(arr)-1):
-    if arr[i] == "(" and arr[i+1] == ")":
-        ans += tmp
-    elif arr[i]==")" and arr[i-1]!="(":
-        ans+=1
-    if arr[i] == "(":
-        tmp += 1
-    elif arr[i] == ")":
-        tmp -= 1
-print(ans)
+# arr = list(input())
+# tmp = 0
+# ans = 0
+# for i in range(len(arr)-1):
+#     if arr[i] == "(" and arr[i+1] == ")":
+#         ans += tmp
+#     elif arr[i] == ")" and arr[i-1] != "(":
+#         ans += 1
+#     if arr[i] == "(":
+#         tmp += 1
+#     elif arr[i] == ")":
+#         tmp -= 1
+# print(ans+1)
+
+# <48. 팩토리얼 >
+
+# N = int(input())
+
+
+# def factorial(N):
+#     tmp = N
+#     ans = 1
+#     while tmp >= 1:
+#         if tmp == 1:
+#             print("1! = 1")
+#             tmp -= 1
+#         else:
+#             print(f"{tmp}! = {tmp} * {tmp-1}!")
+#             ans *= tmp
+#             tmp -= 1
+#     print(ans)
+
+
+# factorial(N)
+
+# <49. 하노이탑>
+
+# def move_disk(N, start_peg, end_peg):
+#     print(f"{N} : {start_peg} -> {end_peg}")
+
+
+# def hanoi(N, start_peg, end_peg, other_peg):
+#     if N == 1:
+#         move_disk(1, start_peg, end_peg)
+#     else:
+#         hanoi(N-1, start_peg, other_peg, end_peg)
+#         move_disk(N, start_peg, end_peg)
+#         hanoi(N-1, other_peg, end_peg, start_peg)
+
+
+# N = int(input())
+# hanoi(N, 1, 3, 2)
+
+# <50. 주사위 던지기1 >
+N, M = map(int, input().split())
+arr = [0]*(N)
+
+
+def case_1(num):
+    if (num >= N):
+        print(f"{arr[0]} {arr[1]} {arr[2]}")
+        return
+    else:
+        for i in range(1, 7):
+            arr[num] = i
+            case_1(num+1)
+
+
+arr = [0]*(N)
+
+
+def case_2(num):
+    if (num >= N):
+        print(f"{arr[0]} {arr[1]} {arr[2]}")
+        return
+    else:
+        for i in range(1, 7):
+            if num >= 1:
+                if arr[num-1] <= i:
+                    arr[num] = i
+                    case_2(num+1)
+            else:
+                arr[num] = i
+                case_2(num+1)
+
+
+arr = [0]*(N)
+
+
+def case_3(num):
+    if (num >= N):
+        print(f"{arr[0]} {arr[1]} {arr[2]}")
+        return
+    else:
+        for i in range(1, 7):
+            if num >= 1:
+                if i not in arr:
+                    arr[num] = i
+                    case_3(num+1)
+            else:
+                arr[num] = i
+                case_3(num+1)
+
+
+if M == 1:
+    case_1(0)
+elif M == 2:
+    case_2(0)
+elif M == 3:
+    case_3(0)
