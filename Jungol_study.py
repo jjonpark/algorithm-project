@@ -1214,59 +1214,147 @@
 # hanoi(N, 1, 3, 2)
 
 # <50. 주사위 던지기1 >
-N, M = map(int, input().split())
-arr = [0]*(N)
+# N, M = map(int, input().split())
+# arr = [0]*(N)
 
 
-def case_1(num):
-    if (num >= N):
-        print(f"{arr[0]} {arr[1]} {arr[2]}")
+# def case_1(num):
+#     if (num >= N):
+#         print(f"{arr[0]} {arr[1]} {arr[2]}")
+#         return
+#     else:
+#         for i in range(1, 7):
+#             arr[num] = i
+#             case_1(num+1)
+
+
+# arr = [0]*(N)
+
+
+# def case_2(num):
+#     if (num >= N):
+#         print(f"{arr[0]} {arr[1]} {arr[2]}")
+#         return
+#     else:
+#         for i in range(1, 7):
+#             if num >= 1:
+#                 if arr[num-1] <= i:
+#                     arr[num] = i
+#                     case_2(num+1)
+#             else:
+#                 arr[num] = i
+#                 case_2(num+1)
+
+
+# arr = [0]*(N)
+
+
+# def case_3(num):
+#     if (num >= N):
+#         print(f"{arr[0]} {arr[1]} {arr[2]}")
+#         return
+#     else:
+#         for i in range(1, 7):
+#             if num >= 1:
+#                 if i not in arr:
+#                     arr[num] = i
+#                     case_3(num+1)
+#             else:
+#                 arr[num] = i
+#                 case_3(num+1)
+
+
+# if M == 1:
+#     case_1(0)
+# elif M == 2:
+#     case_2(0)
+# elif M == 3:
+#     case_3(0)
+
+# <51. 주사위 던지기2 >
+# N, M = map(int, input().split())
+# arr = [0]*N
+
+
+# def answer(A):
+#     if A >= N:
+#         ans = 0
+#         for i in range(N):
+#             ans += arr[i]
+#         if ans == M:
+#             for i in range(N):
+#                 print(f"{arr[i]}", end=" ")
+#             print()
+#         return
+#     else:
+#         for j in range(1, 7):
+#             arr[A] = j
+#             answer(A+1)
+
+
+# answer(0)
+
+# <52. 숫자 고르기 >
+# N = int(input())
+# arr = []
+# for i in range(N):
+#     k = int(input())
+#     arr.append(k)
+# visit = []
+# ans_list = []
+
+
+# def find_answer(A, B):
+#     global visit
+#     global ans_list
+#     if (A == B):
+#         visit = []
+#         ans_list.append(A)
+#         return 1
+#     elif B in visit:
+#         visit = []
+#         return 0
+#     else:
+#         visit.append(B)
+#         return find_answer(A, arr[B-1])
+
+
+# ans = 0
+# for i in range(N):
+#     if find_answer(i+1, arr[i]):
+#         ans += 1
+#         continue
+# print()
+# print(ans)
+# for i in range(len(ans_list)):
+#     print(ans_list[i])
+
+# <53. 숫자 고르기>
+N = int(input())
+M = int(input())
+visit = [0]*(N+1)
+arr = [[0]*(N+1) for i in range(N+1)]
+for i in range(M):
+    a_1, a_2, a_3 = map(int, input().split())
+    visit[a_1] = 1
+    arr[a_1][a_2] = a_3
+basic_list=[]
+for i in range(N+1):
+    if visit[i]==0:
+        basic_list.append(i)
+
+
+def find_answer(A, B):
+    global visit
+    if A in basic_list:
+        visit[A] += B
         return
     else:
-        for i in range(1, 7):
-            arr[num] = i
-            case_1(num+1)
+        for i in range(N+1):
+            if arr[A][i] != 0:
+                find_answer(i, arr[A][i]*B)
 
-
-arr = [0]*(N)
-
-
-def case_2(num):
-    if (num >= N):
-        print(f"{arr[0]} {arr[1]} {arr[2]}")
-        return
-    else:
-        for i in range(1, 7):
-            if num >= 1:
-                if arr[num-1] <= i:
-                    arr[num] = i
-                    case_2(num+1)
-            else:
-                arr[num] = i
-                case_2(num+1)
-
-
-arr = [0]*(N)
-
-
-def case_3(num):
-    if (num >= N):
-        print(f"{arr[0]} {arr[1]} {arr[2]}")
-        return
-    else:
-        for i in range(1, 7):
-            if num >= 1:
-                if i not in arr:
-                    arr[num] = i
-                    case_3(num+1)
-            else:
-                arr[num] = i
-                case_3(num+1)
-
-
-if M == 1:
-    case_1(0)
-elif M == 2:
-    case_2(0)
-elif M == 3:
-    case_3(0)
+find_answer(N,1)
+for i in range(1,N+1):
+    if i in basic_list:
+        print(f"{i} {visit[i]}")
