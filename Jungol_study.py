@@ -1330,31 +1330,91 @@
 #     print(ans_list[i])
 
 # <53. 숫자 고르기>
-N = int(input())
-M = int(input())
-visit = [0]*(N+1)
-arr = [[0]*(N+1) for i in range(N+1)]
-for i in range(M):
-    a_1, a_2, a_3 = map(int, input().split())
-    visit[a_1] = 1
-    arr[a_1][a_2] = a_3
-basic_list=[]
-for i in range(N+1):
-    if visit[i]==0:
-        basic_list.append(i)
+# N = int(input())
+# M = int(input())
+# visit = [0]*(N+1)
+# arr = [[0]*(N+1) for i in range(N+1)]
+# for i in range(M):
+#     a_1, a_2, a_3 = map(int, input().split())
+#     visit[a_1] = 1
+#     arr[a_1][a_2] = a_3
+# basic_list=[]
+# for i in range(N+1):
+#     if visit[i]==0:
+#         basic_list.append(i)
 
 
-def find_answer(A, B):
-    global visit
-    if A in basic_list:
-        visit[A] += B
-        return
-    else:
-        for i in range(N+1):
-            if arr[A][i] != 0:
-                find_answer(i, arr[A][i]*B)
+# def find_answer(A, B):
+#     global visit
+#     if A in basic_list:
+#         visit[A] += B
+#         return
+#     else:
+#         for i in range(N+1):
+#             if arr[A][i] != 0:
+#                 find_answer(i, arr[A][i]*B)
 
-find_answer(N,1)
-for i in range(1,N+1):
-    if i in basic_list:
-        print(f"{i} {visit[i]}")
+# find_answer(N,1)
+# for i in range(1,N+1):
+#     if i in basic_list:
+#         print(f"{i} {visit[i]}")
+
+# <54.로또 번호>
+# from itertools import combinations
+
+# arr = list(input().split())
+# N = int(arr[0])
+# arr_list = arr[1:]
+# for i in range(N):
+#     arr_list[i] = int(arr_list[i])
+
+# ans = list(combinations(arr_list, 6))
+# for i in range(len(ans)):
+#     for j in range(6):
+#         print(f"{ans[i][j]}", end=" ")
+#     print()
+
+# <56. 회의실 배정>
+# N = int(input())
+# arr = [[] for i in range(N)]
+# for i in range(N):
+#     a_1, a_2, a_3 = map(int, input().split())
+#     arr[i] = [a_1, a_2, a_3]
+
+# arr.sort(key=lambda x: x[2])
+# ans = [arr[0][0]]
+# tmp = arr[0][2]
+# for i in range(1, N):
+#     if tmp <= arr[i][1]:
+#         tmp = arr[i][2]
+#         ans.append(arr[i][0])
+# print(len(ans))
+# for i in range(len(ans)):
+#     print(ans[i], end=" ")
+
+# <57. 동전 자판기>
+# #include<cstdio>
+# #include<algorithm>
+# using namespace std;
+# int arr[10],n,l[10],cost[10]={0,500,100,50,10,5,1};
+# int main()
+# {
+#     int i,cnt=0,sum=0;
+#     scanf("%d",&n);
+#     for(i=1;i<=6;i++){
+#         scanf("%d",&arr[i]);
+#         sum+=arr[i]*cost[i];
+#     }
+#     n=sum-n;
+#     for(i=1;i<=6;i++){
+#         int temp=min(arr[i],n/cost[i]);
+#         n-=cost[i]*temp;
+#         l[i]+=temp;
+#     }
+#     for(i=1;i<=6;i++) cnt+=arr[i]-l[i];
+#     printf("%d\n",cnt);
+#     for(i=1;i<=6;i++){
+#         printf("%d ",arr[i]-l[i]);
+#     }
+#     return 0;
+# }
