@@ -1418,3 +1418,75 @@
 #     }
 #     return 0;
 # }
+
+# <58. 색종이 만들기 >
+# N = int(input())
+# graph = []
+# for i in range(N):
+#     k = list(input().split())
+#     for j in range(N):
+#         k[j] = int(k[j])
+#     graph.append(k)
+# ans_1 = 0
+# ans_0 = 0
+
+
+# def check(N, a, b):
+#     global ans_1
+#     global ans_0
+#     if N == 1:
+#         if graph[a][b] == 1:
+#             ans_1 += 1
+#             return
+#         else:
+#             ans_0 += 1
+#             return
+#     else:
+#         tmp = graph[a][b]
+#         for i in range(a,a+N):
+#             for j in range(b,b+N):
+#                 if tmp != graph[i][j]:
+#                     check(N//2, a, b)
+#                     check(N//2, a+N//2, b)
+#                     check(N//2, a, b+N//2)
+#                     check(N//2, a+N//2, b+N//2)
+#                     return
+#         if tmp == 1:
+#             ans_1 += 1
+#             return
+#         else:
+#             ans_0 += 1
+#             return
+# check(N,0,0)
+# print(ans_0)
+# print(ans_1)
+
+# <59. 이진탐색>
+# def binarySearch(A, low, high, target):
+#     while low <= high:
+#         mid = (low+high)//2
+#         if A[mid] == target:
+#             return mid
+#         elif A[mid] > target:
+#             high = mid-1
+#         else:
+#             low = mid+1
+#     return -1
+
+
+# N = int(input())
+# arr = list(input().split())
+# for i in range(N):
+#     arr[i] = int(arr[i])
+
+# M = int(input())
+# find_list = list(input().split())
+# for i in range(M):
+#     find_list[i] = int(find_list[i])
+
+# for i in range(M):
+#     print(binarySearch(arr, 0, N, find_list[i]),end=" ")
+
+#<60.제곱수 출력>
+N,M=map(int,input().split())
+print((N**M)%20091024)
