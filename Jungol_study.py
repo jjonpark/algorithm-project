@@ -1487,6 +1487,48 @@
 # for i in range(M):
 #     print(binarySearch(arr, 0, N, find_list[i]),end=" ")
 
-#<60.제곱수 출력>
-N,M=map(int,input().split())
-print((N**M)%20091024)
+# <60.제곱수 출력>
+# import math
+# N, M = map(int, input().split())
+
+
+# def answer(N, M):
+#     if M == 1:
+#         return N
+#     elif M == 0:
+#         return 1
+#     return N*answer(N, M-1)
+
+
+# answer = int(math.pow(N, M))
+# print(int(answer % 20091024))
+
+# <61 N queens >
+N = int(input())
+graph = [[0]*N for i in range(N)]
+col = [0]*(N+1)
+left = [0]*(2*N)
+right = [0]*(2*N)
+
+ans = 0
+
+
+def DFS(R):
+    global ans, col, left, right
+    if R >= N:
+        ans += 1
+        return
+    for c in range(N):
+        if col[c] == 0 and left[R+c] == 0 and right[R-c+N] == 0:
+            col[c] = 1
+            left[R+c] = 1
+            right[R-c+N] = 1
+            DFS(R+1)
+            col[c] = 0
+            left[R+c] = 0
+            right[R-c+N] = 0
+
+
+DFS(0)
+
+print(ans)
