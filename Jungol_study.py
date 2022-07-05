@@ -1504,31 +1504,98 @@
 # print(int(answer % 20091024))
 
 # <61 N queens >
+# N = int(input())
+# graph = [[0]*N for i in range(N)]
+# col = [0]*(N+1)
+# left = [0]*(2*N)
+# right = [0]*(2*N)
+
+# ans = 0
+
+
+# def DFS(R):
+#     global ans, col, left, right
+#     if R >= N:
+#         ans += 1
+#         return
+#     for c in range(N):
+#         if col[c] == 0 and left[R+c] == 0 and right[R-c+N] == 0:
+#             col[c] = 1
+#             left[R+c] = 1
+#             right[R-c+N] = 1
+#             DFS(R+1)
+#             col[c] = 0
+#             left[R+c] = 0
+#             right[R-c+N] = 0
+
+
+# DFS(0)
+
+# print(ans)
+
+# <62. 해밀턴 순환회로>
+# N = int(input())
+# graph = []
+# for i in range(N):
+#     k = list(map(int, input().split()))
+#     graph.append(k)
+# ans = 0
+# arr = [0]*N
+# arr[0] = 1
+# tmp = 10e9
+
+
+# def find_answer(A, B):
+#     global ans, arr, tmp
+#     if B >= N-1:
+#         if tmp > ans:
+#             tmp = ans
+#             return
+#         else:
+
+#             return
+#     for i in range(1, N):
+#         if arr[i] != 1 and i != A:
+#             ans += graph[A][i]
+#             arr[i] = 1
+#             find_answer(i, B+1)
+#             arr[i] = 0
+#             ans -= graph[A][i]
+
+
+# find_answer(0, 0)
+# print(tmp)
+
+# <62. 해밀턴 순환회로)
+
 N = int(input())
-graph = [[0]*N for i in range(N)]
-col = [0]*(N+1)
-left = [0]*(2*N)
-right = [0]*(2*N)
+graph = []
+for i in range(N):
+    k = list(map(int, input().split()))
+    graph.append(k)
+for i in range(N):
+    for j in range(N):
+        if graph[i][j] == 0:
+            graph[i][j] = 1000000
+ans = 100000
+visit = [0]*N
+visit[0] = 1
 
-ans = 0
 
-
-def DFS(R):
-    global ans, col, left, right
-    if R >= N:
-        ans += 1
+def dfs(step, city, cost):
+    global ans,visit
+    if cost >= ans:
         return
-    for c in range(N):
-        if col[c] == 0 and left[R+c] == 0 and right[R-c+N] == 0:
-            col[c] = 1
-            left[R+c] = 1
-            right[R-c+N] = 1
-            DFS(R+1)
-            col[c] = 0
-            left[R+c] = 0
-            right[R-c+N] = 0
+    if step >= N:
+        ans = min(ans, cost+graph[city][1])
+        return
+    for i in range(1, N):
+        if visit[i]:
+            continue
+        visit[i] = 1
+        dfs(step+1, i, cost+graph[city][1])
+        visit[i] = 0
 
 
-DFS(0)
-
+dfs(1, 1, 0)
 print(ans)
