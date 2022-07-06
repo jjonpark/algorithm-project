@@ -1568,34 +1568,88 @@
 
 # <62. 해밀턴 순환회로)
 
-N = int(input())
+# N = int(input())
+# graph = []
+# for i in range(N):
+#     k = list(map(int, input().split()))
+#     graph.append(k)
+# for i in range(N):
+#     for j in range(N):
+#         if graph[i][j] == 0:
+#             graph[i][j] = 1000000
+# ans = 100000
+# visit = [0]*N
+# visit[0] = 1
+
+
+# def dfs(step, city, cost):
+#     global ans,visit
+#     if cost >= ans:
+#         return
+#     if step >= N:
+#         ans = min(ans, cost+graph[city][1])
+#         return
+#     for i in range(1, N):
+#         if visit[i]:
+#             continue
+#         visit[i] = 1
+#         dfs(step+1, i, cost+graph[city][i])
+#         visit[i] = 0
+
+
+# dfs(1, 1, 0)
+# print(ans)
+
+# < 63. 스도쿠 >
+
 graph = []
-for i in range(N):
+for i in range(9):
     k = list(map(int, input().split()))
     graph.append(k)
-for i in range(N):
-    for j in range(N):
+
+col = [[0]*10 for i in range(9)]
+low = [[0]*10 for i in range(9)]
+group = [[0]*10 for i in range(9)]
+
+for i in range(9):
+    for j in range(9):
         if graph[i][j] == 0:
-            graph[i][j] = 1000000
-ans = 100000
-visit = [0]*N
-visit[0] = 1
-
-
-def dfs(step, city, cost):
-    global ans,visit
-    if cost >= ans:
-        return
-    if step >= N:
-        ans = min(ans, cost+graph[city][1])
-        return
-    for i in range(1, N):
-        if visit[i]:
             continue
-        visit[i] = 1
-        dfs(step+1, i, cost+graph[city][1])
-        visit[i] = 0
+        low[i][graph[i][j]] = 1
+        col[j][graph[i][j]] = 1
+        group[(i//3)*3+(j//3)][graph[i][j]] = 1
+g = 0
 
 
-dfs(1, 1, 0)
-print(ans)
+def sudoku(r, c):
+    global g, graph, low, col, group
+    if c > 8:
+        r += 1
+        c = 0
+    if r > 8:
+        for tmp_1 in range(9):
+            for tmp_2 in range(9):
+                print(graph[tmp_1][tmp_2] , end=" ")
+            print("")
+        return 1
+    if graph[r][c]:
+        return sudoku(r, c+1)
+    g = (i//3)*3+(j//3)
+    for k in range(1, 10):
+        if low[r][k] or col[c][k] or group[g][k]:
+            continue
+        low[r][k] = 1
+        col[r][k] = 1
+        group[g][k] = 1
+        graph[r][c] = k
+        if sudoku(r, c+1):
+            return 1
+        low[r][k] = 0
+        col[r][k] = 0
+        group[g][k] = 0
+        graph[r][c] = 0
+    return 0
+
+sudoku(0,0)
+
+
