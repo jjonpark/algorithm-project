@@ -1600,56 +1600,127 @@
 # dfs(1, 1, 0)
 # print(ans)
 
-# < 63. 스도쿠 >
+# < 63. 스도쿠 > #설명 들으면서 작성했는데 왜 안대
 
-graph = []
-for i in range(9):
-    k = list(map(int, input().split()))
-    graph.append(k)
+# graph = []
+# for i in range(9):
+#     k = list(map(int, input().split()))
+#     graph.append(k)
 
-col = [[0]*10 for i in range(9)]
-low = [[0]*10 for i in range(9)]
-group = [[0]*10 for i in range(9)]
+# col = [[0]*10 for i in range(9)]
+# low = [[0]*10 for i in range(9)]
+# group = [[0]*10 for i in range(9)]
 
-for i in range(9):
-    for j in range(9):
-        if graph[i][j] == 0:
-            continue
-        low[i][graph[i][j]] = 1
-        col[j][graph[i][j]] = 1
-        group[(i//3)*3+(j//3)][graph[i][j]] = 1
-g = 0
-
-
-def sudoku(r, c):
-    global g, graph, low, col, group
-    if c > 8:
-        r += 1
-        c = 0
-    if r > 8:
-        for tmp_1 in range(9):
-            for tmp_2 in range(9):
-                print(graph[tmp_1][tmp_2] , end=" ")
-            print("")
-        return 1
-    if graph[r][c]:
-        return sudoku(r, c+1)
-    g = (i//3)*3+(j//3)
-    for k in range(1, 10):
-        if low[r][k] or col[c][k] or group[g][k]:
-            continue
-        low[r][k] = 1
-        col[r][k] = 1
-        group[g][k] = 1
-        graph[r][c] = k
-        if sudoku(r, c+1):
-            return 1
-        low[r][k] = 0
-        col[r][k] = 0
-        group[g][k] = 0
-        graph[r][c] = 0
-    return 0
-
-sudoku(0,0)
+# for i in range(9):
+#     for j in range(9):
+#         if graph[i][j] == 0:
+#             continue
+#         low[i][graph[i][j]] = 1
+#         col[j][graph[i][j]] = 1
+#         group[(i//3)*3+(j//3)][graph[i][j]] = 1
+# g = 0
 
 
+# def sudoku(r, c):
+#     global g, graph, low, col, group
+#     if c > 8:
+#         r += 1
+#         c = 0
+#     if r > 8:
+#         for tmp_1 in range(9):
+#             for tmp_2 in range(9):
+#                 print(graph[tmp_1][tmp_2] , end=" ")
+#             print("")
+#         return 1
+#     if graph[r][c]:
+#         return sudoku(r, c+1)
+#     g = (i//3)*3+(j//3)
+#     for k in range(1, 10):
+#         if low[r][k] or col[c][k] or group[g][k]:
+#             continue
+#         low[r][k] = 1
+#         col[r][k] = 1
+#         group[g][k] = 1
+#         graph[r][c] = k
+#         if sudoku(r, c+1):
+#             return 1
+#         low[r][k] = 0
+#         col[r][k] = 0
+#         group[g][k] = 0
+#         graph[r][c] = 0
+#     return 0
+
+# sudoku(0,0)
+
+
+# <63. 스도쿠> 답안
+# import sys
+# graph = []
+# blank = []
+
+# for i in range(9):
+#     graph.append(list(map(int, sys.stdin.readline().rstrip().split())))
+
+# for i in range(9):
+#     for j in range(9):
+#         if graph[i][j] == 0:
+#             blank.append((i, j))
+
+# def checkRow(x, a):
+#     for i in range(9):
+#         if a == graph[x][i]:
+#             return False
+#     return True
+
+# def checkCol(y, a):
+#     for i in range(9):
+#         if a == graph[i][y]:
+#             return False
+#     return True
+
+# def checkRect(x, y, a):
+#     nx = x // 3 * 3
+#     ny = y // 3 * 3
+#     for i in range(3):
+#         for j in range(3):
+#             if a == graph[nx+i][ny+j]:
+#                 return False
+#     return True
+
+
+# def dfs(idx):
+#     if idx == len(blank):
+#         for i in range(9):
+#             print(*graph[i])
+#         exit(0)
+
+#     for i in range(1, 10):
+#         x = blank[idx][0]
+#         y = blank[idx][1]
+
+#         if checkRow(x, i) and checkCol(y, i) and checkRect(x, y, i):
+#             graph[x][y] = i
+#             dfs(idx+1)
+#             graph[x][y] = 0
+
+# dfs(0)
+
+# <65. 장기1>
+M, N = map(int, input().split())
+
+graph = [[100]*(M+1) for i in range(N+1)]
+R, C, S, K = map(int, input().split())
+
+dr = [-2, -2, -1, -1, 1, 1, 2, 2]
+dc = [-1, 1, -2, 2, -2, 2, -1, 1]
+def DFS(R, C, cnt):
+    global graph
+    if R<1 or R>N or C<1 or C>M:
+        return 
+    if graph[R][C]<=cnt or graph[S][K]<=cnt:
+        return
+    for i in range(8):
+        DFS(R+dr[i],C+dc[i],cnt+1)
+
+DFS(R, C, 0)
+print(graph[S][K])
