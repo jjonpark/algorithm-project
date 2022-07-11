@@ -1706,21 +1706,24 @@
 # dfs(0)
 
 # <65. 장기1>
-M, N = map(int, input().split())
+# M, N = map(int, input().split())
 
-graph = [[100]*(M+1) for i in range(N+1)]
-R, C, S, K = map(int, input().split())
+# graph = [[100]*(M+1) for i in range(N+1)]
+# R, C, S, K = map(int, input().split())
 
-dr = [-2, -2, -1, -1, 1, 1, 2, 2]
-dc = [-1, 1, -2, 2, -2, 2, -1, 1]
-def DFS(R, C, cnt):
-    global graph
-    if R<1 or R>N or C<1 or C>M:
-        return 
-    if graph[R][C]<=cnt or graph[S][K]<=cnt:
-        return
-    for i in range(8):
-        DFS(R+dr[i],C+dc[i],cnt+1)
+# dr = [-2, -2, -1, -1, 1, 1, 2, 2]
+# dc = [-1, 1, -2, 2, -2, 2, -1, 1]
+# def DFS(R, C, cnt):
+#     global graph
+#     if R<1 or R>N or C<1 or C>M:
+#         return 
+#     if graph[R][C]<=cnt or graph[S][K]<=cnt:
+#         return
+#     for i in range(8):
+#         DFS(R+dr[i],C+dc[i],cnt+1)
 
-DFS(R, C, 0)
-print(graph[S][K])
+# DFS(R, C, 0)
+# print(graph[S][K])
+
+#<67. 보물섬>
+M,N= map(int,input().split())
