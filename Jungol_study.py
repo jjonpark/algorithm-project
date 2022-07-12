@@ -1716,7 +1716,7 @@
 # def DFS(R, C, cnt):
 #     global graph
 #     if R<1 or R>N or C<1 or C>M:
-#         return 
+#         return
 #     if graph[R][C]<=cnt or graph[S][K]<=cnt:
 #         return
 #     for i in range(8):
@@ -1725,5 +1725,38 @@
 # DFS(R, C, 0)
 # print(graph[S][K])
 
-#<67. 보물섬>
-M,N= map(int,input().split())
+# <67. 보물섬>
+from collections import deque
+N, M = map(int, input().split())
+dr = [-2, -2, -1, -1, 1, 1, 2, 2]
+dc = [-1, 1, -2, 2, -2, 2, -1, 1]
+visit = [[0]*(M+1) for i in range(N+1)]
+R, C, S, K = map(int, input().split())
+visit[R][C] = 0
+queue = deque()
+queue.append((R, C, 0))
+
+
+def BFS():
+    r = 0
+    c = 0
+    cnt = 0
+    tmp = 0
+    while queue:
+        global visit
+        r, c, cnt = queue.popleft()
+        for i in range(8):
+            if r+dr[i]<1 or r+dr[i]>N or c+dc[i]<1 or c+dc[i]>M or visit[r+dr[i]][c+dc[i]]==1:
+                continue
+            if r+dr[i]==S and c+dc[i]==C:
+                tmp=1
+                break
+            visit[r+dr[i]][c+dc[i]]=1
+            queue.append((r+dr[i],c+dc[i],cnt+1))
+
+        if tmp==1:
+            break
+    return cnt
+
+ans=BFS()
+print(ans)
