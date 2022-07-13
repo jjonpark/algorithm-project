@@ -1726,37 +1726,95 @@
 # print(graph[S][K])
 
 # <67. 보물섬>
+# from collections import deque
+# N, M = map(int, input().split())
+# dr = [-2, -2, -1, -1, 1, 1, 2, 2]
+# dc = [-1, 1, -2, 2, -2, 2, -1, 1]
+# visit = [[0]*(M+1) for i in range(N+1)]
+# R, C, S, K = map(int, input().split())
+# visit[R][C] = 0
+# queue = deque()
+# queue.append((R, C, 0))
+
+
+# def BFS():
+#     r = 0
+#     c = 0
+#     cnt = 0
+#     tmp = 0
+#     while queue:
+#         global visit
+#         r, c, cnt = queue.popleft()
+#         for i in range(8):
+#             if r+dr[i]<1 or r+dr[i]>N or c+dc[i]<1 or c+dc[i]>M or visit[r+dr[i]][c+dc[i]]==1:
+#                 continue
+#             if r+dr[i]==S and c+dc[i]==C:
+#                 tmp=1
+#                 break
+#             visit[r+dr[i]][c+dc[i]]=1
+#             queue.append((r+dr[i],c+dc[i],cnt+1))
+
+#         if tmp==1:
+#             break
+#     return cnt
+
+# ans=BFS()
+# print(ans)
+
+# <68. 보물섬>
 from collections import deque
-N, M = map(int, input().split())
-dr = [-2, -2, -1, -1, 1, 1, 2, 2]
-dc = [-1, 1, -2, 2, -2, 2, -1, 1]
-visit = [[0]*(M+1) for i in range(N+1)]
-R, C, S, K = map(int, input().split())
-visit[R][C] = 0
-queue = deque()
-queue.append((R, C, 0))
+import copy
+
+M, N = map(int, input().split())
+dr = [-1, 0, 1, 0]
+dc = [0, -1, 0, 1]
+graph = []
+for i in range(M):
+    k = list(input())
+    graph.append(k)
+
+for i in range(M):
+    for j in range(N):
+        if graph[i][j] == "W":
+            graph[i][j] = 0
+        else:
+            graph[i][j] = 1
 
 
-def BFS():
-    r = 0
-    c = 0
-    cnt = 0
-    tmp = 0
+def BFS(R, C):
+    global M, N
+    visit = copy.deepcopy(graph)
+    visit_2 = [[0]*N for i in range(M)]
+    queue = deque()
+    queue.append((R, C, 1))
+    visit[R][C] = 0
+    visit_2[R][C] = 1
     while queue:
-        global visit
-        r, c, cnt = queue.popleft()
-        for i in range(8):
-            if r+dr[i]<1 or r+dr[i]>N or c+dc[i]<1 or c+dc[i]>M or visit[r+dr[i]][c+dc[i]]==1:
+        R, C, cnt = queue.popleft()
+
+        for i in range(4):
+            New_R = R+dr[i]
+            New_C = C+dc[i]
+            if New_R < 0 or New_R >= M or New_C < 0 or New_C >= N:
                 continue
-            if r+dr[i]==S and c+dc[i]==C:
-                tmp=1
-                break
-            visit[r+dr[i]][c+dc[i]]=1
-            queue.append((r+dr[i],c+dc[i],cnt+1))
+            if visit[New_R][New_C] == 0 or visit_2[New_R][New_C] == 1:
+                continue
+            visit[New_R][New_C] = cnt
+            visit_2[New_R][New_C] = 1
+            queue.append((New_R, New_C, cnt+1))
+    tmp = 0
+    for i in range(M):
+        for j in range(N):
+            if tmp < visit[i][j]:
+                tmp = visit[i][j]
+    return tmp
 
-        if tmp==1:
-            break
-    return cnt
 
-ans=BFS()
+ans = 0
+for i in range(M):
+    for j in range(N):
+        if graph[i][j] == 1:
+            K = BFS(i, j)
+            if ans <= K:
+                ans = K
 print(ans)
