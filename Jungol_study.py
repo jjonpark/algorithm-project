@@ -1762,59 +1762,120 @@
 # print(ans)
 
 # <68. 보물섬>
+# from collections import deque
+# import copy
+
+# M, N = map(int, input().split())
+# dr = [-1, 0, 1, 0]
+# dc = [0, -1, 0, 1]
+# graph = []
+# for i in range(M):
+#     k = list(input())
+#     graph.append(k)
+
+# for i in range(M):
+#     for j in range(N):
+#         if graph[i][j] == "W":
+#             graph[i][j] = 0
+#         else:
+#             graph[i][j] = 1
+
+
+# def BFS(R, C):
+#     global M, N
+#     visit = copy.deepcopy(graph)
+#     visit_2 = [[0]*N for i in range(M)]
+#     queue = deque()
+#     queue.append((R, C, 1))
+#     visit[R][C] = 0
+#     visit_2[R][C] = 1
+#     while queue:
+#         R, C, cnt = queue.popleft()
+
+#         for i in range(4):
+#             New_R = R+dr[i]
+#             New_C = C+dc[i]
+#             if New_R < 0 or New_R >= M or New_C < 0 or New_C >= N:
+#                 continue
+#             if visit[New_R][New_C] == 0 or visit_2[New_R][New_C] == 1:
+#                 continue
+#             visit[New_R][New_C] = cnt
+#             visit_2[New_R][New_C] = 1
+#             queue.append((New_R, New_C, cnt+1))
+#     tmp = 0
+#     for i in range(M):
+#         for j in range(N):
+#             if tmp < visit[i][j]:
+#                 tmp = visit[i][j]
+#     return tmp
+
+
+# ans = 0
+# for i in range(M):
+#     for j in range(N):
+#         if graph[i][j] == 1:
+#             K = BFS(i, j)
+#             if ans <= K:
+#                 ans = K
+# print(ans)
+
+# <69. 화염에서 탈출>
 from collections import deque
 import copy
-
 M, N = map(int, input().split())
-dr = [-1, 0, 1, 0]
-dc = [0, -1, 0, 1]
+
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
 graph = []
-for i in range(M):
+for i in range(N):
     k = list(input())
     graph.append(k)
-
-for i in range(M):
-    for j in range(N):
-        if graph[i][j] == "W":
+for i in range(N):
+    for j in range(M):
+        if graph[i][j] == '.':
             graph[i][j] = 0
-        else:
+        if graph[i][j] == "X":
             graph[i][j] = 1
+        if graph[i][j] == "S":
+            S_X = i
+            S_Y = j
+        if graph[i][j] == "*":
+            F_X = i
+            F_Y = j
+        if graph[i][j] == "D":
+            E_X = i
+            E_Y = j
+
+queue = deque()
 
 
-def BFS(R, C):
-    global M, N
+def BFS():
+    global F_X, F_Y, S_X, S_Y, E_X, E_Y
+    cnt = 0
+    queue.append((F_X, F_Y, S_X, S_Y, cnt))
     visit = copy.deepcopy(graph)
-    visit_2 = [[0]*N for i in range(M)]
-    queue = deque()
-    queue.append((R, C, 1))
-    visit[R][C] = 0
-    visit_2[R][C] = 1
     while queue:
-        R, C, cnt = queue.popleft()
-
+        F_X, F_Y, S_X, S_Y, cnt = queue.popleft()
+        tmp=0
         for i in range(4):
-            New_R = R+dr[i]
-            New_C = C+dc[i]
-            if New_R < 0 or New_R >= M or New_C < 0 or New_C >= N:
+            new_fx = F_X+dx[i]
+            new_fy = F_Y+dy[i]
+            new_sx = S_X+dx[i]
+            new_sy = S_Y+dy[i]
+            if new_fx < 0 or new_fx >= M or new_sx < 0 or new_sx >= M or new_fy < 0 or new_fy >= N or new_sy < 0 or new_sy >= N:
                 continue
-            if visit[New_R][New_C] == 0 or visit_2[New_R][New_C] == 1:
+            if new_sx == E_X and new_sy == E_Y:
+                tmp=(cnt+1)
+            if visit[new_fx][new_fy] != 0 or visit[new_sx][new_sy] != 0:
                 continue
-            visit[New_R][New_C] = cnt
-            visit_2[New_R][New_C] = 1
-            queue.append((New_R, New_C, cnt+1))
-    tmp = 0
-    for i in range(M):
-        for j in range(N):
-            if tmp < visit[i][j]:
-                tmp = visit[i][j]
-    return tmp
+            visit[new_fx][new_fy] = (cnt+1)
+            if visit[new_sx][new_sy] == 0:
+                visit[new_sx][new_sy] = (cnt+1)
+            queue.append((new_fx, new_fy, new_sx, new_sy, cnt+1))
+    if tmp!=0:
+        return tmp
+    else:
+        return "impossible"
 
 
-ans = 0
-for i in range(M):
-    for j in range(N):
-        if graph[i][j] == 1:
-            K = BFS(i, j)
-            if ans <= K:
-                ans = K
-print(ans)
+print(BFS())
