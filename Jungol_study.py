@@ -1820,62 +1820,66 @@
 # print(ans)
 
 # <69. 화염에서 탈출>
-from collections import deque
-import copy
-M, N = map(int, input().split())
+# from collections import deque
+# import copy
+# M, N = map(int, input().split())
 
-dx = [-1, 1, 0, 0]
-dy = [0, 0, -1, 1]
-graph = []
-for i in range(N):
-    k = list(input())
-    graph.append(k)
-for i in range(N):
-    for j in range(M):
-        if graph[i][j] == '.':
-            graph[i][j] = 0
-        if graph[i][j] == "X":
-            graph[i][j] = 1
-        if graph[i][j] == "S":
-            S_X = i
-            S_Y = j
-        if graph[i][j] == "*":
-            F_X = i
-            F_Y = j
-        if graph[i][j] == "D":
-            E_X = i
-            E_Y = j
+# dx = [-1, 1, 0, 0]
+# dy = [0, 0, -1, 1]
+# graph = []
+# for i in range(N):
+#     k = list(input())
+#     graph.append(k)
+# for i in range(N):
+#     for j in range(M):
+#         if graph[i][j] == '.':
+#             graph[i][j] = 0
+#         if graph[i][j] == "X":
+#             graph[i][j] = 1
+#         if graph[i][j] == "S":
+#             S_X = i
+#             S_Y = j
+#         if graph[i][j] == "*":
+#             F_X = i
+#             F_Y = j
+#         if graph[i][j] == "D":
+#             E_X = i
+#             E_Y = j
 
-queue = deque()
-
-
-def BFS():
-    global F_X, F_Y, S_X, S_Y, E_X, E_Y
-    cnt = 0
-    queue.append((F_X, F_Y, S_X, S_Y, cnt))
-    visit = copy.deepcopy(graph)
-    while queue:
-        F_X, F_Y, S_X, S_Y, cnt = queue.popleft()
-        tmp=0
-        for i in range(4):
-            new_fx = F_X+dx[i]
-            new_fy = F_Y+dy[i]
-            new_sx = S_X+dx[i]
-            new_sy = S_Y+dy[i]
-            if new_fx < 0 or new_fx >= M or new_sx < 0 or new_sx >= M or new_fy < 0 or new_fy >= N or new_sy < 0 or new_sy >= N:
-                continue
-            if new_sx == E_X and new_sy == E_Y:
-                tmp=(cnt+1)
-            if visit[new_fx][new_fy] != 0 or visit[new_sx][new_sy] != 0:
-                continue
-            visit[new_fx][new_fy] = (cnt+1)
-            if visit[new_sx][new_sy] == 0:
-                visit[new_sx][new_sy] = (cnt+1)
-            queue.append((new_fx, new_fy, new_sx, new_sy, cnt+1))
-    if tmp!=0:
-        return tmp
-    else:
-        return "impossible"
+# queue = deque()
 
 
-print(BFS())
+# def BFS():
+#     global F_X, F_Y, S_X, S_Y, E_X, E_Y
+#     cnt = 0
+#     queue.append((F_X, F_Y, S_X, S_Y, cnt))
+#     visit = copy.deepcopy(graph)
+#     while queue:
+#         F_X, F_Y, S_X, S_Y, cnt = queue.popleft()
+#         tmp=0
+#         for i in range(4):
+#             new_fx = F_X+dx[i]
+#             new_fy = F_Y+dy[i]
+#             new_sx = S_X+dx[i]
+#             new_sy = S_Y+dy[i]
+#             if new_fx < 0 or new_fx >= M or new_fy < 0 or new_fy >= N: 
+#                 if new_sx < 0 or new_sx >= M or new_sy < 0 or new_sy >= N:
+#                     continue
+#             elif visit[new_fx][new_fy] != 0:
+
+                
+#             if new_sx == E_X and new_sy == E_Y:
+#                 tmp=(cnt+1)
+#             or visit[new_sx][new_sy] != 0:
+#                 continue
+#             visit[new_fx][new_fy] = (cnt+1)
+#             if visit[new_sx][new_sy] == 0:
+#                 visit[new_sx][new_sy] = (cnt+1)
+#             queue.append((new_fx, new_fy, new_sx, new_sy, cnt+1))
+#     if tmp!=0:
+#         return tmp
+#     else:
+#         return "impossible"
+
+
+# print(BFS())
