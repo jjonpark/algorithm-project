@@ -1,3 +1,4 @@
+import pandas as pd
 import numpy as np
 np.array([1, 2, 3, 4, 5])
 
@@ -67,7 +68,58 @@ np.array([1, 2, 3, 4, 5])
 
 # 브로드 캐스팅
 # 서로 shape이 다른 array 끼리 연산
-matrix = np.array([[2, 4, 2], [6, 5, 9], [9, 4, 7]])
-print(matrix + np.array([1, 2, 3]))
+# matrix = np.array([[2, 4, 2], [6, 5, 9], [9, 4, 7]])
+# print(matrix + np.array([1, 2, 3]))
 
-print(np.arange(3).reshape((3, 1))+np.arange(3))
+# print(np.arange(3).reshape((3, 1))+np.arange(3))
+
+# 집계 함수
+# x = np.arange(8).reshape((2, 4))
+# np.sum(x)  # 28
+# np.min(x)  # 0
+# np.max(x)  # 7
+# np.mean(x)  # 3.5
+
+# x = np.arange(8).reshape((2, 4))
+# np.sum(x, axis=0)  # array([4,6,8,10])
+# np.sum(x, axis=1)  # array([6,22])
+
+
+# pandas
+data = pd.Series([1, 2, 3, 4])
+print(data)
+
+data = pd.Series([1, 2, 3, 4], index=['a', 'b', 'c', 'd'])
+print(data['b'])
+
+# 데이터 프레임 - 여러개의 Series가 모여서 행과 열을 이루는 데이터
+
+population_dict = {
+    'korea': 5180,
+    'japan': 12718,
+    'china': 141500,
+    'usa': 32676,
+}
+
+population = pd.Series(population_dict)
+
+gdp_dict = {
+    'korea': 169320000,
+    'japan': 516700000,
+    'china': 1409250000,
+    'usa': 2041280000,
+}
+
+gdp = pd.Series(gdp_dict)
+country = pd.DataFrame({
+    'population': population,
+    'gdp': gdp
+})
+print(country)
+
+#datav프레임의 Series도 numpy array 처럼 연산자를 쓸수 있다. 
+gdp_per_capita = country['gdp'] / country['population']
+country['gdp per capita']=gdp_per_capita
+print(country)
+country.to_csv("./country.csv")
+country.to_excel("country.xlsx")
