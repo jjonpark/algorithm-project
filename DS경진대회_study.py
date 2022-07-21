@@ -117,9 +117,57 @@ country = pd.DataFrame({
 })
 print(country)
 
-#datav프레임의 Series도 numpy array 처럼 연산자를 쓸수 있다. 
+# datav프레임의 Series도 numpy array 처럼 연산자를 쓸수 있다.
 gdp_per_capita = country['gdp'] / country['population']
-country['gdp per capita']=gdp_per_capita
+country['gdp per capita'] = gdp_per_capita
 print(country)
 country.to_csv("./country.csv")
 country.to_excel("country.xlsx")
+
+# indexing / Slicing - loc : 명시적인 인덱스를 참조하는 인덱싱/슬라이싱
+print()
+print(country.loc['china'])
+
+print()
+print(country.loc['japan':'korea', :'gdp'])
+
+# iloc : 파이썬 스타일 정수 인덱스 인덱싱/슬라이싱
+print()
+print(country.iloc[0])
+print()
+print(country.iloc[1:3, :2])
+
+# DataFrame 새 데이터 추가 / 수정
+dataframe = pd.DataFrame(columns=['이름', '나이', '주소'])
+dataframe.loc[0] = ['임원균', '26', '서울']
+dataframe.loc[1] = {'이름': '철수', '나이': '25', '주소': '인천'}
+dataframe.loc[1, '이름'] = '영희'
+
+print()
+print(dataframe)
+
+# dataframe에 새 칼럼 추가
+dataframe['전화번호'] = np.nan
+dataframe.loc[0, '전화번호'] = '01012341234'
+print()
+print(dataframe)
+
+# 컬럼 선택하기
+# 컬럼이름이 하나만 들어가 있다면 Series
+# 리스트로 들어가 있다면 DataFrame
+
+# 누락된 데이터 체크
+# 듀토리얼에서 보는 데이터와 달리 현실의 데이터는 누락되어 있는 형태가 많다.
+dataframe.isnull()
+dataframe.notnull()
+
+dataframe.dropna()  # -> 비어있는 데이터가 삭제되어 출력
+dataframe['전화번호'] = dataframe['전화번호'].fillna('전화번호 없음')
+print()
+print(dataframe)
+
+# numpy array에서 사용했던 연산자들을 활용할수 있다.
+A = pd.Series([2, 4, 6], index=[0, 1, 2])
+B = pd.Series([1, 3, 5], index=[1, 2, 3])
+A+B
+print(A.add(B, fill_value=0))
