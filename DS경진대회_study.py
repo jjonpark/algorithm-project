@@ -86,88 +86,135 @@ np.array([1, 2, 3, 4, 5])
 
 
 # pandas
-data = pd.Series([1, 2, 3, 4])
-print(data)
+# data = pd.Series([1, 2, 3, 4])
+# print(data)
 
-data = pd.Series([1, 2, 3, 4], index=['a', 'b', 'c', 'd'])
-print(data['b'])
+# data = pd.Series([1, 2, 3, 4], index=['a', 'b', 'c', 'd'])
+# print(data['b'])
 
-# 데이터 프레임 - 여러개의 Series가 모여서 행과 열을 이루는 데이터
+# # 데이터 프레임 - 여러개의 Series가 모여서 행과 열을 이루는 데이터
 
-population_dict = {
-    'korea': 5180,
-    'japan': 12718,
-    'china': 141500,
-    'usa': 32676,
-}
+# population_dict = {
+#     'korea': 5180,
+#     'japan': 12718,
+#     'china': 141500,
+#     'usa': 32676,
+# }
 
-population = pd.Series(population_dict)
+# population = pd.Series(population_dict)
 
-gdp_dict = {
-    'korea': 169320000,
-    'japan': 516700000,
-    'china': 1409250000,
-    'usa': 2041280000,
-}
+# gdp_dict = {
+#     'korea': 169320000,
+#     'japan': 516700000,
+#     'china': 1409250000,
+#     'usa': 2041280000,
+# }
 
-gdp = pd.Series(gdp_dict)
-country = pd.DataFrame({
-    'population': population,
-    'gdp': gdp
+# gdp = pd.Series(gdp_dict)
+# country = pd.DataFrame({
+#     'population': population,
+#     'gdp': gdp
+# })
+# print(country)
+
+# # datav프레임의 Series도 numpy array 처럼 연산자를 쓸수 있다.
+# gdp_per_capita = country['gdp'] / country['population']
+# country['gdp per capita'] = gdp_per_capita
+# print(country)
+# country.to_csv("./country.csv")
+# country.to_excel("country.xlsx")
+
+# # indexing / Slicing - loc : 명시적인 인덱스를 참조하는 인덱싱/슬라이싱
+# print()
+# print(country.loc['china'])
+
+# print()
+# print(country.loc['japan':'korea', :'gdp'])
+
+# # iloc : 파이썬 스타일 정수 인덱스 인덱싱/슬라이싱
+# print()
+# print(country.iloc[0])
+# print()
+# print(country.iloc[1:3, :2])
+
+# # DataFrame 새 데이터 추가 / 수정
+# dataframe = pd.DataFrame(columns=['이름', '나이', '주소'])
+# dataframe.loc[0] = ['임원균', '26', '서울']
+# dataframe.loc[1] = {'이름': '철수', '나이': '25', '주소': '인천'}
+# dataframe.loc[1, '이름'] = '영희'
+
+# print()
+# print(dataframe)
+
+# # dataframe에 새 칼럼 추가
+# dataframe['전화번호'] = np.nan
+# dataframe.loc[0, '전화번호'] = '01012341234'
+# print()
+# print(dataframe)
+
+# # 컬럼 선택하기
+# # 컬럼이름이 하나만 들어가 있다면 Series
+# # 리스트로 들어가 있다면 DataFrame
+
+# # 누락된 데이터 체크
+# # 듀토리얼에서 보는 데이터와 달리 현실의 데이터는 누락되어 있는 형태가 많다.
+# dataframe.isnull()
+# dataframe.notnull()
+
+# dataframe.dropna()  # -> 비어있는 데이터가 삭제되어 출력
+# dataframe['전화번호'] = dataframe['전화번호'].fillna('전화번호 없음')
+# print()
+# print(dataframe)
+
+# # numpy array에서 사용했던 연산자들을 활용할수 있다.
+# A = pd.Series([2, 4, 6], index=[0, 1, 2])
+# B = pd.Series([1, 3, 5], index=[1, 2, 3])
+# A+B
+# print(A.add(B, fill_value=0))
+
+# # 값으로 정렬하기
+# print()
+# df = pd.DataFrame({
+#     'co11': [2, 1, 9, 8, 7, 4],
+#     'col2': ['A', 'A', 'B', np.nan, 'D', 'C'],
+#     'col3': [0, 1, 9, 4, 2, 3],
+# })
+# print(df)
+# df.sort_values('col1')  # col1 값을 오름 차순으로 정렬
+# df.sort_values('col1', ascending=False)  # 내림 차순으로 정렬
+
+
+# 조건으로 검색하기
+# print()
+# df = pd.DataFrame(np.random.rand(5, 2), columns=["A", "B"])
+# print(df)
+# df["A"] < 0.5
+# print(df.query("A<0.5 and B>0.3"))
+
+# df["Animal"].str.contains("Cat")
+
+# 함수로 데이터 처리하기
+# df = pd.DataFrame(np.arange(5), columns=["Num"])
+
+
+# def square(x):
+#     return x**2
+
+
+# df["Num"].apply(square)
+# df["Squere"] = df["Num"].apply(square)
+# # df["Squere"]=df["Num"].apply(lambd x:x**2)
+
+#그룹으로 묶기
+df=pd.DataFrame({'key' : ['A','B','C','A','B','C'],
+    'data1':[1,2,3,1,2,3],
+    'data2':np.random.randint(0,6,6)
 })
-print(country)
+# df.groupby('key')
+# print(df.groupby('key').sum())
 
-# datav프레임의 Series도 numpy array 처럼 연산자를 쓸수 있다.
-gdp_per_capita = country['gdp'] / country['population']
-country['gdp per capita'] = gdp_per_capita
-print(country)
-country.to_csv("./country.csv")
-country.to_excel("country.xlsx")
+def filter_by_mean(x):
+    return x['data2'].mean()>3
 
-# indexing / Slicing - loc : 명시적인 인덱스를 참조하는 인덱싱/슬라이싱
-print()
-print(country.loc['china'])
-
-print()
-print(country.loc['japan':'korea', :'gdp'])
-
-# iloc : 파이썬 스타일 정수 인덱스 인덱싱/슬라이싱
-print()
-print(country.iloc[0])
-print()
-print(country.iloc[1:3, :2])
-
-# DataFrame 새 데이터 추가 / 수정
-dataframe = pd.DataFrame(columns=['이름', '나이', '주소'])
-dataframe.loc[0] = ['임원균', '26', '서울']
-dataframe.loc[1] = {'이름': '철수', '나이': '25', '주소': '인천'}
-dataframe.loc[1, '이름'] = '영희'
-
-print()
-print(dataframe)
-
-# dataframe에 새 칼럼 추가
-dataframe['전화번호'] = np.nan
-dataframe.loc[0, '전화번호'] = '01012341234'
-print()
-print(dataframe)
-
-# 컬럼 선택하기
-# 컬럼이름이 하나만 들어가 있다면 Series
-# 리스트로 들어가 있다면 DataFrame
-
-# 누락된 데이터 체크
-# 듀토리얼에서 보는 데이터와 달리 현실의 데이터는 누락되어 있는 형태가 많다.
-dataframe.isnull()
-dataframe.notnull()
-
-dataframe.dropna()  # -> 비어있는 데이터가 삭제되어 출력
-dataframe['전화번호'] = dataframe['전화번호'].fillna('전화번호 없음')
-print()
-print(dataframe)
-
-# numpy array에서 사용했던 연산자들을 활용할수 있다.
-A = pd.Series([2, 4, 6], index=[0, 1, 2])
-B = pd.Series([1, 3, 5], index=[1, 2, 3])
-A+B
-print(A.add(B, fill_value=0))
+df.groupby('key').mean()
+print(df.groupby('key').filter(filter_by_mean))
