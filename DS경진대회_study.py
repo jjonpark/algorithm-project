@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 np.array([1, 2, 3, 4, 5])
@@ -205,16 +206,77 @@ np.array([1, 2, 3, 4, 5])
 # df["Squere"] = df["Num"].apply(square)
 # # df["Squere"]=df["Num"].apply(lambd x:x**2)
 
-#그룹으로 묶기
-df=pd.DataFrame({'key' : ['A','B','C','A','B','C'],
-    'data1':[1,2,3,1,2,3],
-    'data2':np.random.randint(0,6,6)
-})
+# 그룹으로 묶기
+# df = pd.DataFrame({'key': ['A', 'B', 'C', 'A', 'B', 'C'],
+#                    'data1': [1, 2, 3, 1, 2, 3],
+#                    'data2': np.random.randint(0, 6, 6)
+#                    })
 # df.groupby('key')
 # print(df.groupby('key').sum())
 
-def filter_by_mean(x):
-    return x['data2'].mean()>3
+#print(df.groupby('key').aggregate({'data1' : 'min','data2' : np.sum}))
 
-df.groupby('key').mean()
-print(df.groupby('key').filter(filter_by_mean))
+
+# def filter_by_mean(x):
+#     return x['data2'].mean() > 3
+
+
+# df.groupby('key').mean()
+# print(df.groupby('key').filter(filter_by_mean))
+
+# df.groupby('key').apply(lambda x: x.max()-x.min())
+
+# Multi Index
+
+# df = pd.DataFrame(
+#     np.random.randn(4, 2),
+#     index=[['A', 'A', 'B', 'B'], [1, 2, 1, 2]],
+#     columns=['data1', 'data2']
+# )
+# print(df)
+
+# 그래프 그려보기
+
+# x = [1, 2, 3, 4, 5]
+# y = [1, 2, 3, 4, 5]
+# plt.plot(x, y)
+# plt.title("First Plot")
+# plt.xlabel("x")
+# plt.ylabel("y ")
+# fig, ax = plt.subplots()
+# ax.plot(x, y)
+# ax.set_title("First Plot")
+# ax.set_xlabel("x")
+# ax.set_xlabel("y")
+# fig.set_dpi(300)
+x = np.linspace(0, np.pi*4, 100)
+fig, axes = plt.subplots(2, 1)
+axes[0].plot(x, np.sin(x))
+axes[1].plot(x, np.cos(x))
+fig.savefig("first_plot.png")
+
+fig, ax = plt.subplots()
+x = np.arange(15)
+y = x**2
+ax.plot(
+    x, y,
+    linestyle=":",
+    marker="*",
+    color="#524FA1"
+)
+fig.savefig("second_plot.png")
+
+x = np.arange(10)
+fig, ax = plt.subplots()
+ax.plot(x, x, linestyle="-")
+ax.plot(x, x+2, linestyle="--")
+ax.plot(x, x+4, linestyle="-.")
+ax.plot(x, x+6, linestyle=":")
+fig.savefig("3_plot.png")
+
+x = np.linspace(0, 10, 1000)
+fig, ax = plt.subplots()
+ax.plot(x, np.sin(x))
+ax.set_xlim(-2, 12)
+ax.set_ylim(-1.5, 1.5)
+fig.savefig("4_plot.png")
